@@ -1,0 +1,7 @@
+analyser/venv
+api/venv
+
+.env
+
+analyser/config.json
+api/config.json

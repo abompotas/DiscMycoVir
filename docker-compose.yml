@@ -1,0 +1,80 @@
+version: "3"
+
+services:
+  db.pocketome.virtuous:
+    image: db.pocketome.virtuous:0.1
+    build: ./db
+    container_name: db.pocketome.virtuous
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: virtuous_pocketome_api
+    volumes:
+      - virtuous-pocketome-db:/var/lib/mysql
+
+  analyser.pocketome.virtuous:
+    image: analyser.pocketome.virtuous
+    build: ./analyser
+    container_name: analyser.pocketome.virtuous
+    restart: always
+    environment:
+      POCKETOME_WEBAPP: $POCKETOME_WEBAPP
+      POCKETOME_API: $POCKETOME_API
+      OUTPUT_PATH: /virtuous-pocketome/output
+      UPLOADS_PATH: /virtuous-pocketome/uploads
+      PDB_PATH: /virtuous-pocketome/pdb/blocks
+      DB_HOST: db.pocketome.virtuous
+      DB_NAME: virtuous_pocketome_api
+      DB_USERNAME: root
+      DB_PASSWORD: $DB_PASSWORD
+      BATCH_SIZE: $BATCH_SIZE
+      SLEEP_SEC: $SLEEP_SEC
+      K_FLAG: $K_FLAG
+      DIST: $DIST
+      SASA_THRESHOLD: $SASA_THRESHOLD
+      DOCK_THRESHOLD: $DOCK_THRESHOLD
+      EXTENSIVE: $EXTENSIVE
+      CPUS: $CPUS
+      SMTP_SERVER: $SMTP_SERVER
+      SMTP_PORT: $SMTP_PORT
+      SMTP_ADDRESS: $SMTP_ADDRESS
+      SMTP_USERNAME: $SMTP_USERNAME
+      SMTP_PASSWORD: $SMTP_PASSWORD
+    depends_on:
+      - db.pocketome.virtuous
+    volumes:
+      - virtuous-pocketome-pdb:/virtuous-pocketome/pdb
+      - virtuous-pocketome-output:/virtuous-pocketome/output
+      - virtuous-pocketome-uploads:/virtuous-pocketome/uploads
+
+  api.pocketome.virtuous:
+    image: api.pocketome.virtuous
+    build: ./api
+    container_name: api.pocketome.virtuous
+    restart: always
+    environment:
+      OUTPUT_PATH: /virtuous-pocketome/output
+      UPLOADS_PATH: /virtuous-pocketome/uploads
+      UPLOADS_SIZE: $UPLOADS_SIZE
+      DB_HOST: db.pocketome.virtuous
+      DB_NAME: virtuous_pocketome_api
+      DB_USERNAME: root
+      DB_PASSWORD: $DB_PASSWORD
+    depends_on:
+      - db.pocketome.virtuous
+    volumes:
+      - virtuous-pocketome-output:/virtuous-pocketome/output
+      - virtuous-pocketome-uploads:/virtuous-pocketome/uploads
+    ports:
+      - "19002:5000"
+
+volumes:
+  virtuous-pocketome-db:
+    external: true
+  virtuous-pocketome-pdb:
+    external: true
+  virtuous-pocketome-output:
+    external: true
+  virtuous-pocketome-uploads:
+    external: true

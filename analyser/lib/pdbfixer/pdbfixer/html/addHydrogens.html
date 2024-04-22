@@ -1,0 +1,197 @@
+<script>
+function validateForm() {
+    if (document.getElementById("addHydrogensCheckbox").checked) {
+        var ph = document.getElementById("phfield").value
+        if (!(ph > 0 && ph < 14)) {
+            alert("pH must be a number between 0 and 14.")
+            return false
+        }
+    }
+    if (document.getElementById("addWaterCheckbox").checked) {
+        var custombox = document.getElementById("customBoxRadio").checked
+        var xsize = document.getElementById("boxxfield").value
+        var ysize = document.getElementById("boxyfield").value
+        var zsize = document.getElementById("boxzfield").value
+        if (custombox && !(xsize > 0 && ysize > 0 && zsize > 0)) {
+            alert("Box dimensions must be positive numbers.")
+            return false
+        }
+        var geombox = document.getElementById("geometricBoxRadio").checked
+        var padsize = document.getElementById("geomPadding").value
+        if (geombox && padsize < 0) {
+            alert("Box padding cannot be negative.")
+            return false
+        }
+        var strength = document.getElementById("ionicstrengthfield").value
+        if (!(strength >= 0)) {
+            alert("Ionic strength must be a nonnegative number.")
+            return false
+        }
+    }
+    if (document.getElementById("addMembraneCheckbox").checked) {
+        var padsize = document.getElementById("membranePadding").value
+        if (padsize < 0) {
+            alert("Box padding cannot be negative.")
+            return false
+        }
+        var strength = document.getElementById("ionicstrengthfield").value
+        if (!(strength >= 0)) {
+            alert("Ionic strength must be a nonnegative number.")
+            return false
+        }
+    }
+    return true
+}
+function applyPaddingToWaterBox(padding) {
+    padding = parseFloat(padding);
+    if(!padding || padding<0) padding = 0;
+    if (document.getElementById('cubicPaddingCheckBox').checked){
+        var maxAxis = Math.max.apply(Math, molxyz);
+        for (var i = pbcxyz.length; i--;) {
+            pbcxyz[i].value = Math.ceil((padding+maxAxis)*1000) / 1000;
+        }
+    }
+    else {
+        for (var i = pbcxyz.length; i--;) {
+            pbcxyz[i].value = Math.ceil((padding+molxyz[i])*1000) / 1000;
+        }
+    }
+}
+function waterBoxChanged() {
+    checked = document.getElementById('addWaterCheckbox').checked;
+    document.getElementById('addMembraneCheckbox').checked = false;
+    enableControls(document.getElementById('waterInputs'), checked);
+    enableControls(document.getElementById('ionInputs'), checked);
+    enableControls(document.getElementById('membraneInputs'), false);
+}
+function membraneBoxChanged() {
+    checked = document.getElementById('addMembraneCheckbox').checked;
+    document.getElementById('addWaterCheckbox').checked = false;
+    enableControls(document.getElementById('membraneInputs'), checked);
+    enableControls(document.getElementById('ionInputs'), checked);
+    enableControls(document.getElementById('waterInputs'), false);
+}
+</script>
+<style>
+a.tooltip {
+    display: inline;
+    position: relative;
+    color: #000;
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+a.tooltip:hover:after {
+    content: attr(rel);
+    text-align: center;
+    font-size: 80%%;
+    background: #000;
+    color: #fff;
+    width: 250px;
+    bottom: 30px;
+    left: -125px;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 100;
+    /* Effects */
+    background: rgba(0,0,0,0.75);
+    border-radius: 5px;
+    box-shadow: 0 0 25px #333;
+}
+/* Down arrow */
+a.tooltip:hover:before {
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 10px 10px 0 10px;
+    bottom: 20px;
+    left: -6px;
+    content: "";
+    position: absolute;
+    z-index: 99;
+    /* Effects */
+    border-color: rgba(0,0,0,0.75) transparent;
+}
+</style>
+<form id="mainform" method="post" action="/">
+<h1>Add Missing Hydrogens</h1>
+Add missing hydrogen atoms?
+<p>
+<input type="checkbox" id="addHydrogensCheckbox" name="addhydrogens" onchange="document.getElementById('phfield').disabled=!document.getElementById('addHydrogensCheckbox').checked" checked> Add hydrogens appropriate for pH <input type="text" id="phfield" name="ph" value="7.0" size="5">
+<h1>Add Water/Membrane</h1>
+Add a water box or membrane surrounding the model?
+<p>
+<input type="checkbox" id="addWaterCheckbox" name="addwater" onchange="waterBoxChanged()"> Add water box
+<div id="waterInputs" style="margin-left:50px">
+    <table style="text-align:right">
+        <tr>
+        <td style="text-align:left"><input id="customBoxRadio" type="radio" name="boxType" value="custom" checked>Custom box dimensions (in nm):</td>
+        <div id="customBoxDimensions">
+        <td><input type="text" id="boxxfield" name="boxx" size="8"></td>
+        <td><input type="text" id="boxyfield" name="boxy" size="8"></td>
+        <td><input type="text" id="boxzfield" name="boxz" size="8"></td>
+        </div>
+        </tr>
+
+        <tr>
+        <td style="text-align:left"><input id="geometricBoxRadio" type="radio" name="boxType" value="geometry">Geometry with padding (in nm):</td>
+        <div id="geometricBoxDimensions">
+        <td><input type="text" id="geomPadding" name="geomPadding" size="8">
+        </td>
+        <td colspan="2">
+            <select id="geometryDropdown" name="geometryDropdown">
+                <option value="cube" selected="selected">Cube</option>
+                <option value="truncatedOctahedron">Truncated octahedron</option>
+                <option value="rhombicDodecahedron">Rhombic dodecahedron</option>
+            </select>
+            <a href="#" rel="The specified padding will be applied on the largest molecular axis, while maintaining selected geometry." class="tooltip">?</a>
+        </div>
+        </td>
+        </tr>
+        %s
+    </table>
+</div>
+<p>
+<input type="checkbox" id="addMembraneCheckbox" name="addmembrane" onchange="membraneBoxChanged()"> Add membrane and water
+<div id="membraneInputs" style="margin-left:50px">
+    The membrane will lie in the XY plane and be centered at Z=0.  Make sure the protein is properly oriented and positioned.
+    When possible, it is easiest to use a PDB file from <a href="http://opm.phar.umich.edu/">OPM</a> since they are already properly positioned.
+    <p>
+    Lipid type:
+        <select id="lipidType" name="lipidType">
+            <option value="POPC" selected="selected">POPC</option>
+            <option value="POPE">POPE</option>
+            <option value="DLPC">DLPC</option>
+            <option value="DLPE">DLPE</option>
+            <option value="DMPC">DMPC</option>
+            <option value="DOPC">DOPC</option>
+            <option value="DPPC">DPPC</option>
+        </select>
+    <p>
+    Minimum padding around protein: <input type="text" id="membranePadding" name="membranePadding" value="1.0" size="5"> (nm)
+</div>
+<div id="ionInputs">
+    <p>
+    Ions will be added to neutralize the model.  You can optionally add more ions based on a desired bulk ionic strength.
+    <p>
+    <table>
+        <tr><td style="text-align:right">Ionic strength (molar):</td><td><input type="text" id="ionicstrengthfield" name="ionicstrength" size="8" value="0.0"></td></tr>
+        <tr><td style="text-align:right">Positive ion:</td><td><select name="positiveion"><option value="Cs">Cs+</option><option value="K">K+</option><option value="Li">Li+</option><option value="Na" selected>Na+</option><option value="Rb">Rb+</option></select></td></tr>
+        <tr><td style="text-align:right">Negative ion:</td><td><select name="negativeion"><option value="Cl" selected>Cl-</option><option value="Br">Br-</option><option value="F">F-</option><option value="I">I-</option></select></td></tr>
+    </table>
+</div>
+<p>
+<input type="button" value="Continue" onclick="if (validateForm()) submitWithSpinner()"/>
+</form>
+<script>
+setCurrentStep(6);
+enableControls(document.getElementById('waterInputs'), false);
+enableControls(document.getElementById('membraneInputs'), false);
+enableControls(document.getElementById('ionInputs'), false);
+var molxyz = [].slice.call(document.getElementById('boxContainingAllAtoms').getElementsByTagName('td')).splice(1,3).map(function(td){ return parseFloat(td.textContent)});
+var hiddenInput = document.createElement("input");
+hiddenInput.setAttribute("type", "hidden");
+hiddenInput.setAttribute("name", "maxMolecularAxis");
+hiddenInput.setAttribute("value", Math.max.apply(Math, molxyz));
+document.getElementById("mainform").appendChild(hiddenInput);
+</script>
+</body>
+<html>

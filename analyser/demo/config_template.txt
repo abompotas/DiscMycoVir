@@ -1,0 +1,27 @@
+# MANDATORY ARGUMENTS
+# Protein-ligand complex PDB file
+complex_pdb = <PATH>
+# Chain label identifying the protein (eg. A)
+chain_protein = 
+# Chain label identifying the ligand (eg. B)
+chain_ligand =  
+
+# OPTIONAL ARGUMENTS
+# MD Trajectory file (If not provided, only the PDB file will be used)
+complex_xtc = <PATH>
+# output folder for results
+outfolder = <PATH>
+# PDB database folder for comparison (a list of blocks is expected in the database folder)
+db_2b_compared = <PATH>
+# Number of clusters to be generated (0 = optimization with silhouette score; otherwise, user-defined number of clusters) (Default: 0)
+kflag = 
+# Maximum distance in Angstrom from ligand to identify pocket residues (Default: 10)
+dist =  
+# Threshold for SASA filter (Default: 0.75)
+sasaThreshold = 
+# Threshold for Docking filter (Default: 0.1)
+dockThreshold = 
+# number of core to run the code in parallel (Default: 1)
+cpus = 
+# Request the extensive run (Default: False)
+extensive = 

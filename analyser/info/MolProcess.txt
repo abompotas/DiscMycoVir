@@ -1,0 +1,96 @@
+Toxin
+Actin capping
+Actin-binding
+Activator
+Transferase
+Allosteric enzyme
+Alpha-amylase inhibitor
+Ligase
+Hydrolase
+Amphibian defense peptide
+Antimicrobial
+Antifreeze protein
+Antioxidant
+Antiviral protein
+Protease inhibitor
+Bence-Jones protein
+Blood group antigen
+Ion channel
+Calmodulin-binding
+Chaperone
+Chromatin regulator
+Cyclin
+Cytokine
+Lyase
+Developmental protein
+Oxidoreductase
+DNA invertase
+DNA-binding
+DNA replication inhibitor
+Elongation factor
+Endorphin
+Excision nuclease
+Eye lens protein
+Transducer
+Receptor
+Growth factor
+Growth factor binding
+GTPase activation
+Guanine-nucleotide releasing factor
+Hemagglutinin
+Heparin-binding
+Hormone
+Hypotensive agent
+Ice nucleation
+IgA-binding protein
+IgE-binding protein
+IgG-binding protein
+Initiation factor
+Integrin
+Isomerase
+Leader peptide
+Light-harvesting polypeptide
+Metalloenzyme inhibitor
+Milk protein
+Mitogen
+Mobility protein
+Monoclonal antibody
+Morphogen
+Motor protein
+Multifunctional enzyme
+Muscle protein
+Mutator protein
+Neuropeptide
+Neurotransmitter
+Opioid peptide
+Pathogenesis-related protein
+Pheromone
+Phospholipase A2 inhibitor
+Photoprotein
+Porin
+Prion
+Protein kinase inhibitor
+Protein phosphatase inhibitor
+Protein synthesis inhibitor
+Prothrombin activator
+Pyrogen
+Repressor
+Ribonucleoprotein
+RNA-binding
+Storage protein
+Serine protease homolog
+Sigma factor
+Signal transduction inhibitor
+Silk protein
+Superantigen
+Suppressor of RNA silencing
+Taste-modifying protein
+Translational shunt
+Translocase
+Tumor antigen
+Vasoactive
+Viral contractile tail ejection system
+Viral long flexible tail ejection system
+Viral movement protein
+Viral nucleoprotein
+Viral short tail ejection system

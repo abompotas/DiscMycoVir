@@ -1,0 +1,28 @@
+# MANDATORY ARGUMENTS
+# Protein-ligand complex PDB file
+complex_pdb = /mnt/data/lorenzo/00-work/CBP/Testing_files/bitter/complex.pdb
+# Chain label identifying the protein
+chain_protein = A
+# Chain label identifying the ligand
+chain_ligand = B
+
+# OPTIONAL ARGUMENTS
+# MD Trajectory file
+complex_xtc = /mnt/data/lorenzo/00-work/CBP/Testing_files/bitter/noPBC_concat.xtc
+# output folder for results
+outfolder = /mnt/data/lorenzo/00-work/CBP/temp_bitter/
+# database folders for comparison
+db_2b_compared = /mnt/data/lorenzo/00-work/CBP/db/20230309/blocks/
+
+# Number of clusters to be generated (0 = optimization with silhouette score; otherwise, user-defined number of clusters) (Default: 0)
+kflag = 0
+# Maximum distance in Angstrom from ligand to identify pocket residues (Default: 10 A)
+dist = 10 
+# Threshold for SASA filter (Default: 0.75)
+sasaThreshold = 0.75
+# Threshold for Docking filter (Default: 0.1)
+dockThreshold = 0.1
+# number of core to run the code in parallel (Default: 1)
+cpus = 28
+# Request the extensive run (Default: False)
+extensive = True

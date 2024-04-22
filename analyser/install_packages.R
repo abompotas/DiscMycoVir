@@ -1,0 +1,16 @@
+install.packages("ggplot2")
+install.packages("gplots")
+install.packages("dplyr")
+install.packages("stringr")
+install.packages("igraph")
+
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(version = "3.14")
+BiocManager::install("annotate")
+BiocManager::install("topGO")
+BiocManager::install("biomatRt")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("Rgraphviz")
+
+install.packages("GOxploreR")
