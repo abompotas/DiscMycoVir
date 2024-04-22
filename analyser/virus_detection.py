@@ -1,14 +1,11 @@
 import argparse
 import multiprocessing
-import numpy as np
 import os
-import pandas as pd
 import shutil
 import subprocess
 import sys
 # time the code
 import time
-from art import *
 
 
 # parse arguments
@@ -22,7 +19,7 @@ def parse_options():
     dockThreshold = 0.1  # Threshold for the docking filter step (Default 0.1)
     outfolder = os.getcwd() + 'VirtuousPocketome'  # Folder where the output will be saved
 
-    parser = argparse.ArgumentParser(description=code_name())
+    parser = argparse.ArgumentParser()
     parser.add_argument('--outfolder', type=str, default=outfolder, help='Folder where the output will be saved')
     parser.add_argument('--complexPDB', type=str, default=None, help='PDB file of the complex')
     parser.add_argument('--complexXTC', type=str, default=None, help='XTC file of the complex')
