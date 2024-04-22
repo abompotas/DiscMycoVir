@@ -1,7 +1,0 @@
-<app-analyse-food-list *ngIf="selector.view === 'list'" (selectFood)="showDetails($event)"></app-analyse-food-list>
-<app-analyse-food-details *ngIf="selector.view === 'details'" [foodId]="foodId"></app-analyse-food-details>
-<app-analyse-food-taste *ngIf="selector.view === 'taste'" [foodId]="foodId" [taste]="selector.taste"></app-analyse-food-taste>
-<app-organoleptic-trial-taste *ngIf="selector.view === 'organoleptic-trial'" [origin]="'food'" [foodId]="foodId"></app-organoleptic-trial-taste>
-<app-analyse-umami-compound-results *ngIf="selector.view === 'umami'" origin="food" [compounds]="selector.compounds"></app-analyse-umami-compound-results>
-<app-analyse-sweetbitter-compound-results *ngIf="selector.view === 'sweetbitter'" origin="food" [compounds]="selector.compounds"></app-analyse-sweetbitter-compound-results>
-<app-analyse-multitaste-compound-results *ngIf="selector.view === 'multitaste'" origin="food" [compounds]="selector.compounds"></app-analyse-multitaste-compound-results>

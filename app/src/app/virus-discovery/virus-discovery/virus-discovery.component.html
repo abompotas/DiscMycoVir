@@ -1,0 +1,2 @@
+<app-virus-discovery-form *ngIf="jobId === 0"></app-virus-discovery-form>
+<app-virus-discovery-results *ngIf="jobId > 0" [jobId]="jobId" [hash]="hash"></app-virus-discovery-results>

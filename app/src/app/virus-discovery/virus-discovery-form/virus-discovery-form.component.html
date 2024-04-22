@@ -1,0 +1,64 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Virtuous Pocketome</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>
+      Searching for similar binding pockets
+    </ion-label>
+    <br/><br/>
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="12" sizeLg="10" sizeXl="8">
+          <!--suppress AngularUndefinedBinding -->
+          <form (ngSubmit)="search()">
+            <ion-row>
+              <ion-col class="section-head">
+                <ion-label>
+                  <strong>Provide the genome:</strong>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>E-mail:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="10" sizeXs="8">
+                <ion-input [(ngModel)]="email" name="email" type="email" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>Reference Genome file:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="10" sizeXs="8">
+                <ion-input name="pdb-file" type="file" (ionChange)="onGenomeFileChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <br/><br/>
+            <ion-accordion-group>
+              <ion-accordion value="first">
+                <ion-item slot="header" color="primary">
+                  <ion-label>Optional parameters</ion-label>
+                </ion-item>
+                <div class="ion-padding ion-text-start" slot="content">
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+            <br/><br/>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col size="10" sizeMd="4" class="ion-text-center">
+                <ion-button type="submit" expand="block" color="secondary">Submit</ion-button>
+              </ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+          </form>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/><br/>
+  </ion-card-content>
+</ion-card>

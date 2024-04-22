@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  virtuousAPI: 'https://virtuous.isi.gr/api',
-  virtuousPocketome: 'https://virtuous.isi.gr/pocketome-api'
+  discvirAPI: 'http://localhost:5000/api/v1',
+  discvir: 'http://localhost:8100'
 };
 
 /*

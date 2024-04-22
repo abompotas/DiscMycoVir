@@ -1,8 +1,8 @@
 {
-  "name": "Virtuous",
+  "name": "Virus Discovery",
   "version": "0.0.1",
   "author": "Agorakis Bompotas",
-  "homepage": "https://virtuoush2020.com/",
+  "homepage": "https://www.imslab.gr/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -68,7 +68,7 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"
   },
-  "description": "Taste virtually chemical compounds",
+  "description": "Discover viruses given a reference genome",
   "cordova": {
     "plugins": {
       "cordova-plugin-statusbar": {},

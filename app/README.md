@@ -1,4 +1,4 @@
-# VirtuousPlatform App - Frontend
+# Virus Discovery App - Frontend
 
 ## Requirements:
 
