@@ -1,9 +1,9 @@
 #!/bin/bash
 
-tee /virtuous-pocketome/config.json > /dev/null <<EOT
+tee /virus-discovery/config.json > /dev/null <<EOT
 {
-  "webbapp": "${POCKETOME_WEBAPP}",
-  "api": "${POCKETOME_API}",
+  "webbapp": "${DISCVIR_WEBAPP}",
+  "api": "${DISCVIR_API}",
   "queue": {
     "batch": ${BATCH_SIZE},
     "sleep": ${SLEEP_SEC}
@@ -35,4 +35,4 @@ tee /virtuous-pocketome/config.json > /dev/null <<EOT
 }
 EOT
 
-python -u /virtuous-pocketome/process_queue.py
+python -u /virus-discovery/process_queue.py
