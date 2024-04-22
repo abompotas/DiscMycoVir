@@ -2,7 +2,7 @@
 
 threads=1
 single_paired="pair"
-illumina_adapter="NexteraPE-PE.fa:2:30:10"
+adapter="NexteraPE-PE.fa:2:30:10"
 sliding_window="5:20"
 min_len="50"
 max_memory="8G"
@@ -11,22 +11,24 @@ sample_name=""
 ref_genome=""
 forward_file=""
 reverse_file=""
+output_dir="$(pwd)"
 
 usage() {
-  echo "Usage (Single End): ./pipeline.sh [options] -c reference_genome -s file"
-  echo "Usage (Paired End): ./pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file"
+  echo "Usage (Single End): ./virus_discovery_pipeline.sh [options] -c reference_genome -s file"
+  echo "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file"
   echo "OPTIONS:"
   echo "-t	Number of threads for parallel execution"
-  echo "-i	Illumina clip adapter for Trimmomatic"
+  echo "-a	Adapter for Trimmomatic"
   echo "-w	Sliding window for Trimmomatic"
   echo "-l	Minimum length for Trimmomatic"
   echo "-q	Sequence type to be used by Trinity"
   echo "-m	Max memory to be used by Trinity"
   echo "-n	Sample name"
-  echo "-c	Reference genome of C.auris"
+  echo "-g	Reference genome"
   echo "-s	Single end input file"
   echo "-f	Paired forward input file"
   echo "-r	Paired reverse input file"
+  echo "-o	Output directory"
   exit 1
 }
 
@@ -36,8 +38,8 @@ while getopts ":t:i:w:l:m:q:n:c:s:f:r:h:" option; do
     t)
       threads=$OPTARG
       ;;
-    i)
-      illumina_adapter=$OPTARG
+    a)
+      adapter=$OPTARG
       ;;
     w)
       sliding_window=$OPTARG
@@ -54,7 +56,7 @@ while getopts ":t:i:w:l:m:q:n:c:s:f:r:h:" option; do
     n)
       sample_name=$OPTARG
       ;;
-    c)
+    g)
       ref_genome=$OPTARG
       ;;
     s)
@@ -68,6 +70,9 @@ while getopts ":t:i:w:l:m:q:n:c:s:f:r:h:" option; do
     r)
       single_paired="pair"
       reverse_file=$OPTARG
+      ;;
+    o)
+      output_dir=$OPTARG
       ;;
     h)
       usage
@@ -94,7 +99,8 @@ if [ "${single_paired}" = "pair" ]; then
 fi
 
 
-cd "$(pwd)"
+mkdir -p "$output_dir"
+cd "$output_dir"
 
 
 #Trimmomatic
@@ -108,7 +114,7 @@ if [ "${single_paired}" = "single" ]; then
     -threads $threads \
     "${forward_file}" \
     "${fastq_files_f}" \
-    ILLUMINACLIP:$illumina_adapter \
+    $adapter \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
 else
@@ -119,7 +125,7 @@ else
      -threads $threads \
     "${forward_file}" "${reverse_file}" \
     "${fastq_files_f}" "${fastq_files_f_un}" "${fastq_files_r}" "${fastq_files_r_un}" \
-    ILLUMINACLIP:$illumina_adapter \
+    $adapter \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
 fi
@@ -170,13 +176,16 @@ fi
 
 #BWA-MEM
 bwa index $ref_genome
-bwa mem $ref_genome "${trinity_dir}.Trinity.fasta" > "${trinity_dir}/C.auris.sam"
+bwa mem $ref_genome "${trinity_dir}.Trinity.fasta" > "./output.sam"
 
 
 #SAMTOOLS
 #Getting the unmapped reads from a sam file:
-samtools view -f 4 "${trinity_dir}/C.auris.sam" > "${trinity_dir}/C.auris_unmapped.sam"
+samtools view -f 4 "./output.sam" > "./output_unmapped.sam"
 #Getting only the mapped reads from a sam file:
-samtools view -b -F 4 "${trinity_dir}/C.auris.sam" > "${trinity_dir}/C.auris_mapped.sam"
+samtools view -b -F 4 "./output.sam" > "./output_mapped.sam"
 #Unmapped sequences from SAM to FASTA
-samtools fasta "${trinity_dir}/C.auris_unmapped.sam" > "${trinity_dir}/C.auris_unmapped.fasta"
+samtools fasta "./output_unmapped.sam" > "./output_unmapped.fasta"
+
+#BLAST
+blastn -db nt -query "./output_unmapped.fasta" -out "./output_unmapped_BLASTn.txt" -max_target_seqs 5 -remote
