@@ -37,6 +37,7 @@ RUN apt update \
     wget \
     libcurl4-openssl-dev \
     libssl-dev \
+    default-libmysqlclient-dev \
     python3-dev \
     python3-pip \
     fastqc \
