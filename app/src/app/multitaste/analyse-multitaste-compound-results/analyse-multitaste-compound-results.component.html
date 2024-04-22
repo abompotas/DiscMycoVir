@@ -1,0 +1,103 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header class="ion-margin-top ion-text-center">
+          <ion-card-title>Analysis Results</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="ion-text-center">
+          <ion-list>
+            <ion-grid>
+              <ion-row>
+                <ion-col></ion-col>
+                <ion-col size="10" sizeMd="4" class="ion-text-center">
+                  <ion-button *ngIf="origin === 'form'" href="#" (click)="goBack($event)" expand="block">
+                    <ion-icon name="create"></ion-icon>
+                    Back to Form
+                  </ion-button>
+                  <ion-button *ngIf="origin === 'food'" href="#" (click)="goBack($event)" expand="block">
+                    <ion-icon name="pizza"></ion-icon>
+                    Back to Food
+                  </ion-button>
+                </ion-col>
+                <ion-col></ion-col>
+              </ion-row>
+              <br/>
+              <ion-row class="ion-hide-lg-down">
+                <ion-item>
+                  <ion-col size="5">
+                    <strong class="table-head">Compound</strong>
+                  </ion-col>
+                  <ion-col size="2">
+                    <strong class="table-head">Results</strong>
+                  </ion-col>
+                  <ion-col size="3">
+                    <strong class="table-head">Spider Chart</strong>
+                  </ion-col>
+                  <ion-col size="2">
+                    <strong class="table-head">Descriptors</strong>
+                  </ion-col>
+                </ion-item>
+              </ion-row>
+              <ion-row class="ion-hide-lg-down">
+                <ion-item *ngFor="let compound of compounds; let i = index">
+                  <ion-col size="5">
+                    {{compound.smiles}}<br/>
+                    <img alt="Image: 2D Structure" src="data:image/png;base64,{{compound.structure}}"/>
+                  </ion-col>
+                  <ion-col size="2">
+                    <span [class]="isDominantTaste(i, 'bitter')">Bitter: {{formatProbabilityResults(compound.taste.bitter)}}</span><br/>
+                    <span [class]="isDominantTaste(i, 'sweet')">Sweet: {{formatProbabilityResults(compound.taste.sweet)}}</span><br/>
+                    <span [class]="isDominantTaste(i, 'other')">Other: {{formatProbabilityResults(compound.taste.other)}}</span><br/>
+                    <span [class]="isDominantTaste(i, 'umami')">Umami: {{formatProbabilityResults(compound.taste.umami)}}</span>
+                  </ion-col>
+                  <ion-col size="3">
+                    <app-analyse-multitaste-compound-chart [canvasId]="generateId('radar', i)" [chartData]="compound.taste"></app-analyse-multitaste-compound-chart>
+                  </ion-col>
+                  <ion-col size="2">
+                    <ion-button href="{{downloadDescriptors(compound.smiles, false)}}" expand="block" color="medium">
+                      <ion-icon name="download-outline"></ion-icon>
+                      All
+                    </ion-button>
+                    <ion-button href="{{downloadDescriptors(compound.smiles, true)}}" expand="block" color="secondary">
+                      <ion-icon name="download-outline"></ion-icon>
+                      Selected
+                    </ion-button>
+                  </ion-col>
+                </ion-item>
+              </ion-row>
+              <ion-row class="ion-hide-lg-up">
+                <ion-item *ngFor="let compound of compounds; let i = index">
+                  <ion-col class="ion-text-center">
+                    <p>
+                      {{compound.smiles}}<br/>
+                      <img alt="Image: 2D Structure" src="data:image/png;base64,{{compound.structure}}"/>
+                    </p>
+                    <app-analyse-multitaste-compound-chart [canvasId]="generateId('radar-small', i)" [chartData]="compound.taste"></app-analyse-multitaste-compound-chart>
+                    <p>
+                      <span [class]="isDominantTaste(i, 'bitter')">Bitter: {{formatProbabilityResults(compound.taste.bitter)}}</span><br/>
+                      <span [class]="isDominantTaste(i, 'sweet')">Sweet: {{formatProbabilityResults(compound.taste.sweet)}}</span><br/>
+                      <span [class]="isDominantTaste(i, 'other')">Other: {{formatProbabilityResults(compound.taste.other)}}</span><br/>
+                      <span [class]="isDominantTaste(i, 'umami')">Umami: {{formatProbabilityResults(compound.taste.umami)}}</span>
+                    </p>
+                    <p>
+                      <ion-button href="{{downloadDescriptors(compound.smiles, false)}}" color="medium">
+                        <ion-icon name="download-outline"></ion-icon>
+                        All
+                      </ion-button>
+                      <ion-button href="{{downloadDescriptors(compound.smiles, true)}}" color="secondary">
+                        <ion-icon name="download-outline"></ion-icon>
+                        Selected
+                      </ion-button>
+                    </p>
+                  </ion-col>
+                </ion-item>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+          <br/>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

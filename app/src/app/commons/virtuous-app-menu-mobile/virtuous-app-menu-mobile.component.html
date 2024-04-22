@@ -1,0 +1,32 @@
+<ion-footer class="ion-no-border ion-hide-lg-up" translucent="true" collapse="fade">
+  <ion-toolbar>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col>
+          <a routerLink="/foods" [class]="isActive('foods')">
+            <ion-icon name="list-outline" size="large"></ion-icon>
+            <br/>Foods
+          </a>
+        </ion-col>
+        <ion-col>
+          <a routerLink="/umami" [class]="isActive('umami')">
+            <ion-icon name="fish-outline" size="large"></ion-icon>
+            <br/>Umami
+          </a>
+        </ion-col>
+        <ion-col>
+          <a routerLink="/sweetbitter" [class]="isActive('sweetbitter')">
+            <ion-icon name="ice-cream-outline" size="large"></ion-icon>
+            <br/>Sweet/Bitter
+          </a>
+        </ion-col>
+        <ion-col>
+          <a routerLink="/multitaste" [class]="isActive('multitaste')">
+            <ion-icon name="restaurant-outline" size="large"></ion-icon>
+            <br/>Multitaste
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

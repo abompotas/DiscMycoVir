@@ -1,0 +1,40 @@
+ion-toolbar {
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  --background: #ffffff;
+  --min-height: 40px;
+}
+
+ion-buttons {
+  margin: 0 5px;
+  padding: 0;
+}
+
+ion-buttons a {
+  margin: 0;
+  padding: 0;
+}
+
+ion-buttons a ion-icon {
+  margin-top: 5px;
+  font-size: 42px;
+  color: #eeeeee;
+}
+
+ion-img.large {
+  height: 50px;
+  margin: 5px;
+}
+
+ion-img.small {
+  height: 40px;
+}
+
+ion-chip {
+  background-color: #eeeeee;
+}
+
+ion-chip ion-icon {
+  color: #333333;
+  font-size: 25px;
+}

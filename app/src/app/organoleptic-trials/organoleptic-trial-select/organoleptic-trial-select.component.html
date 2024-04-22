@@ -1,0 +1,34 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Organoleptic trial</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>Help us improve by telling us what you taste.</ion-label>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="10" sizeLg="8" sizeXl="6">
+          <ion-list class="form">
+            <ion-label><h3>Food</h3></ion-label>
+            <ion-item>
+              <ion-select placeholder="Select" interface="action-sheet" (ionChange)="changeSelection($event)">
+                <ion-select-option *ngFor="let f of foods" value="{{f.food_id}}">{{f.food_name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="10" sizeMd="4" class="ion-text-center">
+          <br/>
+          <ion-button type="submit" expand="block" (click)="emitSelection()">Next</ion-button>
+          <br/>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+  </ion-card-content>
+</ion-card>

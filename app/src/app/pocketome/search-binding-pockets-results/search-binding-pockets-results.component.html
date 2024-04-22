@@ -1,0 +1,206 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Pocketome Analysis</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-item class="ion-no-padding">
+            <ion-col><h2>Results</h2></ion-col>
+          </ion-item>
+        </ion-row>
+
+        <div *ngIf="outputs !== null">
+          <ion-row>
+            <ion-col>
+              <app-search-binding-pockets-visualization [id]="0" [pdb]="outputs.centroids[0]" [proteinChain]="outputs.chains.protein"
+                                                        [ligandChain]="outputs.chains.ligand"></app-search-binding-pockets-visualization>
+            </ion-col>
+            <ion-col>
+              <img src="{{outputs.graphs.interactions}}">
+            </ion-col>
+            <ion-col>
+              <img src="{{outputs.graphs.filtering}}">
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="ion-no-padding">
+              <ion-grid class="seven-cols">
+                <ion-row *ngFor="let row of resultsTable; index as i;">
+                  <ion-item class="ion-no-padding">
+                    <ion-col size="1" *ngFor="let col of row">
+                      <strong class="table-head" *ngIf="i === 0">{{col}}</strong>
+                      <span *ngIf="i > 0">{{col}}</span>
+                    </ion-col>
+                  </ion-item>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <br/>
+
+        <ion-row>
+          <ion-item>
+            <ion-col><h2>Details of the results</h2></ion-col>
+          </ion-item>
+        </ion-row>
+
+        <ion-accordion-group *ngIf="outputs !== null">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="primary">
+              <ion-label>Binding sites centroids</ion-label>
+            </ion-item>
+            <div class="ion-padding ion-text-start" slot="content">
+              <ion-row>
+                <ion-col size="4" *ngFor="let c of outputs.centroids; index as i;">
+                  <p><strong class="table-head">Centroid {{i}}</strong></p>
+                  <app-search-binding-pockets-visualization [id]="i" [pdb]="c" [proteinChain]="outputs.chains.protein"
+                                                            [ligandChain]="outputs.chains.ligand"></app-search-binding-pockets-visualization>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <br/>
+        <ion-accordion-group *ngIf="outputs !== null">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="medium">
+              <ion-label>Biological Processes (BP)</ion-label>
+            </ion-item>
+            <div class="ion-padding ion-text-start" slot="content">
+              <ion-row>
+                <ion-col>
+                  <p><strong class="table-head">Biological Processes 3rd LEVEL</strong></p>
+                </ion-col>
+                <ion-col>
+                  <p><strong class="table-head">Biological Processes GOTERM</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.bp_bar}}">
+                </ion-col>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.bp_goterm}}">
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-margin-top">
+                <ion-col>
+                  <p><strong class="table-head">Biological Processes GOTREE</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.bp_gotree}}">
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <br/>
+        <ion-accordion-group *ngIf="outputs !== null">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="primary">
+              <ion-label>Cellular Components (CC)</ion-label>
+            </ion-item>
+            <div class="ion-padding ion-text-start" slot="content">
+              <ion-row class="ion-margin-top">
+                <ion-col>
+                  <p><strong class="table-head">Cellular Components 3rd LEVEL</strong></p>
+                </ion-col>
+                <ion-col>
+                  <p><strong class="table-head">Cellular Components GOTERM</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.cc_bar}}">
+                </ion-col>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.cc_goterm}}">
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-margin-top">
+                <ion-col>
+                  <p><strong class="table-head">Cellular Components GOTREE</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.cc_gotree}}">
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <br/>
+        <ion-accordion-group *ngIf="outputs !== null">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="medium">
+              <ion-label>Molecular Functions (MF)</ion-label>
+            </ion-item>
+            <div class="ion-padding ion-text-start" slot="content">
+              <ion-row>
+                <ion-col>
+                  <p><strong class="table-head">Molecular Functions 3rd LEVEL</strong></p>
+                </ion-col>
+                <ion-col>
+                  <p><strong class="table-head">Molecular Functions GOTERM</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.mf_bar}}">
+                </ion-col>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.mf_goterm}}">
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-margin-top">
+                <ion-col>
+                  <p><strong class="table-head">Molecular Functions GOTREE</strong></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.mf_gotree}}">
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <br/>
+        <ion-accordion-group *ngIf="outputs !== null">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="primary">
+              <ion-label>Pathway enrichment</ion-label>
+            </ion-item>
+            <div class="ion-padding ion-text-start" slot="content">
+              <ion-row>
+                <ion-col class="bg-white">
+                  <img src="{{outputs.graphs.pathway_enrichment}}">
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+
+        <br/>
+
+        <ion-row>
+          <ion-col>
+            <ion-button color="secondary" href="{{(pocketomeURL + '/download')}}" download>
+              <ion-icon name="download-outline"></ion-icon>
+              Download
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <br/>
+  </ion-card-content>
+</ion-card>

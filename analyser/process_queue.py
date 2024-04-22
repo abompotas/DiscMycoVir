@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 import mysql.connector
 
-from master import run_cbp
+from virus_detection import run_pipeline
 
 with open('config.json') as fp:
     config = load(fp)
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         for job in get_jobs(config['queue']['batch']):
             mark_as_started(job[0])
             job_args = build_args(job[0], job[5], job[6], job[7], job[8], job[9], job[10], job[11], job[12], job[13])
-            run_cbp(job_args)
+            run_pipeline(job_args)
             mark_as_completed(job[0])
             notify_user(job[4], job[0])
         sleep(config['queue']['sleep'])

@@ -1,0 +1,70 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Virtuous Umami</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>
+      Virtuous Umami is an ML-based algorithm to predict the umami taste of a query compound based on its chemical structure
+    </ion-label>
+    <br/><br/><br/>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <!--suppress AngularUndefinedBinding -->
+          <form (ngSubmit)="analyse()">
+            <ion-label>Write each query compound in a different line:</ion-label>
+            <ion-textarea inputmode="text" [(ngModel)]="smiles" class="ion-text-center" rows="6" placeholder="SMILES, FASTA, Inchi, Smarts or pubchem compound. E.g.:
+{{defaultQuery}}" name="smiles"></ion-textarea>
+            <br/>
+            <ion-select shape="round" name="compounds-type" [(ngModel)]="compoundsType" aria-label="compounds-types" placeholder="Select type">
+              <ion-select-option value="auto">Auto</ion-select-option>
+              <ion-select-option value="SMILES">SMILES</ion-select-option>
+              <ion-select-option value="FASTA">FASTA</ion-select-option>
+              <ion-select-option value="SEQUENCE">SEQUENCE</ion-select-option>
+              <ion-select-option value="Inchi">Inchi</ion-select-option>
+              <ion-select-option value="PDB">PDB</ion-select-option>
+              <ion-select-option value="Smarts">Smarts</ion-select-option>
+              <ion-select-option value="pubchem name">Pubchem name</ion-select-option>
+            </ion-select>
+            <br/>
+            <ion-button color="secondary" expand="block" type="submit">Analyse</ion-button>
+          </form>
+        </ion-col>
+        <ion-col size="1" class="ion-hide-lg-down">
+          <h3 class="separator">OR</h3>
+        </ion-col>
+        <ion-col size="12" class="ion-hide-lg-up">
+          <h3 class="separator small">- OR -</h3>
+        </ion-col>
+        <ion-col>
+          <!--suppress AngularUndefinedBinding -->
+          <form (ngSubmit)="analyseFile()">
+            <ion-label>Upload a file (one compound per line, e.g.: <a href="../../../assets/umami.txt" target="_blank" download>umami.txt</a>):</ion-label>
+            <ion-input name="smiles-file" type="file" (ionChange)="onFileChange($event)"></ion-input>
+            <br/>
+            <ion-select name="compounds-type-file" [(ngModel)]="compoundsTypeFile" aria-label="compounds-types-file" placeholder="Select type">
+              <ion-select-option value="auto">Auto</ion-select-option>
+              <ion-select-option value="SMILES">SMILES</ion-select-option>
+              <ion-select-option value="FASTA">FASTA</ion-select-option>
+              <ion-select-option value="SEQUENCE">SEQUENCE</ion-select-option>
+              <ion-select-option value="Inchi">Inchi</ion-select-option>
+              <ion-select-option value="PDB">PDB</ion-select-option>
+              <ion-select-option value="Smarts">Smarts</ion-select-option>
+              <ion-select-option value="pubchem name">Pubchem name</ion-select-option>
+            </ion-select>
+            <br/>
+            <ion-button expand="block" type="submit">Analyse file</ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/><br/>
+    <div class="references">
+      <h3>References</h3>
+      <ol>
+        <li class="ion-text-start">Pallante, L., Korfiati, A., Androutsos, L., Stojceski, F., Bompotas, A., Giannikos, I., Raftopoulos, C., Malavolta, M., Grasso, G., Mavroudi, S., Kalogeras, A., Martos, V., Amoroso, D., Piga, D., Theofilatos, K., & Deriu, M. A. (2022). Toward a general and interpretable umami taste predictor using a multi-objective machine learning approach. Scientific Reports, 12(1), 21735. <a href="https://doi.org/10.1038/s41598-022-25935-3" target="_blank">https://doi.org/10.1038/s41598-022-25935-3</a></li>
+        <li class="ion-text-start"><a href="https://github.com/lorenzopallante/VirtuousUmami" target="_blank">https://github.com/lorenzopallante/VirtuousUmami</a></li>
+      </ol>
+    </div>
+  </ion-card-content>
+</ion-card>

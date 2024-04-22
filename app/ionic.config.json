@@ -1,0 +1,7 @@
+{
+  "name": "VirtuousApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

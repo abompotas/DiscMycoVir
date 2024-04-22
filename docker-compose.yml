@@ -1,31 +1,30 @@
 version: "3"
 
 services:
-  db.pocketome.virtuous:
-    image: db.pocketome.virtuous:0.1
+  discvir.db:
+    image: discvir.db:0.1
     build: ./db
-    container_name: db.pocketome.virtuous
+    container_name: discvir.db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
-      MYSQL_DATABASE: virtuous_pocketome_api
+      MYSQL_DATABASE: virus_discovery_api
     volumes:
-      - virtuous-pocketome-db:/var/lib/mysql
+      - virus-discovery-db:/var/lib/mysql
 
-  analyser.pocketome.virtuous:
-    image: analyser.pocketome.virtuous
+  discvir.analyser:
+    image: discvir.analyser:0.1
     build: ./analyser
-    container_name: analyser.pocketome.virtuous
+    container_name: discvir.analyser
     restart: always
     environment:
-      POCKETOME_WEBAPP: $POCKETOME_WEBAPP
-      POCKETOME_API: $POCKETOME_API
-      OUTPUT_PATH: /virtuous-pocketome/output
-      UPLOADS_PATH: /virtuous-pocketome/uploads
-      PDB_PATH: /virtuous-pocketome/pdb/blocks
-      DB_HOST: db.pocketome.virtuous
-      DB_NAME: virtuous_pocketome_api
+      DISCVIR_WEBAPP: $DISCVIR_WEBAPP
+      DISCVIR_API: $DISCVIR_API
+      OUTPUT_PATH: /virus-discovery/output
+      UPLOADS_PATH: /virus-discovery/uploads
+      DB_HOST: discvir.db
+      DB_NAME: virus_discovery_api
       DB_USERNAME: root
       DB_PASSWORD: $DB_PASSWORD
       BATCH_SIZE: $BATCH_SIZE
@@ -42,39 +41,36 @@ services:
       SMTP_USERNAME: $SMTP_USERNAME
       SMTP_PASSWORD: $SMTP_PASSWORD
     depends_on:
-      - db.pocketome.virtuous
+      - discvir.db
     volumes:
-      - virtuous-pocketome-pdb:/virtuous-pocketome/pdb
-      - virtuous-pocketome-output:/virtuous-pocketome/output
-      - virtuous-pocketome-uploads:/virtuous-pocketome/uploads
+      - virus-discovery-output:/virus-discovery/output
+      - virus-discovery-uploads:/virus-discovery/uploads
 
-  api.pocketome.virtuous:
-    image: api.pocketome.virtuous
+  discvir.api:
+    image: discvir.api:0.1
     build: ./api
-    container_name: api.pocketome.virtuous
+    container_name: discvir.api
     restart: always
     environment:
-      OUTPUT_PATH: /virtuous-pocketome/output
-      UPLOADS_PATH: /virtuous-pocketome/uploads
+      OUTPUT_PATH: /virus-discovery/output
+      UPLOADS_PATH: /virus-discovery/uploads
       UPLOADS_SIZE: $UPLOADS_SIZE
-      DB_HOST: db.pocketome.virtuous
-      DB_NAME: virtuous_pocketome_api
+      DB_HOST: discvir.db
+      DB_NAME: virus_discovery_api
       DB_USERNAME: root
       DB_PASSWORD: $DB_PASSWORD
     depends_on:
-      - db.pocketome.virtuous
+      - discvir.api
     volumes:
-      - virtuous-pocketome-output:/virtuous-pocketome/output
-      - virtuous-pocketome-uploads:/virtuous-pocketome/uploads
+      - virus-discovery-output:/virus-discovery/output
+      - virus-discovery-uploads:/virus-discovery/uploads
     ports:
-      - "19002:5000"
+      - "5000:5000"
 
 volumes:
-  virtuous-pocketome-db:
+  virus-discovery-db:
     external: true
-  virtuous-pocketome-pdb:
+  virus-discovery-output:
     external: true
-  virtuous-pocketome-output:
-    external: true
-  virtuous-pocketome-uploads:
+  virus-discovery-uploads:
     external: true

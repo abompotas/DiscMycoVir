@@ -1,0 +1,44 @@
+ion-item {
+  width: 100%;
+}
+
+ion-item .error-ad {
+  color: var(--ion-color-danger);
+}
+
+ion-text {
+  size: 5em;
+}
+
+ion-icon {
+  margin-right: 0.5em;
+}
+
+ion-col {
+  text-align: center;
+}
+
+ion-button {
+  min-width: 11em;
+}
+
+p {
+  margin: 1em 0;
+  font-size: 1em;
+}
+
+canvas {
+  min-height: 15em;
+  max-height: 20em;
+  left: 50%;
+  translate: -50%;
+  position: relative;
+}
+
+.ion-hide-lg-down canvas {
+  padding: 1em;
+}
+
+.dominant-taste {
+  font-weight: bold;
+}

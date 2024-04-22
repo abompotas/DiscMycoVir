@@ -1,0 +1,44 @@
+ion-textarea {
+  --padding-top: 7px;
+  --padding-bottom: 7px;
+  height: 159px;
+  line-height: 21px;
+  background-color: #fdfdfd;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.75em;
+}
+
+ion-input {
+  margin: 8px auto 0;
+  width: 25em;
+  height: 159px;
+  font-size: 1.2em;
+}
+
+ion-select {
+  background-color: #fdfdfd;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.75em;
+  --placeholder-opacity: 0.63;
+}
+
+ion-button {
+  margin: 0;
+}
+
+.separator {
+  margin: 3em 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.separator.small {
+  margin: 1em 0;
+}
+
+@media screen and (max-width: 991px) {
+  ion-input {
+    width: 100%;
+    height: 60px;
+  }
+}

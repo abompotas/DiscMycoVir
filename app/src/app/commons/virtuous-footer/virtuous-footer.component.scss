@@ -1,0 +1,46 @@
+:host {
+  font-size: 0.75em;
+}
+
+.footer {
+  background: #171717;
+}
+
+.spacer {
+  padding-top: 5.5em;
+  background: #171717;
+}
+
+a ion-icon {
+  margin: 0;
+  padding: 0 0.25em 0;
+  font-size: 2em;
+  color: var(--ion-color-light);
+}
+
+.disclaimer, .disclaimer-sm {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: var(--ion-color-light);
+}
+
+.disclaimer-sm {
+  font-size: 10px;
+}
+
+.disclaimer-sm p {
+  margin: 0;
+}
+
+.disclaimer img {
+  flex-shrink: 0;
+  margin-left: 1em;
+  height: 4em;
+}
+
+.disclaimer-sm img {
+  flex-shrink: 0;
+  margin-left: 0.5em;
+  height: 3.5em;
+}

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="buttons === true" slot="start">
+      <a href="https://virtuoush2020.com/" target="_blank">
+        <ion-icon name="information-circle"></ion-icon>
+      </a>
+    </ion-buttons>
+    <ion-title>
+      <a routerLink="/">
+        <ion-img class="large ion-hide-lg-down" src="/assets/logo.png"></ion-img>
+      </a>
+      <a routerLink="/">
+        <ion-img class="small ion-hide-lg-up" src="/assets/logo.png"></ion-img>
+      </a>
+    </ion-title>
+    <ion-buttons *ngIf="buttons === true" slot="end">
+      <ion-menu-toggle menu="user">
+        <ion-chip>
+          <ion-avatar>
+            <ion-icon name="person-circle"></ion-icon>
+          </ion-avatar>
+          <ion-label>AB</ion-label>
+        </ion-chip>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!--<ion-fab slot="fixed" vertical="bottom" horizontal="end">-->
+<!--  <ion-fab-button color="medium" href="https://docs.google.com/forms/d/e/1FAIpQLSdZMbYuXauHeA-0GUzh45Te-4Pz6g3-xZPlKmVlwn-PMkForQ/viewform" target="_blank">-->
+<!--    <ion-icon name="chatbox-ellipses-outline"></ion-icon>-->
+<!--  </ion-fab-button>-->
+<!--</ion-fab>-->

@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager
 from shared import config, db
 from urllib.parse import quote_plus
 
-from pocketome.routes import pocketome_blueprint
+from virus_discovery.routes import virus_discovery_blueprint
 
 
 if not os.path.exists(config['app']['uploads_path']):
@@ -28,7 +28,7 @@ CORS(app)
 jwt = JWTManager(app)
 db.init_app(app)
 
-app.register_blueprint(pocketome_blueprint)
+app.register_blueprint(virus_discovery_blueprint)
 
 
 @app.route('/', methods=['GET'])

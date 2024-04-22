@@ -1,12 +1,12 @@
 FROM python:3.9-bullseye
 
-ENV UPLOADS_PATH="/virtuous-pocketome/uploads"
-ENV UPLOADS_SIZE=64
+ENV UPLOADS_PATH=""
+ENV UPLOADS_SIZE=8192
 ENV DB_PASSWORD=""
 
-WORKDIR /virtuous-pocketome
-COPY . /virtuous-pocketome
+WORKDIR /virus-discovery
+COPY . /virus-discovery
 
-RUN pip install -r requirements.txt && chmod 755 /virtuous-pocketome/run.sh
+RUN pip install -r requirements.txt && chmod 755 /virus-discovery/run.sh
 
-CMD /virtuous-pocketome/run.sh
+CMD /virus-discovery/run.sh

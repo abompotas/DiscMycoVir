@@ -1,0 +1,2 @@
+<app-search-binding-pockets-form *ngIf="jobId === 0"></app-search-binding-pockets-form>
+<app-search-binding-pockets-results *ngIf="jobId > 0" [jobId]="jobId" [hash]="hash"></app-search-binding-pockets-results>

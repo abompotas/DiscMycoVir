@@ -18,31 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `virtuous_pocketome_api`
+-- Database: `virus_discovery_api`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pocketome_jobs`
+-- Table structure for table `virus_discovery_jobs`
 --
 
-DROP TABLE IF EXISTS `pocketome_jobs`;
-CREATE TABLE IF NOT EXISTS `pocketome_jobs` (
+DROP TABLE IF EXISTS `virus_discovery_jobs`;
+CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `started` timestamp NULL DEFAULT NULL,
   `completed` timestamp NULL DEFAULT NULL,
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `complex_pdb` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `chain_protein` varchar(1) CHARACTER SET utf8mb4 NOT NULL,
-  `chain_ligand` varchar(1) CHARACTER SET utf8mb4 NOT NULL,
-  `complex_xtc` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `k_flag` int(11) DEFAULT NULL,
-  `dist` float DEFAULT NULL,
-  `sasa_threshold` float DEFAULT NULL,
-  `dock_threshold` float DEFAULT NULL,
-  `extensive` tinyint(1) NOT NULL DEFAULT '0',
+  `genome` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;

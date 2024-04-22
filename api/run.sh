@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tee /virtuous-pocketome/config.json > /dev/null <<EOT
+tee /virus-discovery/config.json > /dev/null <<EOT
 {
   "app": {
     "host": "0.0.0.0",
@@ -20,4 +20,4 @@ EOT
 
 export PYTHONPATH=/usr/lib/python3/dist-packages/
 
-python /virtuous-pocketome/main.py
+python -u /virus-discovery/main.py

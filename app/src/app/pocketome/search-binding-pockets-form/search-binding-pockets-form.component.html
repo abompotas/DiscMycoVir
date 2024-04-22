@@ -1,0 +1,147 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Virtuous Pocketome</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>
+      Searching for similar binding pockets
+    </ion-label>
+    <br/><br/>
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="12" sizeLg="10" sizeXl="8">
+          <!--suppress AngularUndefinedBinding -->
+          <form (ngSubmit)="search()">
+            <ion-row>
+              <ion-col class="section-head">
+                <ion-label>
+                  <strong>Provide protein-ligand complex structure</strong>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>E-mail:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="10" sizeXs="8">
+                <ion-input [(ngModel)]="email" name="email" type="email" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>PDB file:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="10" sizeXs="8">
+                <ion-input name="pdb-file" type="file" (ionChange)="onPDBFileChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="section-head">
+                <ion-label><strong>Chain labels for protein and ligand identification</strong></ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>Protein chain:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="4" sizeXs="8">
+                <ion-input [(ngModel)]="proteinChain" name="protein-chain" type="text" required="true" autocapitalize="characters" maxlength="1"></ion-input>
+              </ion-col>
+              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                <ion-label>Ligand chain:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="4" sizeXs="8">
+                <ion-input [(ngModel)]="ligandChain" name="ligand-chain" type="text" required="true" autocapitalize="characters" maxlength="1"></ion-input>
+              </ion-col>
+            </ion-row>
+            <br/><br/>
+            <ion-accordion-group>
+              <ion-accordion value="first">
+                <ion-item slot="header" color="primary">
+                  <ion-label>Optional parameters</ion-label>
+                </ion-item>
+                <div class="ion-padding ion-text-start" slot="content">
+                  <ion-row>
+                    <ion-col class="ion-text-center">
+                      <ion-label><strong>Trajectory file</strong></ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-text-start">
+                    <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+                      <ion-label>XTC file:</ion-label>
+                    </ion-col>
+                    <ion-col sizeSm="10" sizeXs="8">
+                      <ion-input name="xtc-file" type="file" (ionChange)="onXTCFileChange($event)"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col class="section-head ion-text-center">
+                      <ion-label><strong>Advanced options</strong></ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col sizeSm="2" sizeXs="6" class="vcenter">
+                      <ion-label>Kflag</ion-label>
+                    </ion-col>
+                    <ion-col sizeSm="2" sizeXs="6" class="vcenter">
+                      <ion-input [(ngModel)]="kFlag" name="kflag" type="number" value="0" min="0"></ion-input>
+                    </ion-col>
+                    <ion-col sizeSm="8" sizeXs="12" class="vcenter">
+                      <ion-label>
+                        Number of clusters to be generated; 0 = optimization with silhouette score
+                      </ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="2" class="vcenter">
+                      <ion-label>Dist</ion-label>
+                    </ion-col>
+                    <ion-col size="2">
+                      <ion-input [(ngModel)]="dist" name="dist" type="number" value="10" min="0"></ion-input>
+                    </ion-col>
+                    <ion-col class="vcenter">
+                      <ion-label>Maximum distance from ligand (angstrom) to identify pocket residues</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="2" class="vcenter">
+                      <ion-label>sasaThreshold</ion-label>
+                    </ion-col>
+                    <ion-col size="2">
+                      <ion-input [(ngModel)]="sasaThreshold" name="sasa-threshold" type="number" value="0.75" min="0" max="1" step="0.01"></ion-input>
+                    </ion-col>
+                    <ion-col class="vcenter">
+                      <ion-label>Threshold (percentage) for SASA filter</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="2" class="vcenter">
+                      <ion-label>dockThreshold</ion-label>
+                    </ion-col>
+                    <ion-col size="2">
+                      <ion-input [(ngModel)]="dockThreshold" name="dock-threshold" type="number" value="0.1" min="0" max="1" step="0.01"></ion-input>
+                    </ion-col>
+                    <ion-col class="vcenter">
+                      <ion-label>Threshold (percentage) for Docking filter</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+            <br/><br/>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col size="10" sizeMd="4" class="ion-text-center">
+                <ion-button type="submit" expand="block" color="secondary">Submit</ion-button>
+              </ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+          </form>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/><br/>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,114 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Analysis Results</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="10" sizeMd="4" class="ion-text-center">
+            <ion-button *ngIf="origin === 'form'" href="#" (click)="goBack($event)" expand="block">
+              <ion-icon name="create"></ion-icon>
+              Back to Form
+            </ion-button>
+            <ion-button *ngIf="origin === 'food'" href="#" (click)="goBack($event)" expand="block">
+              <ion-icon name="pizza"></ion-icon>
+              Back to Food
+            </ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <br/>
+        <ion-row class="ion-hide-lg-down">
+          <ion-item>
+            <ion-col size="2">
+              <strong class="table-head">Compound</strong>
+            </ion-col>
+            <ion-col size="4">
+              <strong class="table-head">2D Structure</strong>
+            </ion-col>
+            <ion-col size="2">
+              <strong class="table-head">Applicability Domain Check</strong>
+            </ion-col>
+            <ion-col size="2">
+              <strong class="table-head">Sweet/Bitter</strong>
+            </ion-col>
+            <ion-col size="2">
+              <strong class="table-head">Descriptors</strong>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+        <ion-row class="ion-hide-lg-down">
+          <ion-item *ngFor="let compound of compounds">
+            <ion-col size="2">
+              {{compound.smiles}}
+            </ion-col>
+            <ion-col size="4">
+              <img alt="Image: 2D Structure" src="data:image/png;base64,{{compound.structure}}"/>
+            </ion-col>
+            <ion-col size="2" *ngIf="compound.checkad === true">
+              {{formatADResults(compound.checkad)}}
+            </ion-col>
+            <ion-col size="2" *ngIf="compound.checkad === false">
+              <span class="error-ad">{{formatADResults(compound.checkad)}}</span>
+            </ion-col>
+            <ion-col size="2" *ngIf="compound.checkad === true">
+              {{formatProbabilityResults(compound.taste.sweetbitter)}}
+            </ion-col>
+            <ion-col size="2" *ngIf="compound.checkad === false">
+              <span class="error-ad">{{formatProbabilityResults(compound.taste.sweetbitter)}}</span>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button href="{{downloadDescriptors(compound.smiles, false)}}" expand="block" color="medium">
+                <ion-icon name="download-outline"></ion-icon>
+                All
+              </ion-button>
+              <ion-button href="{{downloadDescriptors(compound.smiles, true)}}" expand="block" color="secondary">
+                <ion-icon name="download-outline"></ion-icon>
+                Selected
+              </ion-button>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+        <ion-row class="ion-hide-lg-up">
+          <ion-item *ngFor="let compound of compounds">
+            <ion-col class="ion-text-center">
+              <p>
+                {{compound.smiles}}<br/>
+                <img alt="Image: 2D Structure" src="data:image/png;base64,{{compound.structure}}"/>
+              </p>
+              <p>
+                <strong>Applic. Domain Check: </strong>
+                <span *ngIf="compound.checkad === true">{{formatADResults(compound.checkad)}}</span>
+                <span *ngIf="compound.checkad === false" class="error-ad">{{formatADResults(compound.checkad)}}</span>
+                <br/>
+                <strong>Sweet/Bitter: </strong>
+                <span *ngIf="compound.checkad === true">{{formatProbabilityResults(compound.taste.sweetbitter)}}</span>
+                <span *ngIf="compound.checkad === false" class="error-ad">{{formatProbabilityResults(compound.taste.sweetbitter)}}</span>
+              </p>
+              <p>
+                <ion-button href="{{downloadDescriptors(compound.smiles, false)}}" color="medium">
+                  <ion-icon name="download-outline"></ion-icon>
+                  All
+                </ion-button>
+                <ion-button href="{{downloadDescriptors(compound.smiles, true)}}" color="secondary">
+                  <ion-icon name="download-outline"></ion-icon>
+                  Selected
+                </ion-button>
+              </p>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <br/><br/>
+    <div class="references">
+      <h3>References</h3>
+      <ol>
+        <li class="ion-text-start">Maroni, G., Pallante, L., Di Benedetto, G., Deriu, M. A., Piga, D., & Grasso, G. (2022). Informed classification of sweeteners/bitterants compounds via explainable machine learning. Current Research in Food Science, 5, 2270–2280. <a href="https://doi.org/10.1016/j.crfs.2022.11.014" target="_blank">https://doi.org/10.1016/j.crfs.2022.11.014</a></li>
+        <li class="ion-text-start"><a href="https://github.com/gabribg88/VirtuousSweetBitter" target="_blank">https://github.com/gabribg88/VirtuousSweetBitter</a></li>
+      </ol>
+    </div>
+  </ion-card-content>
+</ion-card>
