@@ -50,6 +50,6 @@ COPY . /virus-discovery
 
 RUN python3 -m pip install -r requirements.txt
 
-RUN chmod 755 /virtuous-pocketome/lib/virus_discovery_pipeline.sh /virtuous-pocketome/run.sh
+RUN chmod 755 /virus-discovery/lib/virus_discovery_pipeline.sh /virus-discovery/run.sh
 
 CMD /virus-discovery/run.sh
