@@ -1,11 +1,13 @@
 FROM ubuntu:22.04
 
-ENV POCKETOME_WEBAPP="localhost:8100/#"
-ENV POCKETOME_API="localhost"
+ENV DISCVIR_WEBAPP="localhost:8100/#"
+ENV DISCVIR_API="localhost"
 ENV BATCH_SIZE=10
 ENV SLEEP_SEC=20
-ENV OUTPUT_PATH="/virtuous-pocketome/output"
-ENV PDB_PATH="/virtuous-pocketome/pdb"
+ENV OUTPUT_PATH="/virus-discovery/output"
+#----> PDB
+ENV PDB_PATH=""
+
 ENV K_FLAG=0
 ENV DIST=10
 ENV SASA_THRESHOLD=0.75
@@ -15,14 +17,14 @@ ENV CPUS=1
 ENV DB_HOST="localhost"
 ENV DB_USERNAME="root"
 ENV DB_PASSWORD=""
-ENV DB_NAME="virtuous_api"
+ENV DB_NAME="virus_discovery_api"
 ENV SMTP_SERVER="localhost"
 ENV SMTP_PORT=465
-ENV SMTP_ADDRESS="virtuous@localhost"
-ENV SMTP_USERNAME="virtuous"
+ENV SMTP_ADDRESS=""
+ENV SMTP_USERNAME=""
 ENV SMTP_PASSWORD=""
 
-WORKDIR /virtuous-pocketome
+WORKDIR /virus-discovery
 
 ENV TZ="Europe/Athens"
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -57,19 +59,20 @@ RUN apt update \
     pdb2pqr \
 && update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
-&& add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" \
-&& apt update \
-&& apt install -y r-base r-base-dev \
-&& R -e "install.packages('ggplot2')" \
-&& R -e "install.packages('gplots')" \
-&& R -e "install.packages('dplyr')" \
-&& R -e "install.packages('stringr')" \
-&& R -e "install.packages('igraph')" \
-&& R -e "install.packages('BiocManager'); BiocManager::install(version = '3.17'); BiocManager::install('annotate'); BiocManager::install('topGO'); BiocManager::install('biomaRt'); BiocManager::install('org.Hs.eg.db'); BiocManager::install('Rgraphviz')" \
-&& R -e "install.packages('GOxploreR')"
+#RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
+#&& add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" \
+#&& apt update \
+#&& apt install -y r-base r-base-dev \
+#&& R -e "install.packages('ggplot2')" \
+#&& R -e "install.packages('gplots')" \
+#&& R -e "install.packages('dplyr')" \
+#&& R -e "install.packages('stringr')" \
+#&& R -e "install.packages('igraph')" \
+#&& R -e "install.packages('BiocManager'); BiocManager::install(version = '3.17'); BiocManager::install('annotate'); BiocManager::install('topGO'); BiocManager::install('biomaRt'); BiocManager::install('org.Hs.eg.db'); BiocManager::install('Rgraphviz')" \
+#&& R -e "install.packages('GOxploreR')"
 
-COPY . /virtuous-pocketome
+
+COPY . /virus-discovery
 
 RUN python3 -m pip install lib/pdbfixer \
 && python3 -m pip install openbabel-wheel \
@@ -82,4 +85,4 @@ RUN cp /virtuous-pocketome/lib/PLANTS/* /usr/local/bin/ \
     $ASSAM_V2/bin/pdbaamc $ASSAM_V2/bin/aspreg2f $ASSAM_V2/bin/aspsup $ASSAM_V2/bin/matmult1r \
     /virtuous-pocketome/run.sh
 
-CMD /virtuous-pocketome/run.sh
+CMD /virus-discovery/run.sh
