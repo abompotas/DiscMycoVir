@@ -1,10 +1,10 @@
 <ion-card>
   <ion-card-header class="ion-margin-top ion-text-center">
-    <ion-card-title>Virtuous Pocketome</ion-card-title>
+    <ion-card-title>Mycovirus Discovery</ion-card-title>
   </ion-card-header>
   <ion-card-content class="ion-text-center">
     <ion-label>
-      Searching for similar binding pockets
+      Search genomes for discovering mycoviruses
     </ion-label>
     <br/><br/>
     <ion-grid>
@@ -21,19 +21,62 @@
               </ion-col>
             </ion-row>
             <ion-row class="ion-text-start">
-              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
                 <ion-label>E-mail:</ion-label>
               </ion-col>
-              <ion-col sizeSm="10" sizeXs="8">
-                <ion-input [(ngModel)]="email" name="email" type="email" required="true"></ion-input>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input [(ngModel)]="email" name="email" type="email" placeholder="johndoe@email.com" required="true"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row class="ion-text-start">
-              <ion-col sizeSm="2" sizeXs="4" class="vcenter">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Sample name:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input [(ngModel)]="sampleName" name="sample_name" type="text" placeholder="Sample 1" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Sequencing technology:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-select [(ngModel)]="sequencingTechnology" name="sequencing_technology"  placeholder="Single or Pair end" required="true">
+                  <ion-select-option value="single">Single end</ion-select-option>
+                  <ion-select-option value="paired">Paired end</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start" *ngIf="sequencingTechnology === 'single'">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Input file:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input name="single_file" type="file" (ionChange)="onSingleFileChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start" *ngIf="sequencingTechnology === 'paired'">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Input file (forward):</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input name="forward_file" type="file" (ionChange)="onForwardFileChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start" *ngIf="sequencingTechnology === 'paired'">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Input file (reverse):</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input name="reverse_file" type="file" (ionChange)="onReverseFileChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
                 <ion-label>Reference Genome file:</ion-label>
               </ion-col>
-              <ion-col sizeSm="10" sizeXs="8">
-                <ion-input name="pdb-file" type="file" (ionChange)="onGenomeFileChange($event)" required="true"></ion-input>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input name="reference_genome" type="file" (ionChange)="onGenomeFileChange($event)" required="true"></ion-input>
               </ion-col>
             </ion-row>
             <br/><br/>
@@ -43,6 +86,30 @@
                   <ion-label>Optional parameters</ion-label>
                 </ion-item>
                 <div class="ion-padding ion-text-start" slot="content">
+                  <ion-row class="ion-text-start">
+                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                      <ion-label>Trimmomatic adapter:</ion-label>
+                    </ion-col>
+                    <ion-col sizeSm="9" sizeXs="8">
+                      <ion-input [(ngModel)]="adapter" name="adapter" type="text" required="true"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-text-start">
+                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                      <ion-label>Trimmomatic sliding window:</ion-label>
+                    </ion-col>
+                    <ion-col sizeSm="9" sizeXs="8">
+                      <ion-input [(ngModel)]="slidingWindow" name="sliding_window" type="text" required="true"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-text-start">
+                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                      <ion-label>Trimmomatic minimum length:</ion-label>
+                    </ion-col>
+                    <ion-col sizeSm="9" sizeXs="8">
+                      <ion-input [(ngModel)]="minLength" name="min_length" type="text" required="true"></ion-input>
+                    </ion-col>
+                  </ion-row>
                 </div>
               </ion-accordion>
             </ion-accordion-group>

@@ -27,7 +27,7 @@ export class VirusDiscoveryResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pocketomeURL = environment.virtuousPocketome + '/pocketome/' + this.jobId + '/' + this.hash;
+    this.pocketomeURL = environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
     this.getResults();
   }
 

@@ -26,7 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
 
 ion-content {
@@ -49,7 +49,7 @@ ion-grid {
 
 ion-card {
   margin-bottom: 1.5rem;
-  border: 2px solid #6B6390;
+  border: 2px solid #155d80;
   border-radius: 24px;
   color: #333333;
 }
@@ -60,12 +60,12 @@ ion-item {
 }
 
 ion-card-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   font-size: 32px;
 }
 
 ion-card-subtitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   font-size: 24px;
 }
 
@@ -79,7 +79,7 @@ ion-card ion-label {
 
 ion-button {
   height: 3em;
-  --border-radius: 0.75em;
+  --border-radius: 1.5em;
   --box-shadow: none;
 }
 
@@ -112,7 +112,7 @@ ion-list.form ion-input, ion-list.form ion-select {
 }
 
 ion-accordion {
-  background: #f2f2f2;
+  background: #f0f0f0;
   border-radius: 0.75em;
 }
 
@@ -121,7 +121,7 @@ strong {
 }
 
 .table-head {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
 
 .references h3 {
