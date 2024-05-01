@@ -1,7 +1,7 @@
 ion-toolbar {
   --padding-top: 5px;
   --padding-bottom: 5px;
-  --background: #ffffff;
+  --background: var(--ion-color-primary);
   --min-height: 40px;
 }
 
