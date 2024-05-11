@@ -1,7 +1,7 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 /** Ionic CSS Variables **/
 :root {
@@ -12,12 +12,12 @@
   //--ion-color-primary-contrast-rgb: 255, 255, 255;
   //--ion-color-primary-shade: #3171e0;
   //--ion-color-primary-tint: #4c8dff;
-  --ion-color-primary: #643a90;
+  --ion-color-primary: #155d80;
   --ion-color-primary-rgb: 74, 50, 99;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #4e2f70;
-  --ion-color-primary-tint: #7240a7;
+  --ion-color-primary-shade: #13435b;
+  --ion-color-primary-tint: #1779a4;
 
   /** secondary **/
   //--ion-color-secondary: #3dc2ff;
@@ -26,20 +26,20 @@
   //--ion-color-secondary-contrast-rgb: 255, 255, 255;
   //--ion-color-secondary-shade: #36abe0;
   //--ion-color-secondary-tint: #50c8ff;
-  --ion-color-secondary: #55c64c;
+  --ion-color-secondary: #158037;
   --ion-color-secondary-rgb: 107, 183, 101;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #558d4f;
-  --ion-color-secondary-tint: #4de73e;
+  --ion-color-secondary-shade: #135e2a;
+  --ion-color-secondary-tint: #1fa44b;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary: #1888bb;
   --ion-color-tertiary-rgb: 82, 96, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  --ion-color-tertiary-shade: #086888;
+  --ion-color-tertiary-tint: #2f9dd9;
 
   /** success **/
   --ion-color-success: #2dd36f;

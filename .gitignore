@@ -1,7 +1,12 @@
-analyser/venv
-api/venv
-
 .env
 
+analyser/venv
 analyser/config.json
+
+api/venv
 api/config.json
+
+app/node_modules
+app/platforms
+app/plugins
+app/www

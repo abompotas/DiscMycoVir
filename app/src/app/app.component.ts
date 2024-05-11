@@ -10,8 +10,8 @@ export class AppComponent {
   constructor(private platform: Platform, private alertController: AlertController) {
     this.platform.backButton.subscribe(async () => {
       const alert = await this.alertController.create({
-        header: 'Exit the VirtuousApp?',
-        message: 'You are going to exit the VirtuousApp',
+        header: 'Exit the Mycovirus Discovery App?',
+        message: 'You are going to exit the Mycovirus Discovery App',
         buttons: [
           {text: 'Cancel', role: 'cancel'},
           {
