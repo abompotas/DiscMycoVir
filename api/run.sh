@@ -14,7 +14,12 @@ tee /virus-discovery/config.json > /dev/null <<EOT
     "username": "${DB_USERNAME}",
     "password": "${DB_PASSWORD}",
     "schema": "${DB_NAME}"
+  },
+  "args": {
+    "uploads": "${UPLOADS_PATH}",
+    "outfolder": "${OUTPUT_PATH}"
   }
+
 }
 EOT
 

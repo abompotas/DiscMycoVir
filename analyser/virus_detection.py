@@ -44,7 +44,15 @@ def parse_options():
 
 
 def run_pipeline(args):
-    print(args)
+    print(args.keys())
+    if args['single_paired'] == "pair" and not (args["reverse_file"] and args["forward_file"]):
+        print("ERROR: MISSING Revers and forward files")
+    #step 1: TrimmomaticSE (paired-single)
+    #step 2: fastq -> fasta
+    #step 3: Trinity (paired-single)
+    #step 4: BWA-MEM
+    #step 5: SAMTOOLS
+    #step 6: BLAST
 
 
 # run main

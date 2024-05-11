@@ -33,7 +33,7 @@ app.register_blueprint(virus_discovery_blueprint)
 
 @app.route('/', methods=['GET'])
 def home():
-    return '<h1>VirtuousPocketome API</h1>'
+    return '<h1> DISCVIR: Virus Discovery API</h1>'
 
 
 @app.after_request

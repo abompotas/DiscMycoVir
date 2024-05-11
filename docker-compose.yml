@@ -10,8 +10,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
       MYSQL_DATABASE: virus_discovery_api
-    volumes:
-      - virus-discovery-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 2s
+    ports:
+      - "3306:3306"
+    #volumes:
+    #  - virus-discovery-db:/var/lib/mysql
 
   discvir.analyser:
     image: discvir.analyser:0.1
@@ -41,36 +46,34 @@ services:
       SMTP_USERNAME: $SMTP_USERNAME
       SMTP_PASSWORD: $SMTP_PASSWORD
     depends_on:
-      - discvir.db
+      discvir.db:
+          condition: service_healthy
     volumes:
       - virus-discovery-output:/virus-discovery/output
       - virus-discovery-uploads:/virus-discovery/uploads
 
-  discvir.api:
-    image: discvir.api:0.1
-    build: ./api
-    container_name: discvir.api
-    restart: always
-    environment:
-      OUTPUT_PATH: /virus-discovery/output
-      UPLOADS_PATH: /virus-discovery/uploads
-      UPLOADS_SIZE: $UPLOADS_SIZE
-      DB_HOST: discvir.db
-      DB_NAME: virus_discovery_api
-      DB_USERNAME: root
-      DB_PASSWORD: $DB_PASSWORD
-    depends_on:
-      - discvir.api
-    volumes:
-      - virus-discovery-output:/virus-discovery/output
-      - virus-discovery-uploads:/virus-discovery/uploads
-    ports:
-      - "5000:5000"
+#  discvir.api:
+#    image: discvir.api:0.1
+#    build: ./api
+#    container_name: discvir.api
+#    restart: always
+#    environment:
+#      OUTPUT_PATH: /virus-discovery/output
+#      UPLOADS_PATH: /virus-discovery/uploads
+#      UPLOADS_SIZE: $UPLOADS_SIZE
+#      DB_HOST: discvir.db
+#      DB_NAME: virus_discovery_api
+#      DB_USERNAME: root
+#      DB_PASSWORD: $DB_PASSWORD
+#    depends_on:
+#      - discvir.api
+#    volumes:
+#      - virus-discovery-output:/virus-discovery/output
+#      - virus-discovery-uploads:/virus-discovery/uploads
+#    ports:
+#      - "5000:5000"
 
 volumes:
-  virus-discovery-db:
-    external: true
+  #virus-discovery-db:
   virus-discovery-output:
-    external: true
   virus-discovery-uploads:
-    external: true

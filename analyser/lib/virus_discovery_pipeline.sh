@@ -117,6 +117,7 @@ if [ "${single_paired}" = "single" ]; then
     $adapter \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
+  # rm forward
 else
   tmp=(${reverse_file//./ })
   fastq_files_r="${tmp[0]}.trimmed.fastq"
@@ -128,6 +129,7 @@ else
     $adapter \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
+    # rm forward reverse
 fi
 
 
@@ -178,6 +180,7 @@ fi
 bwa index $ref_genome
 bwa mem $ref_genome "${trinity_dir}.Trinity.fasta" > "./output.sam"
 
+# rm -r ${trinity_dir}
 
 #SAMTOOLS
 #Getting the unmapped reads from a sam file:

@@ -14,8 +14,8 @@ tee /virus-discovery/config.json > /dev/null <<EOT
     "db2bcompared": "${PDB_PATH}",
     "kflag": ${K_FLAG},
     "dist": ${DIST},
-    "sasaThreshold": ${SASA_THRESHOLD},
-    "dockThreshold": ${DOCK_THRESHOLD},
+    "max_mem": ${UPLOADS_SIZE},
+    "seq_type": "${SEQ_TYPE}",
     "extensive": ${EXTENSIVE},
     "cpus": ${CPUS}
   },
@@ -34,5 +34,4 @@ tee /virus-discovery/config.json > /dev/null <<EOT
   }
 }
 EOT
-
 python -u /virus-discovery/process_queue.py

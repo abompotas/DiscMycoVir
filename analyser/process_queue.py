@@ -11,7 +11,7 @@ import mysql.connector
 
 from virus_detection import run_pipeline
 
-with open('config.json') as fp:
+with open('config.json',encoding='utf-8') as fp:
     config = load(fp)
     db = mysql.connector.connect(
         host=config['db']['host'],
@@ -19,46 +19,45 @@ with open('config.json') as fp:
         password=config['db']['password'],
         database=config['db']['schema']
     )
-
-
-def build_args(job_id, complex_pdb, chain_protein, chain_ligand,
-               complex_xtc=None, k_flag=None, dist=None, sasa_threshold=None, dock_threshold=None, extensive=None):
+def build_args(job_id, genome, paired = False, adapter = "NexteraPE-PE.fa:2:30:10",
+               sample_name="", min_len="50", window = "5:20", forward_file="", reverse_file=""):
+    """Usage (Single End): ./virus_discovery_pipeline.sh [options] -c reference_genome -s file"
+    "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file\
+    """
+    if paired:
+        single_paired = "pair"
+    else:
+        single_paired = "single"
     args = {
-        'complexPDB': config['args']['uploads'] + os.sep + complex_pdb,
-        'chainProtein': chain_protein,
-        'chainLigand': chain_ligand,
-        'db2bcompared': config['args']['db2bcompared'],
-        'outfolder': config['args']['outfolder'] + os.sep + str(job_id) + os.sep,
-        'cpus': config['args']['cpus']
-    }
-    if complex_xtc is not None:
-        args['complexXTC'] = config['args']['uploads'] + os.sep + complex_xtc
-    if k_flag is not None:
-        args['kflag'] = k_flag
-    else:
-        args['kflag'] = config['args']['kflag']
-    if dist is not None:
-        args['dist'] = dist
-    else:
-        args['dist'] = config['args']['dist']
-    if sasa_threshold is not None:
-        args['sasaThreshold'] = sasa_threshold
-    else:
-        args['sasaThreshold'] = config['args']['sasaThreshold']
-    if dock_threshold is not None:
-        args['dockThreshold'] = dock_threshold
-    else:
-        args['dockThreshold'] = config['args']['dockThreshold']
-    if extensive:
-        args['extensive'] = extensive
-    else:
-        args['extensive'] = config['args']['extensive']
+    # Number of threads for parallel execution
+        'threads': config['args']['cpus'],
+        'single_paired': single_paired,
+    # Adapter for Trimmomatic
+        'adapter' : adapter,
+    # Sliding window for Trimmomatic
+        'sliding_window' : window,
+    # Minimum length for Trimmomatic
+        'min_len' : min_len,
+    # Max memory to be used by Trinity
+        'max_memory': config['args']['max_mem'],
+    # Sequence type to be used by Trinity
+        'seq_type' : config['args']['seq_type'],
+    # Sample name
+        'sample_name' : sample_name,
+    # Reference genome
+        'ref_genome' : genome,
+    #"-f	Paired forward input file" "-s	Single end input file"
+        'forward_file' : forward_file,
+    # Paired reverse input file
+        'reverse_file' : reverse_file,
+    # Output directory
+        'output_dir' : config['args']['outfolder'] + os.sep + str(job_id) + os.sep}
     return args
 
 
 def get_jobs(limit):
     cursor = db.cursor()
-    cursor.execute('SELECT * FROM pocketome_jobs WHERE started IS NULL ORDER BY id ASC LIMIT 0,{}'.format(limit))
+    cursor.execute(f"SELECT * FROM virus_discovery_jobs WHERE started IS NULL ORDER BY id ASC LIMIT 0,{limit}")
     jobs = cursor.fetchall()
     cursor.close()
     db.commit()
@@ -67,14 +66,14 @@ def get_jobs(limit):
 
 def mark_as_started(job_id):
     cursor = db.cursor()
-    cursor.execute('UPDATE pocketome_jobs SET started=CURRENT_TIMESTAMP() WHERE id={}'.format(job_id))
+    cursor.execute('UPDATE virus_discovery_jobs SET started=CURRENT_TIMESTAMP() WHERE id={}'.format(job_id))
     cursor.close()
     db.commit()
 
 
 def mark_as_completed(job_id):
     cursor = db.cursor()
-    cursor.execute('UPDATE pocketome_jobs SET completed=CURRENT_TIMESTAMP() WHERE id={}'.format(job_id))
+    cursor.execute('UPDATE virus_discovery_jobs SET completed=CURRENT_TIMESTAMP() WHERE id={}'.format(job_id))
     cursor.close()
     db.commit()
 
@@ -103,10 +102,18 @@ def notify_user(email, job_id):
 if __name__ == '__main__':
     print('Processing queue...')
     while True:
-        for job in get_jobs(config['queue']['batch']):
-            mark_as_started(job[0])
-            job_args = build_args(job[0], job[5], job[6], job[7], job[8], job[9], job[10], job[11], job[12], job[13])
+        jobs = get_jobs(config['queue']['batch'])
+        if not jobs:
+            print("No jobs found")
+        for job in jobs:
+
+            job_id, submitted, started, completed, user, genome, paired, adapter, \
+                sample_name, min_len, window,forward_file, reverse_file = job
+            mark_as_started(job_id)
+            job_args = build_args(job_id,genome,paired,adapter,sample_name,
+                                  min_len,window,forward_file,reverse_file)
+
             run_pipeline(job_args)
-            mark_as_completed(job[0])
-            notify_user(job[4], job[0])
+            mark_as_completed(job_id)
+            # notify_user(job[4], job[0])
         sleep(config['queue']['sleep'])
