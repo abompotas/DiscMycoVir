@@ -13,10 +13,8 @@ services:
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 2s
-    ports:
-      - "3306:3306"
-    #volumes:
-    #  - virus-discovery-db:/var/lib/mysql
+    volumes:
+      - virus-discovery-db:/var/lib/mysql
 
   discvir.analyser:
     image: discvir.analyser:0.1
@@ -34,12 +32,12 @@ services:
       DB_PASSWORD: $DB_PASSWORD
       BATCH_SIZE: $BATCH_SIZE
       SLEEP_SEC: $SLEEP_SEC
-      K_FLAG: $K_FLAG
-      DIST: $DIST
-      SASA_THRESHOLD: $SASA_THRESHOLD
-      DOCK_THRESHOLD: $DOCK_THRESHOLD
-      EXTENSIVE: $EXTENSIVE
-      CPUS: $CPUS
+      ADAPTER: $ADAPTER
+      SLIDING_WINDOW: $SLIDING_WINDOW
+      MIN_LENGTH: $MIN_LENGTH
+      SEQ_TYPE: fa
+      THREADS: $THREADS
+      MAX_MEMORY: $MAX_MEMORY
       SMTP_SERVER: $SMTP_SERVER
       SMTP_PORT: $SMTP_PORT
       SMTP_ADDRESS: $SMTP_ADDRESS
@@ -52,28 +50,39 @@ services:
       - virus-discovery-output:/virus-discovery/output
       - virus-discovery-uploads:/virus-discovery/uploads
 
-#  discvir.api:
-#    image: discvir.api:0.1
-#    build: ./api
-#    container_name: discvir.api
-#    restart: always
-#    environment:
-#      OUTPUT_PATH: /virus-discovery/output
-#      UPLOADS_PATH: /virus-discovery/uploads
-#      UPLOADS_SIZE: $UPLOADS_SIZE
-#      DB_HOST: discvir.db
-#      DB_NAME: virus_discovery_api
-#      DB_USERNAME: root
-#      DB_PASSWORD: $DB_PASSWORD
-#    depends_on:
-#      - discvir.api
-#    volumes:
-#      - virus-discovery-output:/virus-discovery/output
-#      - virus-discovery-uploads:/virus-discovery/uploads
-#    ports:
-#      - "5000:5000"
+  discvir.api:
+    image: discvir.api:0.1
+    build: ./api
+    container_name: discvir.api
+    restart: always
+    environment:
+      OUTPUT_PATH: /virus-discovery/output
+      UPLOADS_PATH: /virus-discovery/uploads
+      UPLOADS_SIZE: $UPLOADS_SIZE
+      DB_HOST: discvir.db
+      DB_NAME: virus_discovery_api
+      DB_USERNAME: root
+      DB_PASSWORD: $DB_PASSWORD
+      ADAPTER: "NexteraPE-PE.fa:2:30:10"
+      SLIDING_WINDOW: 50
+      MIN_LENGTH: "5:20"
+    depends_on:
+      - discvir.db
+    volumes:
+      - virus-discovery-output:/virus-discovery/output
+      - virus-discovery-uploads:/virus-discovery/uploads
+    ports:
+      - "5000:5000"
+
+  discvir.app:
+    image: discvir.app:0.1
+    build: ./app
+    container_name: discvir.app
+    restart: always
+    ports:
+      - "8000:80"
 
 volumes:
-  #virus-discovery-db:
+  virus-discovery-db:
   virus-discovery-output:
   virus-discovery-uploads:

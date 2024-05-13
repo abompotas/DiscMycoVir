@@ -15,11 +15,11 @@ tee /virus-discovery/config.json > /dev/null <<EOT
     "password": "${DB_PASSWORD}",
     "schema": "${DB_NAME}"
   },
-  "args": {
-    "uploads": "${UPLOADS_PATH}",
-    "outfolder": "${OUTPUT_PATH}"
+  "defaults": {
+    "adapter": "${ADAPTER}",
+    "min_length": ${MIN_LENGTH},
+    "sliding_window": "${SLIDING_WINDOW}"
   }
-
 }
 EOT
 

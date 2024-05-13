@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
 from shared import config, db
 from urllib.parse import quote_plus
 
@@ -15,7 +14,6 @@ if not os.path.exists(config['app']['uploads_path']):
 app = Flask(__name__)
 app.secret_key = 'PFtdbiPdkJevKACdS1eyVMsuKNCVRObt'
 app.config['DEBUG'] = True
-app.config['JWT_SECRET_KEY'] = 'CLIPyyNsXfvMr9dN2w9iG6xWif1oVFCP'
 app.config['UPLOAD_FOLDER'] = config['app']['uploads_path']
 app.config['MAX_CONTENT_LENGTH'] = config['app']['uploads_size'] * 1000 * 1000
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -25,7 +23,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{}:{}@{}/{}'.format(con
                                                                              config['db']['schema'])
 
 CORS(app)
-jwt = JWTManager(app)
 db.init_app(app)
 
 app.register_blueprint(virus_discovery_blueprint)

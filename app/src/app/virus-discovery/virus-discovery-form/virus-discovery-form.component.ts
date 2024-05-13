@@ -16,13 +16,13 @@ export class VirusDiscoveryFormComponent implements OnInit {
   email: string | null;
   sampleName: string | null;
   sequencingTechnology: string | null;
-  adapter: string | null;
   slidingWindow: string | null;
   minLength: string | null;
-  private singleFile: File | null;
-  private forwardFile: File | null;
-  private reverseFile: File | null;
-  private referenceGenome: File | null;
+  singleFile: File | null;
+  forwardFile: File | null;
+  reverseFile: File | null;
+  referenceGenome: File | null;
+  adapter: File | null;
 
   constructor(private http: HttpClient, private router: Router,
               private alertController: AlertController, private loadingController: LoadingController) {
@@ -33,13 +33,13 @@ export class VirusDiscoveryFormComponent implements OnInit {
     this.email = null;
     this.sampleName = null;
     this.sequencingTechnology = null;
-    this.adapter = null;
     this.slidingWindow = null;
     this.minLength = null;
     this.singleFile = null;
     this.forwardFile = null;
     this.reverseFile = null;
     this.referenceGenome = null;
+    this.adapter = null;
   }
 
   ngOnInit() {
@@ -61,6 +61,10 @@ export class VirusDiscoveryFormComponent implements OnInit {
     this.referenceGenome = event.target.children['reference_genome'].files[0];
   }
 
+  onAdapterChange(event) {
+    this.adapter = event.target.children['adapter'].files[0];
+  }
+
   search() {
     this.loading().then(() => {
       if(this.validateForm()) {
@@ -76,6 +80,15 @@ export class VirusDiscoveryFormComponent implements OnInit {
           formData.append('reverse_file', this.reverseFile, this.reverseFile.name);
         }
         formData.append('reference_genome', this.referenceGenome, this.referenceGenome.name);
+        if(this.adapter !== null) {
+          formData.append('adapter', this.adapter, this.adapter.name);
+        }
+        if(this.slidingWindow !== null) {
+          formData.append('sliding_window', this.slidingWindow);
+        }
+        if(this.minLength !== null) {
+          formData.append('min_length', this.minLength);
+        }
         this.http.post<VirusDiscoveryResult>(environment.discvirAPI + '/virus-discovery',
           formData, {responseType: 'json'}).subscribe(
           x => this.searchResponse(x),
@@ -90,6 +103,40 @@ export class VirusDiscoveryFormComponent implements OnInit {
   }
 
   validateForm() {
+    let validEmail = true;
+    if(this.email === null) {
+      validEmail = false;
+    }
+    else {
+      const matches = this.email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+      if(!matches) {
+        validEmail = false;
+      }
+    }
+    if(!validEmail) {
+      this.searchError({error: 'Please fill in a valid email address.'}).then(null);
+      return false;
+    }
+    let validName = true;
+    if(this.sampleName === null) {
+      validName = false;
+    }
+    else {
+      const matches = this.sampleName.match(/^\w+$/);
+      if(!matches) {
+        validName = false;
+      }
+    }
+    if(!validName) {
+      this.searchError({error: 'Please fill in a name for your experiment (only alphanumeric characters are permitted).'}).then(null);
+      return false;
+    }
+    return this.validateInputFiles();
+  }
+
+  validateInputFiles() {
     if(this.sequencingTechnology === null) {
       this.searchError({error: 'Please select the sequencing technology type.'}).then(null);
       return false;

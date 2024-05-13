@@ -1,143 +1,148 @@
 import os
+import re
 import uuid
+from json import dumps
 
-from flask import Blueprint, json, request, send_file
 from email_validator import validate_email, EmailNotValidError
+from flask import Blueprint, request, send_file
 
-from virus_discovery.model import VirusDiscoveryJob
 from shared import config
+from virus_discovery.model import VirusDiscoveryJob
 
 virus_discovery_blueprint = Blueprint('virus_discovery', __name__)
 
 
-@virus_discovery_blueprint.route('/virus_discovery', methods=['POST'])
+@virus_discovery_blueprint.route('/virus-discovery', methods=['POST'])
 def submit_virus_discovery_job():
-    job_args = validate_form(request.form)
+    job_args = parse_form()
     if job_args is not None:
-        filenames = save_protein_files(request.files)
-        if 'pdb' in filenames:
-            job_args['pdb-file'] = filenames['pdb']
-            if 'xtc' in filenames:
-                job_args['xtc-file'] = filenames['xtc']
-            if PocketomeJob.create(job_args):
-                return json.dumps({'status': 'success'})
-            else:
-                return json.dumps({'status': 'failed', 'error': 'Could not save to DB'}), 500
+        if VirusDiscoveryJob.create(job_args):
+            return dumps({'status': 'success'})
         else:
-            return json.dumps({'status': 'failed', 'error': 'Please provide a valid PDB file'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not save to DB'}), 500
     else:
-        return json.dumps({'status': 'failed', 'error': 'Please fill in all the fields with the appropriate values'}), 400
+        return dumps({'status': 'failed', 'error': 'Please fill in all the fields with the appropriate values'}), 400
 
 
-@virus_discovery_blueprint.route('/virus_discovery/<int:job_id>/<string:job_hash>', methods=['GET'])
+@virus_discovery_blueprint.route('/virus-discovery/<int:job_id>/<string:job_hash>', methods=['GET'])
 def virus_discovery_job_results(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
-        job = PocketomeJob.get(job_id)
+        job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash):
-                return json.dumps({'status': 'success', 'results': job.get_results()})
+                return dumps({'status': 'success', 'results': job.get_results()})
             else:
-                return json.dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
         else:
-            return json.dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
     else:
-        return json.dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-@virus_discovery_blueprint.route('/virus_discovery/<int:job_id>/<string:job_hash>/download', methods=['GET'])
+@virus_discovery_blueprint.route('/virus-discovery/<int:job_id>/<string:job_hash>/download', methods=['GET'])
 def virus_discovery_job_results_zipped(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
-        job = PocketomeJob.get(job_id)
+        job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash):
                 return send_file(job.get_zipped_results(), mimetype='application/zip', as_attachment=True)
             else:
-                return json.dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
         else:
-            return json.dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
     else:
-        return json.dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-def validate_form(form):
-    job_args = {}
-    fields = [{'name': 'email', 'required': True, 'type': 'email'},
-              {'name': 'protein-chain', 'required': True, 'type': 'str', 'len': 1},
-              {'name': 'ligand-chain', 'required': True, 'type': 'str', 'len': 1},
-              {'name': 'kflag', 'required': True, 'type': 'int', 'min': 0},
-              {'name': 'dist', 'required': True, 'type': 'float', 'min': 0},
-              {'name': 'sasa-threshold', 'required': True, 'type': 'float', 'min': 0, 'max': 1},
-              {'name': 'dock-threshold', 'required': True, 'type': 'float', 'min': 0, 'max': 1}]
-    for f in fields:
-        if validate_field(form, f):
-            job_args[f['name']] = form[f['name']]
+def parse_form():
+    job_args = {
+        'email': parse_email(),
+        'sample_name': parse_sample_name(),
+        'genome': parse_file('reference_genome'),
+        'adapter': parse_file('adapter', config['defaults']['adapter']),
+        'window': parse_sliding_window(config['defaults']['sliding_window']),
+        'min_len': parse_int('min_length', 1, 1000, config['defaults']['min_length'])
+    }
+    if 'sequencing_technology' in request.form:
+        job_args['sequencing_technology'] = request.form['sequencing_technology']
+        if request.form['sequencing_technology'] == 'single':
+            job_args['single_file'] = parse_file('single_file')
+        elif request.form['sequencing_technology'] == 'paired':
+            job_args['forward_file'] = parse_file('forward_file')
+            job_args['reverse_file'] = parse_file('reverse_file')
         else:
+            job_args['sequencing_technology'] = None
+    else:
+        job_args['sequencing_technology'] = None
+    if None in job_args.values():
+        return None
+    else:
+        return job_args
+
+
+def parse_email():
+    if 'email' not in request.form:
+        return None
+    else:
+        try:
+            validate_email(request.form['email'])
+        except EmailNotValidError:
             return None
-    return job_args
+        return request.form['email']
 
 
-def validate_field(form, field):
-    if 'name' not in field:
-        return False
-    if 'type' not in field:
-        return False
-    if field['name'] in form:
-        if field['type'] == 'str':
-            if not validate_str(form, field):
-                return False
-        elif field['type'] == 'email':
-            try:
-                validate_email(form[field['name']])
-            except EmailNotValidError:
-                return False
-        elif field['type'] == 'int':
-            if not validate_num(form, field):
-                return False
-        elif field['type'] == 'float':
-            if not validate_num(form, field, True):
-                return False
-        return True
-    return not field['required']
+def parse_sample_name():
+    if 'sample_name' not in request.form:
+        return None
+    else:
+        if re.search('^\w+$', request.form['sample_name']) is None:
+            return None
+        return request.form['sample_name']
 
 
-def validate_str(form, field):
-    if 'len' in field:
-        if len(form[field['name']]) != field['len']:
-            return False
-    return True
+def parse_sliding_window(default=None):
+    if 'sliding_window' not in request.form:
+        return default
+    else:
+        if len(request.form['sliding_window']) == 0:
+            return default
+        if re.search('^\d+:\d+$', request.form['sliding_window']) is None:
+            return None
+        return request.form['sliding_window']
 
 
-def validate_num(form, field, isfloat=False):
-    try:
-        if isfloat:
-            x = float(form[field['name']])
-        else:
-            x = int(form[field['name']])
-        if 'min' in field:
-            if x < field['min']:
-                return False
-        if 'max' in field:
-            if x > field['max']:
-                return False
-    except ValueError:
-        return False
-    return True
+def parse_int(field, min_w=None, max_w=None, default=None):
+    if field not in request.form:
+        return default
+    else:
+        if len(request.form['sliding_window']) == 0:
+            return default
+        try:
+            x = int(request.form[field])
+            if min_w is not None:
+                if x < min_w:
+                    return None
+            if max_w is not None:
+                if x > max_w:
+                    return None
+        except ValueError:
+            return None
+        return x
+
+
+def parse_file(name, default=None):
+    if name not in request.files:
+        return default
+    else:
+        filepath = None
+        file = request.files[name]
+        if file.filename != '':
+            if file and allowed_file(file.filename, 'fasta'):
+                filename = '{}.fasta'.format(str(uuid.uuid4()))
+                filepath = os.path.join(config['app']['uploads_path'], filename)
+                file.save(filepath)
+        return filepath
 
 
 def allowed_file(filename, filetype):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ['txt', filetype]
-
-
-def save_protein_files(files):
-    filetypes = ['pdb', 'xtc']
-    filenames = {}
-    for ft in filetypes:
-        protein_file = ft + '-file'
-        if protein_file in files:
-            file = files[protein_file]
-            if file.filename != '':
-                if file and allowed_file(file.filename, ft):
-                    filenames[ft] = str(uuid.uuid4()) + '.' + ft
-                    filepath = os.path.join(config['app']['uploads_path'], filenames[ft])
-                    file.save(filepath)
-    return filenames

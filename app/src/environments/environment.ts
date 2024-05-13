@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  discvirAPI: 'http://localhost:5000/api/v1',
+  discvirAPI: 'http://localhost:5000',
   discvir: 'http://localhost:8100'
 };
 

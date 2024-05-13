@@ -36,27 +36,15 @@ CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `genome` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `paired` boolean NOT NULL DEFAULT 0,
-  `adapter` varchar(255) CHARACTER SET utf8mb4 DEFAULT "NexteraPE-PE.fa:2:30:10",
-  `sample_name` varchar(255) CHARACTER SET utf8mb4 DEFAULT "Sample X",
+  `adapter` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `sample_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `min_len` int(6) DEFAULT 50,
-  `window` varchar(20) CHARACTER SET utf8mb4 DEFAULT "(5:20)",
-  `forward_file` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `window` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+  `forward_file` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `reverse_file` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
-
--- Inserting a job for single-end sequencing
-INSERT INTO `virus_discovery_jobs` (`submitted`, `user`, `genome`, `paired`, `adapter`, `sample_name`, `min_len`, `window`)
-VALUES (CURRENT_TIMESTAMP, 'user1', 'AGTCGATCGATCGATC', 0, 'NexteraPE-PE.fa:2:30:10"', 'sample1', 50, '1:15');
-
--- Inserting a job for paired-end sequencing
-INSERT INTO `virus_discovery_jobs` (`submitted`, `user`, `genome`, `paired`, `adapter`, `sample_name`, `min_len`, `window`)
-VALUES (CURRENT_TIMESTAMP, 'user2', 'AGTCGATCGATCGATC', 1, 'NexteraPE-PE.fa:2:30:10"', 'sample2', 50, '2:16');
-
--- Inserting another job for single-end sequencing
-INSERT INTO `virus_discovery_jobs` (`submitted`, `user`, `genome`, `paired`, `adapter`, `sample_name`, `min_len`, `window`)
-VALUES (CURRENT_TIMESTAMP, 'user3', 'AGTCGATCGATCGATC', 0, 'NexteraPE-PE.fa:2:30:10"', 'sample3', 50, '3:17');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
