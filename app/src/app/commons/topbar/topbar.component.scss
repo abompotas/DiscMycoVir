@@ -2,7 +2,7 @@ ion-toolbar {
   --padding-top: 5px;
   --padding-bottom: 5px;
   --background: var(--ion-color-primary);
-  --min-height: 40px;
+  --min-height: 80px;
 }
 
 ion-buttons {
@@ -22,12 +22,12 @@ ion-buttons a ion-icon {
 }
 
 ion-img.large {
-  height: 50px;
-  margin: 5px;
+  height: 75px;
+  margin: 2.5px;
 }
 
 ion-img.small {
-  height: 40px;
+  height: 60px;
 }
 
 ion-chip {
