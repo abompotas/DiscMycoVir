@@ -90,7 +90,7 @@ def run_pipeline(args):
                    '-o', args["output_dir"],
                    '-g', args["ref_genome"],
                    '-s', args["forward_file"]])
-        if res == 0:
+        if res.returncode == 0:
             print("Command executed.")
         else:
             print("Command failed.", res)
@@ -107,7 +107,7 @@ def run_pipeline(args):
                    '-g', args["ref_genome"],
                    '-f', args["forward_file"],
                    '-r', args["reverse_file"]])
-        if res == 0:
+        if res.returncode == 0:
             print("Command executed.")
         else:
             print("Command failed.", res)
