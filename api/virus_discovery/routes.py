@@ -138,7 +138,7 @@ def parse_file(name, default=None):
         file = request.files[name]
         if file.filename != '':
             if file and allowed_file(file.filename):
-                filename = '{}'.format(str(uuid.uuid4()))
+                filename = str(uuid.uuid4())
                 filepath = os.path.join(config['app']['uploads_path'], filename)
                 file.save(filepath)
         return filepath
