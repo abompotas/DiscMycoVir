@@ -79,8 +79,10 @@ def run_pipeline(args):
     Usage (Single End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -s file"
     Usage (Paired End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file
     """
+    cwd = os.path.realpath(__file__)
+    pipeline_exec = os.path.join(cwd, 'lib/virus_discovery_pipeline.sh')
     if args['single_paired'] == 'single':
-        res = run(['./lib/virus_discovery_pipeline.sh',
+        res = run([pipeline_exec,
                    '-t', args["threads"],
                    '-a', args["adapter"],
                    '-w', args["sliding_window"],
@@ -96,7 +98,7 @@ def run_pipeline(args):
             print("Command failed.", res)
 
     elif args['single_paired'] == 'pair':
-        res = run(['./lib/virus_discovery_pipeline.sh',
+        res = run([pipeline_exec,
                    '-t', args["threads"],
                    '-a', args["adapter"],
                    '-w', args["sliding_window"],
