@@ -3,7 +3,7 @@ import os
 from json import load
 from time import sleep
 from helpers import VirusDiscoveryJob, notify_user
-
+from subprocess import run
 
 with open('config.json', encoding='utf-8') as fp:
     config = load(fp)
@@ -11,9 +11,6 @@ with open('config.json', encoding='utf-8') as fp:
 
 def build_args(job_id, genome, paired=0, sample_name="", forward_file="", reverse_file="",
                adapter=None, min_len=None, window=None):
-    """Usage (Single End): ./virus_discovery_pipeline.sh [options] -c reference_genome -s file"
-    "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file\
-    """
     if paired:
         single_paired = "pair"
     else:
@@ -60,12 +57,60 @@ def run_pipeline(args):
             print('ERROR: MISSING Reverse and forward input files')
     else:
         print('ERROR: Unknown sequencing technology')
-    #step 1: TrimmomaticSE (paired-single)
-    #step 2: fastq -> fasta
-    #step 3: Trinity (paired-single)
-    #step 4: BWA-MEM
-    #step 5: SAMTOOLS
-    #step 6: BLAST
+
+    # TODO: .sh to python
+    # step 1: TrimmomaticSE (paired-single)
+    if args['single_paired'] == 'single':
+        # TrimmomaticSE -threads $threads "${forward_file}" ${fastq_files_f}"
+        # $adapter SLIDINGWINDOW:$sliding_window MIN LEN:$min_len
+        pass
+    elif args['single_paired'] == 'pair':
+        # TrimmomaticPE - threads $threads "${forward_file}" "${reverse_file}"
+        # "${fastq_files_f}" "${fastq_files_f_un}" "${fastq_files_r}" "${fastq_files_r_un}"
+        #  $adapter SLIDINGWINDOW:$sliding_window MIN LEN:$min_len
+        pass
+
+    # step 2: fastq -> fasta NOT NEEDED
+    # step 3: Trinity (paired-single)
+    # step 4: BWA-MEM
+    # step 5: SAMTOOLS
+    # step 6: BLAST
+    """
+    Usage (Single End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -s file"
+    Usage (Paired End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file
+    """
+    if args['single_paired'] == 'single':
+        res = run(['./lib/virus_discovery_pipeline.sh',
+                   '-t', args["threads"],
+                   '-a', args["adapter"],
+                   '-w', args["sliding_window"],
+                   '-m', args["max_memory"],
+                   '-w', args["sliding_window"],
+                   '-l', args["min_len"],
+                   '-o', args["output_dir"],
+                   '-g', args["ref_genome"],
+                   '-s', args["forward_file"]])
+        if res == 0:
+            print("Command executed.")
+        else:
+            print("Command failed.", res)
+
+    elif args['single_paired'] == 'pair':
+        res = run(['./lib/virus_discovery_pipeline.sh',
+                   '-t', args["threads"],
+                   '-a', args["adapter"],
+                   '-w', args["sliding_window"],
+                   '-m', args["max_memory"],
+                   '-w', args["sliding_window"],
+                   '-l', args["min_len"],
+                   '-o', args["output_dir"],
+                   '-g', args["ref_genome"],
+                   '-f', args["forward_file"],
+                   '-r', args["reverse_file"]])
+        if res == 0:
+            print("Command executed.")
+        else:
+            print("Command failed.", res)
 
 
 if __name__ == '__main__':
