@@ -74,14 +74,14 @@ def run_pipeline(args):
     pipeline_exec = os.path.join(cwd, 'lib/virus_discovery_pipeline.sh')
     if args['single_paired'] == 'single':
         res = run([pipeline_exec,
-                   '-t', args['threads'],
-                   '-a', args['adapter'],
-                   '-w', args['sliding_window'],
-                   '-m', args['max_memory'],
-                   '-l', args['min_len'],
-                   '-o', args['output_dir'],
-                   '-g', args['ref_genome'],
-                   '-s', args['forward_file']])
+                   '-t', str(args['threads']),
+                   '-a', str(args['adapter']),
+                   '-w', str(args['sliding_window']),
+                   '-m', str(args['max_memory']),
+                   '-l', str(args['min_len']),
+                   '-o', str(args['output_dir']),
+                   '-g', str(args['ref_genome']),
+                   '-s', str(args['forward_file'])])
         if res.returncode == 0:
             print('Command executed.')
         else:
@@ -89,15 +89,15 @@ def run_pipeline(args):
 
     elif args['single_paired'] == 'pair':
         res = run([pipeline_exec,
-                   '-t', args['threads'],
-                   '-a', args['adapter'],
-                   '-w', args['sliding_window'],
-                   '-m', args['max_memory'],
-                   '-l', args['min_len'],
-                   '-o', args['output_dir'],
-                   '-g', args['ref_genome'],
-                   '-f', args['forward_file'],
-                   '-r', args['reverse_file']])
+                   '-t', str(args['threads']),
+                   '-a', str(args['adapter']),
+                   '-w', str(args['sliding_window']),
+                   '-m', str(args['max_memory']),
+                   '-l', str(args['min_len']),
+                   '-o', str(args['output_dir']),
+                   '-g', str(args['ref_genome']),
+                   '-f', str(args['forward_file']),
+                   '-r', str(args['reverse_file'])])
         if res.returncode == 0:
             print('Command executed.')
         else:
