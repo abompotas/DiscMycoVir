@@ -9,12 +9,12 @@ with open('config.json', encoding='utf-8') as fp:
     config = load(fp)
 
 
-def build_args(job_id, genome, paired=0, sample_name="", forward_file="", reverse_file="",
+def build_args(job_id, genome, paired=0, sample_name='', forward_file='', reverse_file='',
                adapter=None, min_len=None, window=None):
     if paired:
-        single_paired = "pair"
+        single_paired = 'pair'
     else:
-        single_paired = "single"
+        single_paired = 'single'
     if adapter is None:
         adapter = config['args']['adapter']
     if min_len is None:
@@ -37,7 +37,7 @@ def build_args(job_id, genome, paired=0, sample_name="", forward_file="", revers
         'sample_name': sample_name,
         # Reference genome
         'ref_genome': genome,
-        # "-f	Paired forward input file" "-s	Single end input file"
+        # '-f	Paired forward input file' '-s	Single end input file'
         'forward_file': forward_file,
         # Paired reverse input file
         'reverse_file': reverse_file,
@@ -60,59 +60,48 @@ def run_pipeline(args):
 
     # TODO: .sh to python
     # step 1: TrimmomaticSE (paired-single)
-    if args['single_paired'] == 'single':
-        # TrimmomaticSE -threads $threads "${forward_file}" ${fastq_files_f}"
-        # $adapter SLIDINGWINDOW:$sliding_window MIN LEN:$min_len
-        pass
-    elif args['single_paired'] == 'pair':
-        # TrimmomaticPE - threads $threads "${forward_file}" "${reverse_file}"
-        # "${fastq_files_f}" "${fastq_files_f_un}" "${fastq_files_r}" "${fastq_files_r_un}"
-        #  $adapter SLIDINGWINDOW:$sliding_window MIN LEN:$min_len
-        pass
-
     # step 2: fastq -> fasta NOT NEEDED
     # step 3: Trinity (paired-single)
     # step 4: BWA-MEM
     # step 5: SAMTOOLS
     # step 6: BLAST
-    """
-    Usage (Single End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -s file"
-    Usage (Paired End): lib/virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file
-    """
+
+    '''
+    Usage (Single End): lib/virus_discovery_pipeline.sh [options] -g reference_genome -s file'
+    Usage (Paired End): lib/virus_discovery_pipeline.sh [options] -g reference_genome -f forward_file -r reverse_file
+    '''
     cwd = os.path.realpath(__file__)
     pipeline_exec = os.path.join(cwd, 'lib/virus_discovery_pipeline.sh')
     if args['single_paired'] == 'single':
         res = run([pipeline_exec,
-                   '-t', args["threads"],
-                   '-a', args["adapter"],
-                   '-w', args["sliding_window"],
-                   '-m', args["max_memory"],
-                   '-w', args["sliding_window"],
-                   '-l', args["min_len"],
-                   '-o', args["output_dir"],
-                   '-g', args["ref_genome"],
-                   '-s', args["forward_file"]])
+                   '-t', args['threads'],
+                   '-a', args['adapter'],
+                   '-w', args['sliding_window'],
+                   '-m', args['max_memory'],
+                   '-l', args['min_len'],
+                   '-o', args['output_dir'],
+                   '-g', args['ref_genome'],
+                   '-s', args['forward_file']])
         if res.returncode == 0:
-            print("Command executed.")
+            print('Command executed.')
         else:
-            print("Command failed.", res)
+            print('Command failed.', res)
 
     elif args['single_paired'] == 'pair':
         res = run([pipeline_exec,
-                   '-t', args["threads"],
-                   '-a', args["adapter"],
-                   '-w', args["sliding_window"],
-                   '-m', args["max_memory"],
-                   '-w', args["sliding_window"],
-                   '-l', args["min_len"],
-                   '-o', args["output_dir"],
-                   '-g', args["ref_genome"],
-                   '-f', args["forward_file"],
-                   '-r', args["reverse_file"]])
+                   '-t', args['threads'],
+                   '-a', args['adapter'],
+                   '-w', args['sliding_window'],
+                   '-m', args['max_memory'],
+                   '-l', args['min_len'],
+                   '-o', args['output_dir'],
+                   '-g', args['ref_genome'],
+                   '-f', args['forward_file'],
+                   '-r', args['reverse_file']])
         if res.returncode == 0:
-            print("Command executed.")
+            print('Command executed.')
         else:
-            print("Command failed.", res)
+            print('Command failed.', res)
 
 
 if __name__ == '__main__':

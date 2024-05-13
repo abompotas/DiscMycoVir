@@ -14,8 +14,8 @@ reverse_file=""
 output_dir="virus_discovery_output"
 
 usage() {
-  echo "Usage (Single End): ./virus_discovery_pipeline.sh [options] -c reference_genome -s file"
-  echo "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -c reference_genome -f forward_file -r reverse_file"
+  echo "Usage (Single End): ./virus_discovery_pipeline.sh [options] -g reference_genome -s file"
+  echo "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -g reference_genome -f forward_file -r reverse_file"
   echo "OPTIONS:"
   echo "-t	Number of threads for parallel execution"
   echo "-a	Adapter for Trimmomatic"
