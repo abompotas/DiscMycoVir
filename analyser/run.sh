@@ -10,14 +10,12 @@ tee /virus-discovery/config.json > /dev/null <<EOT
   },
   "args": {
     "uploads": "${UPLOADS_PATH}",
-    "outfolder": "${OUTPUT_PATH}",
-    "db2bcompared": "${PDB_PATH}",
-    "kflag": ${K_FLAG},
-    "dist": ${DIST},
-    "max_mem": ${UPLOADS_SIZE},
-    "seq_type": "${SEQ_TYPE}",
-    "extensive": ${EXTENSIVE},
-    "cpus": ${CPUS}
+    "output": "${OUTPUT_PATH}",
+    "adapter": "${ADAPTER}",
+    "sliding_window": "${SLIDING_WINDOW}",
+    "min_length": ${MIN_LENGTH},
+    "threads": ${THREADS},
+    "max_memory": ${MAX_MEMORY}
   },
   "db": {
     "host": "${DB_HOST}",

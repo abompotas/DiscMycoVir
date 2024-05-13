@@ -63,9 +63,9 @@ services:
       DB_NAME: virus_discovery_api
       DB_USERNAME: root
       DB_PASSWORD: $DB_PASSWORD
-      ADAPTER: "NexteraPE-PE.fa:2:30:10"
-      SLIDING_WINDOW: 50
-      MIN_LENGTH: "5:20"
+      ADAPTER: $ADAPTER
+      SLIDING_WINDOW: $SLIDING_WINDOW
+      MIN_LENGTH: $MIN_LENGTH
     depends_on:
       - discvir.db
     volumes:
