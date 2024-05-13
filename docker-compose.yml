@@ -67,7 +67,8 @@ services:
       SLIDING_WINDOW: $SLIDING_WINDOW
       MIN_LENGTH: $MIN_LENGTH
     depends_on:
-      - discvir.db
+      discvir.db:
+          condition: service_healthy
     volumes:
       - virus-discovery-output:/virus-discovery/output
       - virus-discovery-uploads:/virus-discovery/uploads

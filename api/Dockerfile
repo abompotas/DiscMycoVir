@@ -16,4 +16,4 @@ COPY . /virus-discovery
 
 RUN pip install -r requirements.txt && chmod 755 /virus-discovery/run.sh
 
-CMD["/virus-discovery/run.sh"]
+CMD ["/virus-discovery/run.sh"]
