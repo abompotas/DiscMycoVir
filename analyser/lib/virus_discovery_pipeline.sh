@@ -33,7 +33,7 @@ usage() {
 }
 
 
-while getopts ":t:i:w:l:m:q:n:c:s:f:r:h:" option; do
+while getopts ":t:a:w:l:q:m:n:g:s:f:r:o:h:" option; do
   case $option in
     t)
       threads=$OPTARG
