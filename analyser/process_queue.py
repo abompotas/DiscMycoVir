@@ -74,6 +74,7 @@ def run_pipeline(args):
     pipeline_exec = os.path.join(cwd, 'lib/virus_discovery_pipeline.sh')
     if args['single_paired'] == 'single':
         res = run([pipeline_exec,
+                   '-n', str(args['sample_name']),
                    '-t', str(args['threads']),
                    '-a', str(args['adapter']),
                    '-w', str(args['sliding_window']),
@@ -89,6 +90,7 @@ def run_pipeline(args):
 
     elif args['single_paired'] == 'pair':
         res = run([pipeline_exec,
+                   '-n', str(args['sample_name']),
                    '-t', str(args['threads']),
                    '-a', str(args['adapter']),
                    '-w', str(args['sliding_window']),
