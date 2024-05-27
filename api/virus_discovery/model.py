@@ -8,7 +8,7 @@ from hashlib import sha256
 from shared import config, db
 
 
-def get_text_output(filepath, array=True):
+def get_text_output(filepath, array=False):
     with open(filepath, 'r') as txt:
         if array:
             contents = txt.readlines()
@@ -28,15 +28,20 @@ class VirusDiscoveryJob(db.Model):
 
     id = db.Column('id', db.Integer, primary_key=True)
     submitted = db.Column('submitted', db.TIMESTAMP, nullable=False, default=datetime.now())
-    started = db.Column('started', db.TIMESTAMP)
-    completed = db.Column('completed', db.TIMESTAMP)
+    started_analysis = db.Column('started_analysis', db.TIMESTAMP)
+    completed_analysis = db.Column('completed_analysis', db.TIMESTAMP)
+    started_trimming = db.Column('started_trimming', db.TIMESTAMP)
+    completed_trimming = db.Column('completed_trimming', db.TIMESTAMP)
+    trimming_ready = db.Column('trimming_ready', db.Boolean, nullable=False, default=False)
+    started_discovery = db.Column('started_discovery', db.TIMESTAMP)
+    completed_discovery = db.Column('completed_discovery', db.TIMESTAMP)
     user = db.Column('user', db.String(255), nullable=False)
     sample_name = db.Column('sample_name', db.String(255), nullable=False)
     genome = db.Column('genome', db.String(255), nullable=False)
     paired = db.Column('paired', db.Boolean, nullable=False, default=False)
-    adapter = db.Column('adapter', db.String(255), nullable=False)
-    min_len = db.Column('min_len', db.Integer, nullable=False, default=50)
-    window = db.Column('window', db.String(255), nullable=False)
+    adapter = db.Column('adapter', db.String(255), nullable=True)
+    min_len = db.Column('min_len', db.Integer, nullable=True)
+    window = db.Column('window', db.String(255), nullable=True)
     forward_file = db.Column('forward_file', db.String(255), nullable=False)
     reverse_file = db.Column('reverse_file', db.String(255))
 
@@ -65,11 +70,35 @@ class VirusDiscoveryJob(db.Model):
             return True
         return False
 
-    def verify_hash(self, job_hash):
-        calc_hash = sha256('{}%%{}'.format(self.id, self.user).encode('utf-8')).hexdigest()
+    def verify_hash(self, job_hash, stage='analysis'):
+        if stage == 'analysis':
+            check_str = '{}%%{}%%{}'.format(self.id, self.user, self.completed_analysis).encode('utf-8')
+        else:
+            check_str = '{}%%{}%%{}'.format(self.id, self.user, self.completed_discovery).encode('utf-8')
+        calc_hash = sha256(check_str).hexdigest()
         if calc_hash == job_hash:
             return True
         return False
+
+    def get_analysis_results(self):
+        root_path = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
+        if self.paired:
+            forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
+            reverse_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.reverse_file))
+            return [get_text_output(forward_file_report), get_text_output(reverse_file_report)]
+        else:
+            forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
+            return [get_text_output(forward_file_report)]
+
+    def get_zipped_analysis_results(self):
+        root_path = os.path.join(config['app']['output_path'], str(self.id))
+        results_path = os.path.join(root_path, 'fastqc_analysis')
+        zip_path = os.path.join(root_path, 'virus_discovery-{}'.format(str(self.id)))
+        zip_file = '{}.zip'.format(zip_path)
+        if not os.path.exists(zip_file):
+            os.remove(zip_file)
+        shutil.make_archive(zip_path, 'zip', results_path)
+        return zip_file
 
     def get_results(self):
         root_path = os.path.join(config['app']['output_path'], str(self.id))

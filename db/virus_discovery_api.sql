@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Sep 14, 2023 at 01:53 PM
--- Server version: 5.7.31
--- PHP Version: 7.4.9
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -31,17 +22,22 @@ DROP TABLE IF EXISTS `virus_discovery_jobs`;
 CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `submitted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `started` timestamp NULL DEFAULT NULL,
-  `completed` timestamp NULL DEFAULT NULL,
+  `started_analysis` timestamp NULL DEFAULT NULL,
+  `completed_analysis` timestamp NULL DEFAULT NULL,
+  `started_trimming` timestamp NULL DEFAULT NULL,
+  `completed_trimming` timestamp NULL DEFAULT NULL,
+  `trimming_ready` boolean NOT NULL DEFAULT 0,
+  `started_discovery` timestamp NULL DEFAULT NULL,
+  `completed_discovery` timestamp NULL DEFAULT NULL,
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `sample_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `genome` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `paired` boolean NOT NULL DEFAULT 0,
-  `adapter` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `sample_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `min_len` int(6) DEFAULT 50,
-  `window` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
   `forward_file` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `reverse_file` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `adapter` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `min_len` int(6) DEFAULT NULL,
+  `window` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;

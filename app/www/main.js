@@ -33,10 +33,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/home/home-page.component */ 2249);
+/* harmony import */ var _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/trimming/trimming-page.component */ 102);
+/* harmony import */ var _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/results/results-page.component */ 3209);
+
+
 
 
 
@@ -47,22 +51,38 @@ const routes = [
         component: _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_0__.HomePageComponent
     },
     {
+        path: 'trimming',
+        component: _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_1__.TrimmingPageComponent
+    },
+    {
+        path: 'trimming/:job',
+        component: _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_1__.TrimmingPageComponent
+    },
+    {
+        path: 'trimming/:job/:hash',
+        component: _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_1__.TrimmingPageComponent
+    },
+    {
+        path: 'results',
+        component: _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_2__.ResultsPageComponent
+    },
+    {
         path: 'results/:job',
-        component: _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_0__.HomePageComponent
+        component: _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_2__.ResultsPageComponent
     },
     {
         path: 'results/:job/:hash',
-        component: _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_0__.HomePageComponent
+        component: _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_2__.ResultsPageComponent
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
-AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forRoot(routes, { useHash: true })
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule.forRoot(routes, { useHash: true })
         ],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule]
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule]
     })
 ], AppRoutingModule);
 
@@ -148,21 +168,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ 1841);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ 3679);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
 /* harmony import */ var _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/home/home-page.component */ 2249);
-/* harmony import */ var _commons_footer_footer_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./commons/footer/footer.component */ 3758);
-/* harmony import */ var _commons_topbar_topbar_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./commons/topbar/topbar.component */ 2608);
-/* harmony import */ var _virus_discovery_virus_discovery_virus_discovery_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./virus-discovery/virus-discovery/virus-discovery.component */ 6578);
-/* harmony import */ var _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-form/virus-discovery-form.component */ 3743);
-/* harmony import */ var _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-results/virus-discovery-results.component */ 1126);
+/* harmony import */ var _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/trimming/trimming-page.component */ 102);
+/* harmony import */ var _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/results/results-page.component */ 3209);
+/* harmony import */ var _commons_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./commons/footer/footer.component */ 3758);
+/* harmony import */ var _commons_topbar_topbar_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./commons/topbar/topbar.component */ 2608);
+/* harmony import */ var _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-form/virus-discovery-form.component */ 3743);
+/* harmony import */ var _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component */ 7575);
+/* harmony import */ var _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-results/virus-discovery-results.component */ 1126);
+
+
 
 
 
@@ -180,27 +204,29 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.NgModule)({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent,
             _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_2__.HomePageComponent,
-            _commons_footer_footer_component__WEBPACK_IMPORTED_MODULE_3__.FooterComponent,
-            _commons_topbar_topbar_component__WEBPACK_IMPORTED_MODULE_4__.TopbarComponent,
-            _virus_discovery_virus_discovery_virus_discovery_component__WEBPACK_IMPORTED_MODULE_5__.VirusDiscoveryComponent,
-            _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_6__.VirusDiscoveryFormComponent,
-            _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_7__.VirusDiscoveryResultsComponent
+            _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_3__.TrimmingPageComponent,
+            _pages_results_results_page_component__WEBPACK_IMPORTED_MODULE_4__.ResultsPageComponent,
+            _commons_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__.FooterComponent,
+            _commons_topbar_topbar_component__WEBPACK_IMPORTED_MODULE_6__.TopbarComponent,
+            _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_7__.VirusDiscoveryFormComponent,
+            _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__.VirusDiscoveryTrimmingComponent,
+            _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_9__.VirusDiscoveryResultsComponent
         ],
         entryComponents: [],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicModule.forRoot(),
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClientModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_14__.HttpClientModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_15__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_15__.ReactiveFormsModule
         ],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_14__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicRouteStrategy }],
+        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_16__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicRouteStrategy }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
     })
 ], AppModule);
@@ -331,6 +357,78 @@ HomePageComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
+/***/ 3209:
+/*!*********************************************************!*\
+  !*** ./src/app/pages/results/results-page.component.ts ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ResultsPageComponent": () => (/* binding */ ResultsPageComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _raw_loader_results_page_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./results-page.component.html */ 8069);
+/* harmony import */ var _results_page_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./results-page.component.scss */ 1308);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
+
+
+
+
+let ResultsPageComponent = class ResultsPageComponent {
+    constructor() { }
+    ngOnInit() { }
+};
+ResultsPageComponent.ctorParameters = () => [];
+ResultsPageComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-results-page',
+        template: _raw_loader_results_page_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_results_page_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], ResultsPageComponent);
+
+
+
+/***/ }),
+
+/***/ 102:
+/*!***********************************************************!*\
+  !*** ./src/app/pages/trimming/trimming-page.component.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TrimmingPageComponent": () => (/* binding */ TrimmingPageComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _raw_loader_trimming_page_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./trimming-page.component.html */ 4210);
+/* harmony import */ var _trimming_page_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./trimming-page.component.scss */ 4422);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
+
+
+
+
+let TrimmingPageComponent = class TrimmingPageComponent {
+    constructor() { }
+    ngOnInit() { }
+};
+TrimmingPageComponent.ctorParameters = () => [];
+TrimmingPageComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-trimming-page',
+        template: _raw_loader_trimming_page_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_trimming_page_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], TrimmingPageComponent);
+
+
+
+/***/ }),
+
 /***/ 3743:
 /*!****************************************************************************************!*\
   !*** ./src/app/virus-discovery/virus-discovery-form/virus-discovery-form.component.ts ***!
@@ -370,13 +468,10 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
         this.email = null;
         this.sampleName = null;
         this.sequencingTechnology = null;
-        this.slidingWindow = null;
-        this.minLength = null;
         this.singleFile = null;
         this.forwardFile = null;
         this.reverseFile = null;
         this.referenceGenome = null;
-        this.adapter = null;
     }
     ngOnInit() {
     }
@@ -391,9 +486,6 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
     }
     onGenomeFileChange(event) {
         this.referenceGenome = event.target.children['reference_genome'].files[0];
-    }
-    onAdapterChange(event) {
-        this.adapter = event.target.children['adapter'].files[0];
     }
     search() {
         this.loading().then(() => {
@@ -410,15 +502,6 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
                     formData.append('reverse_file', this.reverseFile, this.reverseFile.name);
                 }
                 formData.append('reference_genome', this.referenceGenome, this.referenceGenome.name);
-                if (this.adapter !== null) {
-                    formData.append('adapter', this.adapter, this.adapter.name);
-                }
-                if (this.slidingWindow !== null) {
-                    formData.append('sliding_window', this.slidingWindow);
-                }
-                if (this.minLength !== null) {
-                    formData.append('min_length', this.minLength);
-                }
                 this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery', formData, { responseType: 'json' }).subscribe(x => this.searchResponse(x), e => this.searchError(e.error), () => {
                     this.initForm();
                     this.loadingController.dismiss().then(null);
@@ -583,15 +666,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// noinspection DuplicatedCode
 let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
-    constructor(http, router, alertController, loadingController) {
+    constructor(http, route, router, alertController, loadingController) {
         this.http = http;
+        this.route = route;
         this.router = router;
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.pocketomeURL = '';
         this.outputs = null;
         this.resultsTable = [];
+        this.jobId = 0;
+        this.hash = '';
+        this.route.params.subscribe(params => {
+            if (params.hasOwnProperty('job')) {
+                if (params.hasOwnProperty('hash')) {
+                    this.jobId = params.job;
+                    this.hash = params.hash;
+                }
+            }
+        }, () => router.navigate(['/']), () => {
+            if ((this.jobId) === 0 || (this.hash === '')) {
+                router.navigate(['/']);
+            }
+        });
     }
     ngOnInit() {
         this.pocketomeURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
@@ -658,14 +757,11 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
 };
 VirusDiscoveryResultsComponent.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController }
 ];
-VirusDiscoveryResultsComponent.propDecorators = {
-    jobId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.Input }],
-    hash: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.Input }]
-};
 VirusDiscoveryResultsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-virus-discovery-results',
@@ -678,62 +774,155 @@ VirusDiscoveryResultsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorat
 
 /***/ }),
 
-/***/ 6578:
-/*!******************************************************************************!*\
-  !*** ./src/app/virus-discovery/virus-discovery/virus-discovery.component.ts ***!
-  \******************************************************************************/
+/***/ 7575:
+/*!************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component.ts ***!
+  \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VirusDiscoveryComponent": () => (/* binding */ VirusDiscoveryComponent)
+/* harmony export */   "VirusDiscoveryTrimmingComponent": () => (/* binding */ VirusDiscoveryTrimmingComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _raw_loader_virus_discovery_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery.component.html */ 5805);
-/* harmony import */ var _virus_discovery_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery.component.scss */ 8439);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _raw_loader_virus_discovery_trimming_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-trimming.component.html */ 3352);
+/* harmony import */ var _virus_discovery_trimming_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-trimming.component.scss */ 1400);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ 2340);
 
 
 
 
 
-let VirusDiscoveryComponent = class VirusDiscoveryComponent {
-    constructor(route, router) {
+
+
+
+// noinspection DuplicatedCode
+let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
+    constructor(http, route, router, alertController, loadingController) {
+        this.http = http;
         this.route = route;
         this.router = router;
+        this.alertController = alertController;
+        this.loadingController = loadingController;
         this.jobId = 0;
         this.hash = '';
+        this.analysisResults = [];
         this.route.params.subscribe(params => {
             if (params.hasOwnProperty('job')) {
                 if (params.hasOwnProperty('hash')) {
                     this.jobId = params.job;
                     this.hash = params.hash;
                 }
-                else {
-                    this.router.navigate(['..'], { relativeTo: this.route });
-                }
-            }
-            else {
-                this.jobId = 0;
-                this.hash = '';
             }
         });
+        this.initForm();
     }
-    ngOnInit() { }
+    ngOnInit() {
+        if ((this.jobId) === 0 || (this.hash === '')) {
+            this.router.navigate(['/']);
+        }
+        else {
+            this.loading().then(() => {
+                this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery/analysis/' + this.jobId + '/' + this.hash, { responseType: 'json' }).subscribe(x => {
+                    this.analysisResults = [...x.results];
+                }, e => this.resultsError(e.error), () => this.loadingController.dismiss().then(null));
+            });
+        }
+    }
+    initForm() {
+        this.sequencingTechnology = null;
+        this.slidingWindow = null;
+        this.minLength = null;
+        this.adapter = null;
+    }
+    onAdapterChange(event) {
+        this.adapter = event.target.children['adapter'].files[0];
+    }
+    trim() {
+        this.loading().then(() => {
+            const formData = new FormData();
+            if (this.adapter !== null) {
+                formData.append('adapter', this.adapter, this.adapter.name);
+            }
+            if (this.slidingWindow !== null) {
+                formData.append('sliding_window', this.slidingWindow);
+            }
+            if (this.minLength !== null) {
+                formData.append('min_length', this.minLength);
+            }
+            this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery/trimming', formData, { responseType: 'json' }).subscribe(x => this.trimResponse(x), e => this.resultsError(e.error), () => {
+                this.initForm();
+                this.loadingController.dismiss().then(null);
+            });
+        });
+    }
+    trimResponse(response) {
+        if (response.status === 'success') {
+            this.alertSuccess().then(null);
+        }
+        else {
+            this.resultsError(response).then(null);
+        }
+    }
+    loading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Please wait...',
+            });
+            yield loading.present();
+        });
+    }
+    resultsError(resp) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            this.loadingController.dismiss().then(() => {
+                let msg = 'Oops! Something went wrong...';
+                if (resp.hasOwnProperty('error')) {
+                    msg = resp.error;
+                }
+                this.alertError(msg);
+            });
+        });
+    }
+    alertSuccess() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Success!',
+                message: 'Your query has been submitted. Once the search is completed you will receive an email containing the results.',
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
+    }
+    alertError(msg) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Error!',
+                message: msg,
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
+    }
 };
-VirusDiscoveryComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.ActivatedRoute },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router }
+VirusDiscoveryTrimmingComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController }
 ];
-VirusDiscoveryComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
-        selector: 'app-virus-discovery',
-        template: _raw_loader_virus_discovery_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
-        styles: [_virus_discovery_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+VirusDiscoveryTrimmingComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+        selector: 'app-virus-discovery-trimming',
+        template: _raw_loader_virus_discovery_trimming_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_virus_discovery_trimming_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
     })
-], VirusDiscoveryComponent);
+], VirusDiscoveryTrimmingComponent);
 
 
 
@@ -1054,7 +1243,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("#main-container {\n  background: #262626;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFBO0FBQ0YiLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI21haW4tY29udGFpbmVyIHtcclxuICBiYWNrZ3JvdW5kOiAjMjYyNjI2O1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("#main-container {\n  background: #262626;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFBO0FBQ0YiLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI21haW4tY29udGFpbmVyIHtcbiAgYmFja2dyb3VuZDogIzI2MjYyNjtcbn1cbiJdfQ== */");
 
 /***/ }),
 
@@ -1069,7 +1258,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (":host {\n  font-size: 0.75em;\n}\n\n.footer {\n  background: #171717;\n}\n\n.spacer {\n  padding-top: 5.5em;\n  background: #171717;\n}\n\na ion-icon {\n  margin: 0;\n  padding: 0 0.25em 0;\n  font-size: 2em;\n  color: var(--ion-color-light);\n}\n\n.disclaimer {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: var(--ion-color-light);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZvb3Rlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtFQUNBLG1CQUFBO0VBQ0EsY0FBQTtFQUNBLDZCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLDZCQUFBO0FBQ0YiLCJmaWxlIjoiZm9vdGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIGZvbnQtc2l6ZTogMC43NWVtO1xyXG59XHJcblxyXG4uZm9vdGVyIHtcclxuICBiYWNrZ3JvdW5kOiAjMTcxNzE3O1xyXG59XHJcblxyXG4uc3BhY2VyIHtcclxuICBwYWRkaW5nLXRvcDogNS41ZW07XHJcbiAgYmFja2dyb3VuZDogIzE3MTcxNztcclxufVxyXG5cclxuYSBpb24taWNvbiB7XHJcbiAgbWFyZ2luOiAwO1xyXG4gIHBhZGRpbmc6IDAgMC4yNWVtIDA7XHJcbiAgZm9udC1zaXplOiAyZW07XHJcbiAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodCk7XHJcbn1cclxuXHJcbi5kaXNjbGFpbWVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodCk7XHJcbn1cclxuIl19 */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (":host {\n  font-size: 0.75em;\n}\n\n.footer {\n  background: #171717;\n}\n\n.spacer {\n  padding-top: 5.5em;\n  background: #171717;\n}\n\na ion-icon {\n  margin: 0;\n  padding: 0 0.25em 0;\n  font-size: 2em;\n  color: var(--ion-color-light);\n}\n\n.disclaimer {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: var(--ion-color-light);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZvb3Rlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtFQUNBLG1CQUFBO0VBQ0EsY0FBQTtFQUNBLDZCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLDZCQUFBO0FBQ0YiLCJmaWxlIjoiZm9vdGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBmb250LXNpemU6IDAuNzVlbTtcbn1cblxuLmZvb3RlciB7XG4gIGJhY2tncm91bmQ6ICMxNzE3MTc7XG59XG5cbi5zcGFjZXIge1xuICBwYWRkaW5nLXRvcDogNS41ZW07XG4gIGJhY2tncm91bmQ6ICMxNzE3MTc7XG59XG5cbmEgaW9uLWljb24ge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDAgMC4yNWVtIDA7XG4gIGZvbnQtc2l6ZTogMmVtO1xuICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLWxpZ2h0KTtcbn1cblxuLmRpc2NsYWltZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodCk7XG59XG4iXX0= */");
 
 /***/ }),
 
@@ -1084,7 +1273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-toolbar {\n  --padding-top: 5px;\n  --padding-bottom: 5px;\n  --background: var(--ion-color-primary);\n  --min-height: 80px;\n}\n\nion-buttons {\n  margin: 0 5px;\n  padding: 0;\n}\n\nion-buttons a {\n  margin: 0;\n  padding: 0;\n}\n\nion-buttons a ion-icon {\n  margin-top: 5px;\n  font-size: 42px;\n  color: #eeeeee;\n}\n\nion-img.large {\n  height: 75px;\n  margin: 2.5px;\n}\n\nion-img.small {\n  height: 60px;\n}\n\nion-chip {\n  background-color: #eeeeee;\n}\n\nion-chip ion-icon {\n  color: #333333;\n  font-size: 25px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EscUJBQUE7RUFDQSxzQ0FBQTtFQUNBLGtCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsVUFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtFQUNBLFVBQUE7QUFDRjs7QUFFQTtFQUNFLGVBQUE7RUFDQSxlQUFBO0VBQ0EsY0FBQTtBQUNGOztBQUVBO0VBQ0UsWUFBQTtFQUNBLGFBQUE7QUFDRjs7QUFFQTtFQUNFLFlBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxjQUFBO0VBQ0EsZUFBQTtBQUNGIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10b29sYmFyIHtcclxuICAtLXBhZGRpbmctdG9wOiA1cHg7XHJcbiAgLS1wYWRkaW5nLWJvdHRvbTogNXB4O1xyXG4gIC0tYmFja2dyb3VuZDogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xyXG4gIC0tbWluLWhlaWdodDogODBweDtcclxufVxyXG5cclxuaW9uLWJ1dHRvbnMge1xyXG4gIG1hcmdpbjogMCA1cHg7XHJcbiAgcGFkZGluZzogMDtcclxufVxyXG5cclxuaW9uLWJ1dHRvbnMgYSB7XHJcbiAgbWFyZ2luOiAwO1xyXG4gIHBhZGRpbmc6IDA7XHJcbn1cclxuXHJcbmlvbi1idXR0b25zIGEgaW9uLWljb24ge1xyXG4gIG1hcmdpbi10b3A6IDVweDtcclxuICBmb250LXNpemU6IDQycHg7XHJcbiAgY29sb3I6ICNlZWVlZWU7XHJcbn1cclxuXHJcbmlvbi1pbWcubGFyZ2Uge1xyXG4gIGhlaWdodDogNzVweDtcclxuICBtYXJnaW46IDIuNXB4O1xyXG59XHJcblxyXG5pb24taW1nLnNtYWxsIHtcclxuICBoZWlnaHQ6IDYwcHg7XHJcbn1cclxuXHJcbmlvbi1jaGlwIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlZWVlO1xyXG59XHJcblxyXG5pb24tY2hpcCBpb24taWNvbiB7XHJcbiAgY29sb3I6ICMzMzMzMzM7XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-toolbar {\n  --padding-top: 5px;\n  --padding-bottom: 5px;\n  --background: var(--ion-color-primary);\n  --min-height: 80px;\n}\n\nion-buttons {\n  margin: 0 5px;\n  padding: 0;\n}\n\nion-buttons a {\n  margin: 0;\n  padding: 0;\n}\n\nion-buttons a ion-icon {\n  margin-top: 5px;\n  font-size: 42px;\n  color: #eeeeee;\n}\n\nion-img.large {\n  height: 75px;\n  margin: 2.5px;\n}\n\nion-img.small {\n  height: 60px;\n}\n\nion-chip {\n  background-color: #eeeeee;\n}\n\nion-chip ion-icon {\n  color: #333333;\n  font-size: 25px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EscUJBQUE7RUFDQSxzQ0FBQTtFQUNBLGtCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsVUFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtFQUNBLFVBQUE7QUFDRjs7QUFFQTtFQUNFLGVBQUE7RUFDQSxlQUFBO0VBQ0EsY0FBQTtBQUNGOztBQUVBO0VBQ0UsWUFBQTtFQUNBLGFBQUE7QUFDRjs7QUFFQTtFQUNFLFlBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxjQUFBO0VBQ0EsZUFBQTtBQUNGIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10b29sYmFyIHtcbiAgLS1wYWRkaW5nLXRvcDogNXB4O1xuICAtLXBhZGRpbmctYm90dG9tOiA1cHg7XG4gIC0tYmFja2dyb3VuZDogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xuICAtLW1pbi1oZWlnaHQ6IDgwcHg7XG59XG5cbmlvbi1idXR0b25zIHtcbiAgbWFyZ2luOiAwIDVweDtcbiAgcGFkZGluZzogMDtcbn1cblxuaW9uLWJ1dHRvbnMgYSB7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbn1cblxuaW9uLWJ1dHRvbnMgYSBpb24taWNvbiB7XG4gIG1hcmdpbi10b3A6IDVweDtcbiAgZm9udC1zaXplOiA0MnB4O1xuICBjb2xvcjogI2VlZWVlZTtcbn1cblxuaW9uLWltZy5sYXJnZSB7XG4gIGhlaWdodDogNzVweDtcbiAgbWFyZ2luOiAyLjVweDtcbn1cblxuaW9uLWltZy5zbWFsbCB7XG4gIGhlaWdodDogNjBweDtcbn1cblxuaW9uLWNoaXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlZWVlO1xufVxuXG5pb24tY2hpcCBpb24taWNvbiB7XG4gIGNvbG9yOiAjMzMzMzMzO1xuICBmb250LXNpemU6IDI1cHg7XG59XG4iXX0= */");
 
 /***/ }),
 
@@ -1103,6 +1292,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 1308:
+/*!***********************************************************!*\
+  !*** ./src/app/pages/results/results-page.component.scss ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXN1bHRzLXBhZ2UuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ 4422:
+/*!*************************************************************!*\
+  !*** ./src/app/pages/trimming/trimming-page.component.scss ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0cmltbWluZy1wYWdlLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
 /***/ 8827:
 /*!******************************************************************************************!*\
   !*** ./src/app/virus-discovery/virus-discovery-form/virus-discovery-form.component.scss ***!
@@ -1114,7 +1333,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-col.vcenter {\n  display: flex;\n  align-items: center;\n}\n\nion-col.section-head {\n  padding: 20px 0 10px;\n}\n\nion-input, ion-select {\n  background-color: #fdfdfd;\n  border: 1px solid var(--ion-color-medium);\n  border-radius: 0.75em;\n}\n\nion-button {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1mb3JtLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBQTtFQUNBLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxvQkFBQTtBQUNGOztBQUVBO0VBQ0UseUJBQUE7RUFDQSx5Q0FBQTtFQUNBLHFCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxTQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LWZvcm0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tY29sLnZjZW50ZXIge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuaW9uLWNvbC5zZWN0aW9uLWhlYWQge1xyXG4gIHBhZGRpbmc6IDIwcHggMCAxMHB4O1xyXG59XHJcblxyXG5pb24taW5wdXQsIGlvbi1zZWxlY3QgIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmRmZGZkO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWlvbi1jb2xvci1tZWRpdW0pO1xyXG4gIGJvcmRlci1yYWRpdXM6IDAuNzVlbTtcclxufVxyXG5cclxuaW9uLWJ1dHRvbiB7XHJcbiAgbWFyZ2luOiAwO1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-col.vcenter {\n  display: flex;\n  align-items: center;\n}\n\nion-col.section-head {\n  padding: 20px 0 10px;\n}\n\nion-input, ion-select {\n  background-color: #fdfdfd;\n  border: 1px solid var(--ion-color-medium);\n  border-radius: 0.75em;\n}\n\nion-button {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1mb3JtLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBQTtFQUNBLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxvQkFBQTtBQUNGOztBQUVBO0VBQ0UseUJBQUE7RUFDQSx5Q0FBQTtFQUNBLHFCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxTQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LWZvcm0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tY29sLnZjZW50ZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG5pb24tY29sLnNlY3Rpb24taGVhZCB7XG4gIHBhZGRpbmc6IDIwcHggMCAxMHB4O1xufVxuXG5pb24taW5wdXQsIGlvbi1zZWxlY3QgIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZkZmRmZDtcbiAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0taW9uLWNvbG9yLW1lZGl1bSk7XG4gIGJvcmRlci1yYWRpdXM6IDAuNzVlbTtcbn1cblxuaW9uLWJ1dHRvbiB7XG4gIG1hcmdpbjogMDtcbn1cbiJdfQ== */");
 
 /***/ }),
 
@@ -1129,14 +1348,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-item {\n  width: 100%;\n}\n\nion-item .error-ad {\n  color: var(--ion-color-danger);\n}\n\nion-text {\n  size: 5em;\n}\n\nion-icon {\n  margin-right: 0.5em;\n}\n\nion-grid.seven-cols {\n  --ion-grid-columns: 7;\n}\n\nion-col {\n  text-align: center;\n}\n\nion-col.bg-white {\n  background-color: #ffffff;\n}\n\nion-button {\n  min-width: 11em;\n}\n\nh2 {\n  margin: 1em 0 0.5em;\n  font-size: 24px;\n  font-weight: 500;\n}\n\np {\n  margin: 1em 0;\n  font-size: 1em;\n}\n\nimg {\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1yZXN1bHRzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBQTtBQUNGOztBQUVBO0VBQ0UsOEJBQUE7QUFDRjs7QUFFQTtFQUNFLFNBQUE7QUFDRjs7QUFFQTtFQUNFLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxxQkFBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxlQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtBQUNGOztBQUVBO0VBQ0UsYUFBQTtFQUNBLGNBQUE7QUFDRjs7QUFFQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LXJlc3VsdHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbmlvbi1pdGVtIC5lcnJvci1hZCB7XHJcbiAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1kYW5nZXIpO1xyXG59XHJcblxyXG5pb24tdGV4dCB7XHJcbiAgc2l6ZTogNWVtO1xyXG59XHJcblxyXG5pb24taWNvbiB7XHJcbiAgbWFyZ2luLXJpZ2h0OiAwLjVlbTtcclxufVxyXG5cclxuaW9uLWdyaWQuc2V2ZW4tY29scyB7XHJcbiAgLS1pb24tZ3JpZC1jb2x1bW5zOiA3O1xyXG59XHJcblxyXG5pb24tY29sIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbmlvbi1jb2wuYmctd2hpdGUge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XHJcbn1cclxuXHJcbmlvbi1idXR0b24ge1xyXG4gIG1pbi13aWR0aDogMTFlbTtcclxufVxyXG5cclxuaDIge1xyXG4gIG1hcmdpbjogMWVtIDAgMC41ZW07XHJcbiAgZm9udC1zaXplOiAyNHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbn1cclxuXHJcbnAge1xyXG4gIG1hcmdpbjogMWVtIDA7XHJcbiAgZm9udC1zaXplOiAxZW07XHJcbn1cclxuXHJcbmltZyB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIHRvcDogNTAlO1xyXG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcclxufVxyXG4iXX0= */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-item {\n  width: 100%;\n}\n\nion-item .error-ad {\n  color: var(--ion-color-danger);\n}\n\nion-text {\n  size: 5em;\n}\n\nion-icon {\n  margin-right: 0.5em;\n}\n\nion-grid.seven-cols {\n  --ion-grid-columns: 7;\n}\n\nion-col {\n  text-align: center;\n}\n\nion-col.bg-white {\n  background-color: #ffffff;\n}\n\nion-button {\n  min-width: 11em;\n}\n\nh2 {\n  margin: 1em 0 0.5em;\n  font-size: 24px;\n  font-weight: 500;\n}\n\np {\n  margin: 1em 0;\n  font-size: 1em;\n}\n\nimg {\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1yZXN1bHRzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBQTtBQUNGOztBQUVBO0VBQ0UsOEJBQUE7QUFDRjs7QUFFQTtFQUNFLFNBQUE7QUFDRjs7QUFFQTtFQUNFLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxxQkFBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxlQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtBQUNGOztBQUVBO0VBQ0UsYUFBQTtFQUNBLGNBQUE7QUFDRjs7QUFFQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LXJlc3VsdHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5pb24taXRlbSAuZXJyb3ItYWQge1xuICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLWRhbmdlcik7XG59XG5cbmlvbi10ZXh0IHtcbiAgc2l6ZTogNWVtO1xufVxuXG5pb24taWNvbiB7XG4gIG1hcmdpbi1yaWdodDogMC41ZW07XG59XG5cbmlvbi1ncmlkLnNldmVuLWNvbHMge1xuICAtLWlvbi1ncmlkLWNvbHVtbnM6IDc7XG59XG5cbmlvbi1jb2wge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbmlvbi1jb2wuYmctd2hpdGUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xufVxuXG5pb24tYnV0dG9uIHtcbiAgbWluLXdpZHRoOiAxMWVtO1xufVxuXG5oMiB7XG4gIG1hcmdpbjogMWVtIDAgMC41ZW07XG4gIGZvbnQtc2l6ZTogMjRweDtcbiAgZm9udC13ZWlnaHQ6IDUwMDtcbn1cblxucCB7XG4gIG1hcmdpbjogMWVtIDA7XG4gIGZvbnQtc2l6ZTogMWVtO1xufVxuXG5pbWcge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRvcDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG59XG4iXX0= */");
 
 /***/ }),
 
-/***/ 8439:
-/*!********************************************************************************!*\
-  !*** ./src/app/virus-discovery/virus-discovery/virus-discovery.component.scss ***!
-  \********************************************************************************/
+/***/ 1400:
+/*!**************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component.scss ***!
+  \**************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1144,7 +1363,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aXJ1cy1kaXNjb3ZlcnkuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-col.vcenter {\n  display: flex;\n  align-items: center;\n}\n\nion-col.section-head {\n  padding: 20px 0 10px;\n}\n\nion-input, ion-select {\n  background-color: #fdfdfd;\n  border: 1px solid var(--ion-color-medium);\n  border-radius: 0.75em;\n}\n\nion-button {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUVBO0VBQ0Usb0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0VBQ0EseUNBQUE7RUFDQSxxQkFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtBQUNGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb2wudmNlbnRlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbmlvbi1jb2wuc2VjdGlvbi1oZWFkIHtcbiAgcGFkZGluZzogMjBweCAwIDEwcHg7XG59XG5cbmlvbi1pbnB1dCwgaW9uLXNlbGVjdCAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmRmZGZkO1xuICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbWVkaXVtKTtcbiAgYm9yZGVyLXJhZGl1czogMC43NWVtO1xufVxuXG5pb24tYnV0dG9uIHtcbiAgbWFyZ2luOiAwO1xufVxuIl19 */");
 
 /***/ }),
 
@@ -1159,7 +1378,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-router-outlet id=\"main-container\" animated=\"false\"></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\n  <ion-router-outlet id=\"main-container\" animated=\"false\"></ion-router-outlet>\n</ion-app>\n");
 
 /***/ }),
 
@@ -1174,7 +1393,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"footer\">\r\n  <ion-grid>\r\n    <ion-row class=\"ion-align-items-center ion-hide-md-down\">\r\n      <ion-col>\r\n        <div class=\"disclaimer\">\r\n          <p class=\"ion-text-center\">&copy; Agorakis Bompotas, Nikitas Kalogeropoulos, Maria Giachali, Ioly Kotta-Loizou, Christos Makris</p>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</div>\r\n<div *ngIf=\"spacer\" class=\"spacer ion-hide-lg-up\"></div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"footer\">\n  <ion-grid>\n    <ion-row class=\"ion-align-items-center ion-hide-md-down\">\n      <ion-col>\n        <div class=\"disclaimer\">\n          <p class=\"ion-text-center\">&copy; Agorakis Bompotas, Nikitas Kalogeropoulos, Maria Giachali, Ioly Kotta-Loizou, Christos Makris</p>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</div>\n<div *ngIf=\"spacer\" class=\"spacer ion-hide-lg-up\"></div>\n");
 
 /***/ }),
 
@@ -1189,7 +1408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-buttons *ngIf=\"buttons === true\" slot=\"start\">\r\n      <a href=\"https://www.imslab.gr/\" target=\"_blank\">\r\n        <ion-icon name=\"information-circle\"></ion-icon>\r\n      </a>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      <a routerLink=\"/\">\r\n        <ion-img class=\"large ion-hide-lg-down\" src=\"/assets/discvir.png\"></ion-img>\r\n      </a>\r\n      <a routerLink=\"/\">\r\n        <ion-img class=\"small ion-hide-lg-up\" src=\"/assets/discvir.png\"></ion-img>\r\n      </a>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"buttons === true\" slot=\"start\">\n      <a href=\"https://www.imslab.gr/\" target=\"_blank\">\n        <ion-icon name=\"information-circle\"></ion-icon>\n      </a>\n    </ion-buttons>\n    <ion-title>\n      <a routerLink=\"/\">\n        <ion-img class=\"large ion-hide-lg-down\" src=\"/assets/discvir.png\"></ion-img>\n      </a>\n      <a routerLink=\"/\">\n        <ion-img class=\"small ion-hide-lg-up\" src=\"/assets/discvir.png\"></ion-img>\n      </a>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n");
 
 /***/ }),
 
@@ -1204,7 +1423,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<app-topbar buttons=\"false\"></app-topbar>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <div class=\"page-container\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\r\n        <ion-col size=\"12\" sizeXl=\"10\">\r\n          <app-virus-discovery></app-virus-discovery>\r\n        </ion-col>\r\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n\r\n    <app-footer></app-footer>\r\n  </div>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<app-topbar buttons=\"false\"></app-topbar>\n\n<ion-content [fullscreen]=\"true\">\n  <div class=\"page-container\">\n    <ion-grid>\n      <ion-row>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n        <ion-col size=\"12\" sizeXl=\"10\">\n          <app-virus-discovery-form></app-virus-discovery-form>\n        </ion-col>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <app-footer></app-footer>\n  </div>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 8069:
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/results/results-page.component.html ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<app-topbar buttons=\"false\"></app-topbar>\n\n<ion-content [fullscreen]=\"true\">\n  <div class=\"page-container\">\n    <ion-grid>\n      <ion-row>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n        <ion-col size=\"12\" sizeXl=\"10\">\n          <app-virus-discovery-results></app-virus-discovery-results>\n        </ion-col>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <app-footer></app-footer>\n  </div>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 4210:
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/trimming/trimming-page.component.html ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<app-topbar buttons=\"false\"></app-topbar>\n\n<ion-content [fullscreen]=\"true\">\n  <div class=\"page-container\">\n    <ion-grid>\n      <ion-row>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n        <ion-col size=\"12\" sizeXl=\"10\">\n          <app-virus-discovery-trimming></app-virus-discovery-trimming>\n        </ion-col>\n        <ion-col size=\"0\" sizeXl=\"1\"></ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <app-footer></app-footer>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -1219,7 +1468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\r\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\r\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\r\n  </ion-card-header>\r\n  <ion-card-content class=\"ion-text-center\">\r\n    <ion-label>\r\n      Search genomes for discovering mycoviruses\r\n    </ion-label>\r\n    <br/><br/>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col></ion-col>\r\n        <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\r\n          <!--suppress AngularUndefinedBinding -->\r\n          <form (ngSubmit)=\"search()\">\r\n            <ion-row>\r\n              <ion-col class=\"section-head\">\r\n                <ion-label>\r\n                  <strong>Provide the genome:</strong>\r\n                </ion-label>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>E-mail:</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input [(ngModel)]=\"email\" name=\"email\" type=\"email\" placeholder=\"johndoe@email.com\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Sample name:</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input [(ngModel)]=\"sampleName\" name=\"sample_name\" type=\"text\" placeholder=\"Sample 1\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Sequencing technology:</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-select [(ngModel)]=\"sequencingTechnology\" name=\"sequencing_technology\"  placeholder=\"Single or Pair end\" required=\"true\">\r\n                  <ion-select-option value=\"single\">Single end</ion-select-option>\r\n                  <ion-select-option value=\"paired\">Paired end</ion-select-option>\r\n                </ion-select>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'single'\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Input file:</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input name=\"single_file\" type=\"file\" (ionChange)=\"onSingleFileChange($event)\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'paired'\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Input file (forward):</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input name=\"forward_file\" type=\"file\" (ionChange)=\"onForwardFileChange($event)\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'paired'\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Input file (reverse):</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input name=\"reverse_file\" type=\"file\" (ionChange)=\"onReverseFileChange($event)\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"ion-text-start\">\r\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                <ion-label>Reference Genome file:</ion-label>\r\n              </ion-col>\r\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                <ion-input name=\"reference_genome\" type=\"file\" (ionChange)=\"onGenomeFileChange($event)\" required=\"true\"></ion-input>\r\n              </ion-col>\r\n            </ion-row>\r\n            <br/><br/>\r\n            <ion-accordion-group>\r\n              <ion-accordion value=\"first\">\r\n                <ion-item slot=\"header\" color=\"primary\">\r\n                  <ion-label>Optional parameters</ion-label>\r\n                </ion-item>\r\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\r\n                  <ion-row class=\"ion-text-start\">\r\n                    <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                      <ion-label>Trimmomatic adapter:</ion-label>\r\n                    </ion-col>\r\n                    <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                      <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\r\n                    </ion-col>\r\n                  </ion-row>\r\n                  <ion-row class=\"ion-text-start\">\r\n                    <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                      <ion-label>Trimmomatic sliding window:</ion-label>\r\n                    </ion-col>\r\n                    <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                      <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\r\n                    </ion-col>\r\n                  </ion-row>\r\n                  <ion-row class=\"ion-text-start\">\r\n                    <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\r\n                      <ion-label>Trimmomatic minimum length:</ion-label>\r\n                    </ion-col>\r\n                    <ion-col sizeSm=\"9\" sizeXs=\"8\">\r\n                      <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\r\n                    </ion-col>\r\n                  </ion-row>\r\n                </div>\r\n              </ion-accordion>\r\n            </ion-accordion-group>\r\n            <br/><br/>\r\n            <ion-row>\r\n              <ion-col></ion-col>\r\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\r\n                <ion-button type=\"submit\" expand=\"block\" color=\"secondary\">Submit</ion-button>\r\n              </ion-col>\r\n              <ion-col></ion-col>\r\n            </ion-row>\r\n          </form>\r\n        </ion-col>\r\n        <ion-col></ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n    <br/><br/>\r\n  </ion-card-content>\r\n</ion-card>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <ion-grid>\n      <ion-row>\n        <ion-col></ion-col>\n        <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n          <!--suppress AngularUndefinedBinding -->\n          <form (ngSubmit)=\"search()\">\n            <ion-row>\n              <ion-col class=\"section-head\">\n                <ion-label>\n                  <strong>Provide the genome:</strong>\n                </ion-label>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>E-mail:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"email\" name=\"email\" type=\"email\" placeholder=\"johndoe@email.com\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Sample name:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"sampleName\" name=\"sample_name\" type=\"text\" placeholder=\"Sample 1\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Sequencing technology:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-select [(ngModel)]=\"sequencingTechnology\" name=\"sequencing_technology\"  placeholder=\"Single or Pair end\" required=\"true\">\n                  <ion-select-option value=\"single\">Single end</ion-select-option>\n                  <ion-select-option value=\"paired\">Paired end</ion-select-option>\n                </ion-select>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'single'\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Input file:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"single_file\" type=\"file\" (ionChange)=\"onSingleFileChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'paired'\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Input file (forward):</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"forward_file\" type=\"file\" (ionChange)=\"onForwardFileChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\" *ngIf=\"sequencingTechnology === 'paired'\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Input file (reverse):</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"reverse_file\" type=\"file\" (ionChange)=\"onReverseFileChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Reference Genome file:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"reference_genome\" type=\"file\" (ionChange)=\"onGenomeFileChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"secondary\">Submit</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </form>\n        </ion-col>\n        <ion-col></ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ }),
 
@@ -1234,14 +1483,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\r\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\r\n    <ion-card-title>Pocketome Analysis</ion-card-title>\r\n  </ion-card-header>\r\n  <ion-card-content class=\"ion-text-center\">\r\n    <ion-list>\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-item class=\"ion-no-padding\">\r\n            <ion-col><h2>Results</h2></ion-col>\r\n          </ion-item>\r\n        </ion-row>\r\n\r\n        <div *ngIf=\"outputs !== null\">\r\n        </div>\r\n\r\n        <br/>\r\n\r\n      </ion-grid>\r\n    </ion-list>\r\n    <br/>\r\n  </ion-card-content>\r\n</ion-card>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Pocketome Analysis</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-list>\n      <ion-grid>\n        <ion-row>\n          <ion-item class=\"ion-no-padding\">\n            <ion-col><h2>Results</h2></ion-col>\n          </ion-item>\n        </ion-row>\n\n        <div *ngIf=\"outputs !== null\">\n        </div>\n\n        <br/>\n\n      </ion-grid>\n    </ion-list>\n    <br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ }),
 
-/***/ 5805:
-/*!**********************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery/virus-discovery.component.html ***!
-  \**********************************************************************************************************************/
+/***/ 3352:
+/*!****************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component.html ***!
+  \****************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1249,7 +1498,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<app-virus-discovery-form *ngIf=\"jobId === 0\"></app-virus-discovery-form>\r\n<app-virus-discovery-results *ngIf=\"jobId > 0\" [jobId]=\"jobId\" [hash]=\"hash\"></app-virus-discovery-results>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <ion-grid>\n      <ion-row>\n        <ion-col></ion-col>\n        <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n          <!--suppress AngularUndefinedBinding -->\n          <form (ngSubmit)=\"trim()\">\n            <ion-accordion-group *ngFor=\"let report of analysisResults; index as i\">\n              <ion-accordion value=\"first\">\n                <ion-item slot=\"header\" color=\"primary\">\n                  <ion-label>Report file #{{i+1}}</ion-label>\n                </ion-item>\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                  <iframe srcdoc=\"{{report}}\"></iframe>\n                </div>\n              </ion-accordion>\n            </ion-accordion-group>\n            <br/><br/>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic adapter:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic sliding window:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic minimum length:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"primary\">Trim</ion-button>\n              </ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"secondary\">Submit</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </form>\n        </ion-col>\n        <ion-col></ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ })
 

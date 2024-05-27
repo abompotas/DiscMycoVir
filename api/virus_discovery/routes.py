@@ -24,7 +24,37 @@ def submit_virus_discovery_job():
         return dumps({'status': 'failed', 'error': 'Please fill in all the fields with the appropriate values'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/<int:job_id>/<string:job_hash>', methods=['GET'])
+@virus_discovery_blueprint.route('/virus-discovery/analysis/<int:job_id>/<string:job_hash>', methods=['GET'])
+def virus_discovery_analysis_results(job_id=0, job_hash=None):
+    if job_id != 0 and job_hash is not None:
+        job = VirusDiscoveryJob.get(job_id)
+        if job is not None:
+            if job.verify_hash(job_hash, 'analysis'):
+                return dumps({'status': 'success', 'results': job.get_analysis_results()})
+            else:
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+        else:
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+    else:
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+
+
+@virus_discovery_blueprint.route('/virus-discovery/analysis/<int:job_id>/<string:job_hash>/download', methods=['GET'])
+def virus_discovery_analysis_results_zipped(job_id=0, job_hash=None):
+    if job_id != 0 and job_hash is not None:
+        job = VirusDiscoveryJob.get(job_id)
+        if job is not None:
+            if job.verify_hash(job_hash, 'analysis'):
+                return send_file(job.get_zipped_analysis_results(), mimetype='application/zip', as_attachment=True)
+            else:
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+        else:
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+    else:
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+
+
+@virus_discovery_blueprint.route('/virus-discovery/results/<int:job_id>/<string:job_hash>', methods=['GET'])
 def virus_discovery_job_results(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
@@ -39,12 +69,12 @@ def virus_discovery_job_results(job_id=0, job_hash=None):
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/<int:job_id>/<string:job_hash>/download', methods=['GET'])
+@virus_discovery_blueprint.route('/virus-discovery/results/<int:job_id>/<string:job_hash>/download', methods=['GET'])
 def virus_discovery_job_results_zipped(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
-            if job.verify_hash(job_hash):
+            if job.verify_hash(job_hash, 'results'):
                 return send_file(job.get_zipped_results(), mimetype='application/zip', as_attachment=True)
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
@@ -59,9 +89,9 @@ def parse_form():
         'email': parse_email(),
         'sample_name': parse_sample_name(),
         'genome': parse_file('reference_genome'),
-        'adapter': parse_file('adapter', config['defaults']['adapter']),
-        'window': parse_sliding_window(config['defaults']['sliding_window']),
-        'min_len': parse_int('min_length', 1, 1000, config['defaults']['min_length'])
+        'adapter': parse_file('adapter'),
+        'window': parse_sliding_window(),
+        'min_len': parse_int('min_length', 1, 1000)
     }
     if 'sequencing_technology' in request.form:
         job_args['sequencing_technology'] = request.form['sequencing_technology']
@@ -71,9 +101,9 @@ def parse_form():
             job_args['forward_file'] = parse_file('forward_file')
             job_args['reverse_file'] = parse_file('reverse_file')
         else:
-            job_args['sequencing_technology'] = None
+            return None
     else:
-        job_args['sequencing_technology'] = None
+        return None
     if None in job_args.values():
         return None
     else:
@@ -134,14 +164,14 @@ def parse_file(name, default=None):
     if name not in request.files:
         return default
     else:
-        filepath = None
+        filename = ''
         file = request.files[name]
         if file.filename != '':
             if file and allowed_file(file.filename):
                 filename = str(uuid.uuid4())
                 filepath = os.path.join(config['app']['uploads_path'], filename)
                 file.save(filepath)
-        return filepath
+        return filename
 
 
 def allowed_file(filename):

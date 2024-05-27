@@ -80,40 +80,6 @@
               </ion-col>
             </ion-row>
             <br/><br/>
-            <ion-accordion-group>
-              <ion-accordion value="first">
-                <ion-item slot="header" color="primary">
-                  <ion-label>Optional parameters</ion-label>
-                </ion-item>
-                <div class="ion-padding ion-text-start" slot="content">
-                  <ion-row class="ion-text-start">
-                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
-                      <ion-label>Trimmomatic adapter:</ion-label>
-                    </ion-col>
-                    <ion-col sizeSm="9" sizeXs="8">
-                      <ion-input name="adapter" type="file" (ionChange)="onAdapterChange($event)" required="true"></ion-input>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row class="ion-text-start">
-                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
-                      <ion-label>Trimmomatic sliding window:</ion-label>
-                    </ion-col>
-                    <ion-col sizeSm="9" sizeXs="8">
-                      <ion-input [(ngModel)]="slidingWindow" name="sliding_window" type="text" required="true"></ion-input>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row class="ion-text-start">
-                    <ion-col sizeSm="3" sizeXs="4" class="vcenter">
-                      <ion-label>Trimmomatic minimum length:</ion-label>
-                    </ion-col>
-                    <ion-col sizeSm="9" sizeXs="8">
-                      <ion-input [(ngModel)]="minLength" name="min_length" type="text" required="true"></ion-input>
-                    </ion-col>
-                  </ion-row>
-                </div>
-              </ion-accordion>
-            </ion-accordion-group>
-            <br/><br/>
             <ion-row>
               <ion-col></ion-col>
               <ion-col size="10" sizeMd="4" class="ion-text-center">

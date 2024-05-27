@@ -10,10 +10,12 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
 import {HomePageComponent} from './pages/home/home-page.component';
+import {TrimmingPageComponent} from './pages/trimming/trimming-page.component';
+import {ResultsPageComponent} from './pages/results/results-page.component';
 import {FooterComponent} from './commons/footer/footer.component';
 import {TopbarComponent} from './commons/topbar/topbar.component';
-import {VirusDiscoveryComponent} from './virus-discovery/virus-discovery/virus-discovery.component';
 import {VirusDiscoveryFormComponent} from './virus-discovery/virus-discovery-form/virus-discovery-form.component';
+import {VirusDiscoveryTrimmingComponent} from './virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component';
 import {VirusDiscoveryResultsComponent} from './virus-discovery/virus-discovery-results/virus-discovery-results.component';
 
 
@@ -21,10 +23,12 @@ import {VirusDiscoveryResultsComponent} from './virus-discovery/virus-discovery-
   declarations: [
     AppComponent,
     HomePageComponent,
+    TrimmingPageComponent,
+    ResultsPageComponent,
     FooterComponent,
     TopbarComponent,
-    VirusDiscoveryComponent,
     VirusDiscoveryFormComponent,
+    VirusDiscoveryTrimmingComponent,
     VirusDiscoveryResultsComponent
   ],
   entryComponents: [],
