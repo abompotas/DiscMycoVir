@@ -27,12 +27,12 @@ class VirusDiscoveryJob(db.Model):
     __tablename__ = 'virus_discovery_jobs'
 
     id = db.Column('id', db.Integer, primary_key=True)
+    stage = db.Column('stage', db.Integer, nullable=False, default=False)
     submitted = db.Column('submitted', db.TIMESTAMP, nullable=False, default=datetime.now())
     started_analysis = db.Column('started_analysis', db.TIMESTAMP)
     completed_analysis = db.Column('completed_analysis', db.TIMESTAMP)
     started_trimming = db.Column('started_trimming', db.TIMESTAMP)
     completed_trimming = db.Column('completed_trimming', db.TIMESTAMP)
-    trimming_ready = db.Column('trimming_ready', db.Boolean, nullable=False, default=False)
     started_discovery = db.Column('started_discovery', db.TIMESTAMP)
     completed_discovery = db.Column('completed_discovery', db.TIMESTAMP)
     user = db.Column('user', db.String(255), nullable=False)
@@ -55,17 +55,46 @@ class VirusDiscoveryJob(db.Model):
         if job_args['sequencing_technology'] == 'single':
             new_job = VirusDiscoveryJob(user=job_args['email'], sample_name=job_args['sample_name'],
                                         genome=job_args['genome'], paired=False,
-                                        forward_file=job_args['single_file'], reverse_file=None,
-                                        adapter=job_args['adapter'], min_len=job_args['min_len'],
-                                        window=job_args['window'])
+                                        forward_file=job_args['single_file'], reverse_file=None)
         elif job_args['sequencing_technology'] == 'paired':
             new_job = VirusDiscoveryJob(user=job_args['email'], sample_name=job_args['sample_name'],
                                         genome=job_args['genome'], paired=True,
-                                        forward_file=job_args['forward_file'], reverse_file=job_args['reverse_file'],
-                                        adapter=job_args['adapter'], min_len=job_args['min_len'],
-                                        window=job_args['window'])
+                                        forward_file=job_args['forward_file'], reverse_file=job_args['reverse_file'])
         if new_job:
             db.session.add(new_job)
+            db.session.commit()
+            return True
+        return False
+
+    def is_scheduled(self):
+        if self.stage == 0:
+            if self.completed_analysis is not None:
+                return True
+        elif self.stage == 1:
+            if self.completed_trimming is not None:
+                return True
+        else:
+            if self.completed_discovery is not None:
+                return True
+        return False
+
+    def schedule_for_trimming(self, job_args):
+        if self.is_scheduled():
+            self.stage = 1
+            self.started_trimming = None
+            self.completed_trimming = None
+            self.adapter = job_args['adapter']
+            self.window = job_args['window']
+            self.min_len = job_args['min_len']
+            db.session.commit()
+            return True
+        return False
+
+    def schedule_for_discovery(self):
+        if self.is_scheduled():
+            self.stage = 2
+            self.started_discovery = None
+            self.completed_discovery = None
             db.session.commit()
             return True
         return False
@@ -81,7 +110,7 @@ class VirusDiscoveryJob(db.Model):
             return True
         return False
 
-    def get_analysis_results(self):
+    def get_analysis_reports(self):
         root_path = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
         if self.paired:
             forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
@@ -91,7 +120,7 @@ class VirusDiscoveryJob(db.Model):
             forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
             return [get_text_output(forward_file_report)]
 
-    def get_zipped_analysis_results(self):
+    def get_zipped_analysis_reports(self):
         root_path = os.path.join(config['app']['output_path'], str(self.id))
         results_path = os.path.join(root_path, 'fastqc_analysis')
         zip_path = os.path.join(root_path, 'virus_discovery-{}'.format(str(self.id)))

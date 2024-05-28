@@ -80,7 +80,7 @@ let AppRoutingModule = class AppRoutingModule {
 AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule.forRoot(routes, { useHash: true })
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule.forRoot(routes, { useHash: false })
         ],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule]
     })
@@ -207,6 +207,7 @@ let AppModule = class AppModule {
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.NgModule)({
         declarations: [
+            _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__.SafeHtmlPipe,
             _app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent,
             _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_2__.HomePageComponent,
             _pages_trimming_trimming_page_component__WEBPACK_IMPORTED_MODULE_3__.TrimmingPageComponent,
@@ -502,7 +503,7 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
                     formData.append('reverse_file', this.reverseFile, this.reverseFile.name);
                 }
                 formData.append('reference_genome', this.referenceGenome, this.referenceGenome.name);
-                this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery', formData, { responseType: 'json' }).subscribe(x => this.searchResponse(x), e => this.searchError(e.error), () => {
+                this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/job', formData, { responseType: 'json' }).subscribe(x => this.response(x), e => this.error(e.error), () => {
                     this.initForm();
                     this.loadingController.dismiss().then(null);
                 });
@@ -515,13 +516,14 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
             validEmail = false;
         }
         else {
+            // noinspection RegExpRedundantEscape
             const matches = this.email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
             if (!matches) {
                 validEmail = false;
             }
         }
         if (!validEmail) {
-            this.searchError({ error: 'Please fill in a valid email address.' }).then(null);
+            this.error({ error: 'Please fill in a valid email address.' }).then(null);
             return false;
         }
         let validName = true;
@@ -535,50 +537,50 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
             }
         }
         if (!validName) {
-            this.searchError({ error: 'Please fill in a name for your experiment (only alphanumeric characters are permitted).' }).then(null);
+            this.error({ error: 'Please fill in a name for your experiment (only alphanumeric characters are permitted).' }).then(null);
             return false;
         }
         return this.validateInputFiles();
     }
     validateInputFiles() {
         if (this.sequencingTechnology === null) {
-            this.searchError({ error: 'Please select the sequencing technology type.' }).then(null);
+            this.error({ error: 'Please select the sequencing technology type.' }).then(null);
             return false;
         }
         else {
             if (this.sequencingTechnology === 'single') {
                 if (this.singleFile === null) {
-                    this.searchError({ error: 'Please select the input file to search in.' }).then(null);
+                    this.error({ error: 'Please select the input file to search in.' }).then(null);
                     return false;
                 }
             }
             else if (this.sequencingTechnology === 'paired') {
                 if (this.forwardFile === null) {
-                    this.searchError({ error: 'Please select the forward read input file to search in.' }).then(null);
+                    this.error({ error: 'Please select the forward read input file to search in.' }).then(null);
                     return false;
                 }
                 if (this.reverseFile === null) {
-                    this.searchError({ error: 'Please select the reverse read input file to search in.' }).then(null);
+                    this.error({ error: 'Please select the reverse read input file to search in.' }).then(null);
                     return false;
                 }
             }
             else {
-                this.searchError({ error: 'Unknown sequencing technology type.' }).then(null);
+                this.error({ error: 'Unknown sequencing technology type.' }).then(null);
                 return false;
             }
         }
         if (this.referenceGenome === null) {
-            this.searchError({ error: 'Please select a file for the reference genome.' }).then(null);
+            this.error({ error: 'Please select a file for the reference genome.' }).then(null);
             return false;
         }
         return true;
     }
-    searchResponse(response) {
-        if (response.status === 'success') {
+    response(resp) {
+        if (resp.status === 'success') {
             this.alertSuccess().then(null);
         }
         else {
-            this.searchError(response).then(null);
+            this.error(resp).then(null);
         }
     }
     loading() {
@@ -589,7 +591,7 @@ let VirusDiscoveryFormComponent = class VirusDiscoveryFormComponent {
             yield loading.present();
         });
     }
-    searchError(resp) {
+    error(resp) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             this.loadingController.dismiss().then(() => {
                 let msg = 'Check your input for missing values.';
@@ -686,15 +688,16 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
                     this.hash = params.hash;
                 }
             }
-        }, () => router.navigate(['/']), () => {
-            if ((this.jobId) === 0 || (this.hash === '')) {
-                router.navigate(['/']);
-            }
         });
     }
     ngOnInit() {
-        this.pocketomeURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
-        this.getResults();
+        if ((this.jobId) === 0 || (this.hash === '')) {
+            this.router.navigate(['/']);
+        }
+        else {
+            this.pocketomeURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
+            this.getResults();
+        }
     }
     getResults() {
         this.loading().then(() => {
@@ -783,15 +786,17 @@ VirusDiscoveryResultsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorat
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SafeHtmlPipe": () => (/* binding */ SafeHtmlPipe),
 /* harmony export */   "VirusDiscoveryTrimmingComponent": () => (/* binding */ VirusDiscoveryTrimmingComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_virus_discovery_trimming_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-trimming.component.html */ 3352);
 /* harmony import */ var _virus_discovery_trimming_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-trimming.component.scss */ 1400);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 1841);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ 2340);
 
 
@@ -800,6 +805,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+let SafeHtmlPipe = class SafeHtmlPipe {
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    transform(inHtml) {
+        let outHtml = inHtml.replaceAll(/ href="#M\d+/g, '');
+        outHtml = outHtml.replaceAll('href=', 'target="_blank" href=');
+        return this.sanitizer.bypassSecurityTrustHtml(outHtml);
+    }
+};
+SafeHtmlPipe.ctorParameters = () => [
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__.DomSanitizer }
+];
+SafeHtmlPipe = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Pipe)({ name: 'safeIFrame' })
+], SafeHtmlPipe);
 
 // noinspection DuplicatedCode
 let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
@@ -824,14 +847,10 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
     }
     ngOnInit() {
         if ((this.jobId) === 0 || (this.hash === '')) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/']).then(null);
         }
         else {
-            this.loading().then(() => {
-                this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery/analysis/' + this.jobId + '/' + this.hash, { responseType: 'json' }).subscribe(x => {
-                    this.analysisResults = [...x.results];
-                }, e => this.resultsError(e.error), () => this.loadingController.dismiss().then(null));
-            });
+            this.fetchAnalysis();
         }
     }
     initForm() {
@@ -839,6 +858,13 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
         this.slidingWindow = null;
         this.minLength = null;
         this.adapter = null;
+    }
+    fetchAnalysis() {
+        this.loading().then(() => {
+            this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/analysis/' + this.jobId + '/' + this.hash, { responseType: 'json' }).subscribe(x => {
+                this.analysisResults = [...x.results];
+            }, e => this.error(e.error), () => this.loadingController.dismiss().then(null));
+        });
     }
     onAdapterChange(event) {
         this.adapter = event.target.children['adapter'].files[0];
@@ -855,30 +881,38 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
             if (this.minLength !== null) {
                 formData.append('min_length', this.minLength);
             }
-            this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus-discovery/trimming', formData, { responseType: 'json' }).subscribe(x => this.trimResponse(x), e => this.resultsError(e.error), () => {
+            this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/trimming/' + this.jobId + '/' + this.hash, formData, { responseType: 'json' }).subscribe(x => this.response(x), e => this.error(e.error), () => {
                 this.initForm();
                 this.loadingController.dismiss().then(null);
             });
         });
     }
-    trimResponse(response) {
-        if (response.status === 'success') {
+    proceed() {
+        this.loading().then(() => {
+            this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/discovery/' + this.jobId + '/' + this.hash, {}, { responseType: 'json' }).subscribe(x => this.response(x), e => this.error(e.error), () => {
+                this.initForm();
+                this.loadingController.dismiss().then(null);
+            });
+        });
+    }
+    response(resp) {
+        if (resp.status === 'success') {
             this.alertSuccess().then(null);
         }
         else {
-            this.resultsError(response).then(null);
+            this.error(resp).then(null);
         }
     }
     loading() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 message: 'Please wait...',
             });
             yield loading.present();
         });
     }
-    resultsError(resp) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+    error(resp) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             this.loadingController.dismiss().then(() => {
                 let msg = 'Oops! Something went wrong...';
                 if (resp.hasOwnProperty('error')) {
@@ -889,7 +923,7 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
         });
     }
     alertSuccess() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Success!',
                 message: 'Your query has been submitted. Once the search is completed you will receive an email containing the results.',
@@ -899,7 +933,7 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
         });
     }
     alertError(msg) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Error!',
                 message: msg,
@@ -910,14 +944,14 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
     }
 };
 VirusDiscoveryTrimmingComponent.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__.HttpClient },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.ActivatedRoute },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController }
 ];
-VirusDiscoveryTrimmingComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+VirusDiscoveryTrimmingComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-virus-discovery-trimming',
         template: _raw_loader_virus_discovery_trimming_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_virus_discovery_trimming_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -1363,7 +1397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-col.vcenter {\n  display: flex;\n  align-items: center;\n}\n\nion-col.section-head {\n  padding: 20px 0 10px;\n}\n\nion-input, ion-select {\n  background-color: #fdfdfd;\n  border: 1px solid var(--ion-color-medium);\n  border-radius: 0.75em;\n}\n\nion-button {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUVBO0VBQ0Usb0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0VBQ0EseUNBQUE7RUFDQSxxQkFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtBQUNGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb2wudmNlbnRlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbmlvbi1jb2wuc2VjdGlvbi1oZWFkIHtcbiAgcGFkZGluZzogMjBweCAwIDEwcHg7XG59XG5cbmlvbi1pbnB1dCwgaW9uLXNlbGVjdCAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmRmZGZkO1xuICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbWVkaXVtKTtcbiAgYm9yZGVyLXJhZGl1czogMC43NWVtO1xufVxuXG5pb24tYnV0dG9uIHtcbiAgbWFyZ2luOiAwO1xufVxuIl19 */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-col.vcenter {\n  display: flex;\n  align-items: center;\n}\n\nion-col.section-head {\n  padding: 20px 0 10px;\n}\n\nion-input, ion-select {\n  background-color: #fdfdfd;\n  border: 1px solid var(--ion-color-medium);\n  border-radius: 0.75em;\n}\n\nion-button {\n  margin: 0;\n}\n\niframe {\n  width: 100%;\n  min-height: calc(100vh - 100px);\n  border: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxtQkFBQTtBQUNGOztBQUVBO0VBQ0Usb0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0VBQ0EseUNBQUE7RUFDQSxxQkFBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtBQUNGOztBQUVBO0VBQ0UsV0FBQTtFQUNBLCtCQUFBO0VBQ0EsU0FBQTtBQUNGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS10cmltbWluZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb2wudmNlbnRlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbmlvbi1jb2wuc2VjdGlvbi1oZWFkIHtcbiAgcGFkZGluZzogMjBweCAwIDEwcHg7XG59XG5cbmlvbi1pbnB1dCwgaW9uLXNlbGVjdCAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmRmZGZkO1xuICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbWVkaXVtKTtcbiAgYm9yZGVyLXJhZGl1czogMC43NWVtO1xufVxuXG5pb24tYnV0dG9uIHtcbiAgbWFyZ2luOiAwO1xufVxuXG5pZnJhbWUge1xuICB3aWR0aDogMTAwJTtcbiAgbWluLWhlaWdodDogY2FsYygxMDB2aCAtIDEwMHB4KTtcbiAgYm9yZGVyOiAwO1xufVxuIl19 */");
 
 /***/ }),
 
@@ -1498,7 +1532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <ion-grid>\n      <ion-row>\n        <ion-col></ion-col>\n        <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n          <!--suppress AngularUndefinedBinding -->\n          <form (ngSubmit)=\"trim()\">\n            <ion-accordion-group *ngFor=\"let report of analysisResults; index as i\">\n              <ion-accordion value=\"first\">\n                <ion-item slot=\"header\" color=\"primary\">\n                  <ion-label>Report file #{{i+1}}</ion-label>\n                </ion-item>\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                  <iframe srcdoc=\"{{report}}\"></iframe>\n                </div>\n              </ion-accordion>\n            </ion-accordion-group>\n            <br/><br/>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic adapter:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic sliding window:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic minimum length:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"primary\">Trim</ion-button>\n              </ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"secondary\">Submit</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </form>\n        </ion-col>\n        <ion-col></ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <!--suppress AngularUndefinedBinding -->\n    <form (ngSubmit)=\"trim()\">\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-accordion-group *ngFor=\"let report of analysisResults; index as i\">\n              <ion-accordion value=\"first\">\n                <ion-item slot=\"header\" color=\"primary\">\n                  <ion-label>Report file #{{i + 1}}</ion-label>\n                </ion-item>\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                  <iframe [srcdoc]=\"report | safeIFrame\"></iframe>\n                </div>\n              </ion-accordion>\n            </ion-accordion-group>\n            <br/><br/>\n          </ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col></ion-col>\n          <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic adapter:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic sliding window:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic minimum length:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"primary\">Trim</ion-button>\n              </ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button (click)=\"proceed()\" expand=\"block\" color=\"secondary\">Proceed</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </ion-col>\n          <ion-col></ion-col>\n        </ion-row>\n      </ion-grid>\n    </form>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ })
 

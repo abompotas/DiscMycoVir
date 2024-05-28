@@ -1,9 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AlertController, LoadingController} from "@ionic/angular";
-import {VirusDiscoveryResult} from "../../interfaces";
-import {environment} from "../../../environments/environment";
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
+import {AlertController, LoadingController} from '@ionic/angular';
+import {VirusDiscoveryResponse} from '../../interfaces';
+import {environment} from '../../../environments/environment';
+
+@Pipe({name: 'safeIFrame'})
+export class SafeHtmlPipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {
+  }
+
+  transform(inHtml) {
+    let outHtml = inHtml.replaceAll(/ href="#M\d+/g, '');
+    outHtml = outHtml.replaceAll('href=', 'target="_blank" href=');
+    return this.sanitizer.bypassSecurityTrustHtml(outHtml);
+  }
+}
 
 // noinspection DuplicatedCode
 @Component({
@@ -39,19 +52,10 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
 
   ngOnInit() {
     if((this.jobId) === 0 || (this.hash === '')) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then(null);
     }
     else {
-      this.loading().then(() => {
-        this.http.get<VirusDiscoveryResult>(environment.discvirAPI + '/virus-discovery/analysis/' + this.jobId + '/' + this.hash,
-          {responseType: 'json'}).subscribe(
-          x => {
-            this.analysisResults = [...x.results]
-          },
-          e => this.resultsError(e.error),
-          () => this.loadingController.dismiss().then(null)
-        );
-      });
+      this.fetchAnalysis();
     }
   }
 
@@ -60,6 +64,18 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
     this.slidingWindow = null;
     this.minLength = null;
     this.adapter = null;
+  }
+
+  fetchAnalysis() {
+    this.loading().then(() => {
+      this.http.get<VirusDiscoveryResponse>(environment.discvirAPI + '/analysis/' + this.jobId + '/' + this.hash, {responseType: 'json'}).subscribe(
+        x => {
+          this.analysisResults = [...x.results]
+        },
+        e => this.error(e.error),
+        () => this.loadingController.dismiss().then(null)
+      );
+    });
   }
 
   onAdapterChange(event) {
@@ -78,10 +94,9 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
       if(this.minLength !== null) {
         formData.append('min_length', this.minLength);
       }
-      this.http.post<VirusDiscoveryResult>(environment.discvirAPI + '/virus-discovery/trimming',
-        formData, {responseType: 'json'}).subscribe(
-        x => this.trimResponse(x),
-        e => this.resultsError(e.error),
+      this.http.put<VirusDiscoveryResponse>(environment.discvirAPI + '/trimming/' + this.jobId + '/' + this.hash, formData, {responseType: 'json'}).subscribe(
+        x => this.response(x),
+        e => this.error(e.error),
         () => {
           this.initForm();
           this.loadingController.dismiss().then(null);
@@ -90,12 +105,25 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
     });
   }
 
-  trimResponse(response) {
-    if(response.status === 'success') {
+  proceed() {
+    this.loading().then(() => {
+      this.http.put<VirusDiscoveryResponse>(environment.discvirAPI + '/discovery/' + this.jobId + '/' + this.hash, {}, {responseType: 'json'}).subscribe(
+        x => this.response(x),
+        e => this.error(e.error),
+        () => {
+          this.initForm();
+          this.loadingController.dismiss().then(null);
+        }
+      );
+    });
+  }
+
+  response(resp) {
+    if(resp.status === 'success') {
       this.alertSuccess().then(null);
     }
     else {
-      this.resultsError(response).then(null);
+      this.error(resp).then(null);
     }
   }
 
@@ -106,7 +134,7 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
     await loading.present();
   }
 
-  async resultsError(resp) {
+  async error(resp) {
     this.loadingController.dismiss().then(() => {
       let msg = 'Oops! Something went wrong...';
       if(resp.hasOwnProperty('error')) {

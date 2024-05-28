@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {environment} from '../../../environments/environment'
-import {VirusDiscoveryResult} from '../../interfaces';
+import {VirusDiscoveryResponse} from '../../interfaces';
 
 
 @Component({
@@ -70,10 +70,9 @@ export class VirusDiscoveryFormComponent implements OnInit {
           formData.append('reverse_file', this.reverseFile, this.reverseFile.name);
         }
         formData.append('reference_genome', this.referenceGenome, this.referenceGenome.name);
-        this.http.post<VirusDiscoveryResult>(environment.discvirAPI + '/virus-discovery',
-          formData, {responseType: 'json'}).subscribe(
-          x => this.searchResponse(x),
-          e => this.searchError(e.error),
+        this.http.post<VirusDiscoveryResponse>(environment.discvirAPI + '/job', formData, {responseType: 'json'}).subscribe(
+          x => this.response(x),
+          e => this.error(e.error),
           () => {
             this.initForm();
             this.loadingController.dismiss().then(null);
@@ -98,7 +97,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
       }
     }
     if(!validEmail) {
-      this.searchError({error: 'Please fill in a valid email address.'}).then(null);
+      this.error({error: 'Please fill in a valid email address.'}).then(null);
       return false;
     }
     let validName = true;
@@ -112,7 +111,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
       }
     }
     if(!validName) {
-      this.searchError({error: 'Please fill in a name for your experiment (only alphanumeric characters are permitted).'}).then(null);
+      this.error({error: 'Please fill in a name for your experiment (only alphanumeric characters are permitted).'}).then(null);
       return false;
     }
     return this.validateInputFiles();
@@ -120,44 +119,44 @@ export class VirusDiscoveryFormComponent implements OnInit {
 
   validateInputFiles() {
     if(this.sequencingTechnology === null) {
-      this.searchError({error: 'Please select the sequencing technology type.'}).then(null);
+      this.error({error: 'Please select the sequencing technology type.'}).then(null);
       return false;
     }
     else {
       if(this.sequencingTechnology === 'single') {
         if(this.singleFile === null) {
-          this.searchError({error: 'Please select the input file to search in.'}).then(null);
+          this.error({error: 'Please select the input file to search in.'}).then(null);
           return false;
         }
       }
       else if(this.sequencingTechnology === 'paired') {
         if(this.forwardFile === null) {
-          this.searchError({error: 'Please select the forward read input file to search in.'}).then(null);
+          this.error({error: 'Please select the forward read input file to search in.'}).then(null);
           return false;
         }
         if(this.reverseFile === null) {
-          this.searchError({error: 'Please select the reverse read input file to search in.'}).then(null);
+          this.error({error: 'Please select the reverse read input file to search in.'}).then(null);
           return false;
         }
       }
       else {
-        this.searchError({error: 'Unknown sequencing technology type.'}).then(null);
+        this.error({error: 'Unknown sequencing technology type.'}).then(null);
         return false;
       }
     }
     if(this.referenceGenome === null) {
-      this.searchError({error: 'Please select a file for the reference genome.'}).then(null);
+      this.error({error: 'Please select a file for the reference genome.'}).then(null);
       return false;
     }
     return true;
   }
 
-  searchResponse(response) {
-    if(response.status === 'success') {
+  response(resp) {
+    if(resp.status === 'success') {
       this.alertSuccess().then(null);
     }
     else {
-      this.searchError(response).then(null);
+      this.error(resp).then(null);
     }
   }
 
@@ -168,7 +167,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
     await loading.present();
   }
 
-  async searchError(resp) {
+  async error(resp) {
     this.loadingController.dismiss().then(() => {
       let msg = 'Check your input for missing values.';
       if(resp.hasOwnProperty('error')) {

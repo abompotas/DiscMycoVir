@@ -12,9 +12,9 @@ from virus_discovery.model import VirusDiscoveryJob
 virus_discovery_blueprint = Blueprint('virus_discovery', __name__)
 
 
-@virus_discovery_blueprint.route('/virus-discovery', methods=['POST'])
-def submit_virus_discovery_job():
-    job_args = parse_form()
+@virus_discovery_blueprint.route('/job', methods=['POST'])
+def submit_job():
+    job_args = parse_job_form()
     if job_args is not None:
         if VirusDiscoveryJob.create(job_args):
             return dumps({'status': 'success'})
@@ -24,13 +24,13 @@ def submit_virus_discovery_job():
         return dumps({'status': 'failed', 'error': 'Please fill in all the fields with the appropriate values'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/analysis/<int:job_id>/<string:job_hash>', methods=['GET'])
-def virus_discovery_analysis_results(job_id=0, job_hash=None):
+@virus_discovery_blueprint.route('/analysis/<int:job_id>/<string:job_hash>', methods=['GET'])
+def analysis_reports(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'analysis'):
-                return dumps({'status': 'success', 'results': job.get_analysis_results()})
+                return dumps({'status': 'success', 'results': job.get_analysis_reports()})
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
@@ -39,13 +39,13 @@ def virus_discovery_analysis_results(job_id=0, job_hash=None):
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/analysis/<int:job_id>/<string:job_hash>/download', methods=['GET'])
-def virus_discovery_analysis_results_zipped(job_id=0, job_hash=None):
+@virus_discovery_blueprint.route('/analysis/<int:job_id>/<string:job_hash>/download', methods=['GET'])
+def analysis_reports_zipped(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'analysis'):
-                return send_file(job.get_zipped_analysis_results(), mimetype='application/zip', as_attachment=True)
+                return send_file(job.get_zipped_analysis_reports(), mimetype='application/zip', as_attachment=True)
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
@@ -54,8 +54,49 @@ def virus_discovery_analysis_results_zipped(job_id=0, job_hash=None):
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/results/<int:job_id>/<string:job_hash>', methods=['GET'])
-def virus_discovery_job_results(job_id=0, job_hash=None):
+@virus_discovery_blueprint.route('/trimming/<int:job_id>/<string:job_hash>', methods=['PUT'])
+def trimming(job_id=0, job_hash=None):
+    if job_id != 0 and job_hash is not None:
+        job = VirusDiscoveryJob.get(job_id)
+        if job is not None:
+            if job.verify_hash(job_hash, 'analysis'):
+                job_args = parse_trimming_form()
+                if job_args is not None:
+                    if job.schedule_for_trimming(job_args):
+                        return dumps({'status': 'success'})
+                    else:
+                        return dumps({'status': 'failed', 'error': 'This job has already been submitted'}), 400
+                else:
+                    return dumps({'status': 'failed',
+                                  'error': 'Please fill in all the fields with the appropriate values'}), 400
+            else:
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
+        else:
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
+    else:
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+
+
+@virus_discovery_blueprint.route('/discovery/<int:job_id>/<string:job_hash>', methods=['PUT'])
+def discovery(job_id=0, job_hash=None):
+    if job_id != 0 and job_hash is not None:
+        job = VirusDiscoveryJob.get(job_id)
+        if job is not None:
+            if job.verify_hash(job_hash, 'analysis'):
+                if job.schedule_for_discovery():
+                    return dumps({'status': 'success'})
+                else:
+                    return dumps({'status': 'failed', 'error': 'This job has already been submitted'}), 400
+            else:
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
+        else:
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
+    else:
+        return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
+
+
+@virus_discovery_blueprint.route('/results/<int:job_id>/<string:job_hash>', methods=['GET'])
+def results(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
@@ -69,8 +110,8 @@ def virus_discovery_job_results(job_id=0, job_hash=None):
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-@virus_discovery_blueprint.route('/virus-discovery/results/<int:job_id>/<string:job_hash>/download', methods=['GET'])
-def virus_discovery_job_results_zipped(job_id=0, job_hash=None):
+@virus_discovery_blueprint.route('/results/<int:job_id>/<string:job_hash>/download', methods=['GET'])
+def results_zipped(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
@@ -84,14 +125,11 @@ def virus_discovery_job_results_zipped(job_id=0, job_hash=None):
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
 
-def parse_form():
+def parse_job_form():
     job_args = {
         'email': parse_email(),
         'sample_name': parse_sample_name(),
-        'genome': parse_file('reference_genome'),
-        'adapter': parse_file('adapter'),
-        'window': parse_sliding_window(),
-        'min_len': parse_int('min_length', 1, 1000)
+        'genome': parse_file('reference_genome')
     }
     if 'sequencing_technology' in request.form:
         job_args['sequencing_technology'] = request.form['sequencing_technology']
@@ -104,6 +142,18 @@ def parse_form():
             return None
     else:
         return None
+    if None in job_args.values():
+        return None
+    else:
+        return job_args
+
+
+def parse_trimming_form():
+    job_args = {
+        'adapter': parse_file('adapter', config['defaults']['adapter']),
+        'window': parse_sliding_window(config['defaults']['sliding_window']),
+        'min_len': parse_int('min_length', 1, 1000, config['defaults']['min_length'])
+    }
     if None in job_args.values():
         return None
     else:

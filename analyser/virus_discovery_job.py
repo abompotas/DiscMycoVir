@@ -43,7 +43,7 @@ class VirusDiscoveryJob:
     def get_trimming_jobs(self, limit):
         cursor = self.db.cursor(dictionary=True)
         cursor.execute('''SELECT * FROM virus_discovery_jobs 
-            WHERE trimming_ready=1 AND started_trimming IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
+            WHERE stage=1 AND started_trimming IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
         jobs = cursor.fetchall()
         cursor.close()
         self.db.commit()
@@ -70,7 +70,7 @@ class VirusDiscoveryJob:
     def get_discovery_jobs(self, limit):
         cursor = self.db.cursor(dictionary=True)
         cursor.execute('''SELECT * FROM virus_discovery_jobs 
-            WHERE trimming_ready=2 AND started_discovery IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
+            WHERE stage=2 AND started_discovery IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
         jobs = cursor.fetchall()
         cursor.close()
         self.db.commit()

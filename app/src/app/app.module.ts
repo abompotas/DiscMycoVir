@@ -15,12 +15,13 @@ import {ResultsPageComponent} from './pages/results/results-page.component';
 import {FooterComponent} from './commons/footer/footer.component';
 import {TopbarComponent} from './commons/topbar/topbar.component';
 import {VirusDiscoveryFormComponent} from './virus-discovery/virus-discovery-form/virus-discovery-form.component';
-import {VirusDiscoveryTrimmingComponent} from './virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component';
+import {SafeHtmlPipe, VirusDiscoveryTrimmingComponent} from './virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component';
 import {VirusDiscoveryResultsComponent} from './virus-discovery/virus-discovery-results/virus-discovery-results.component';
 
 
 @NgModule({
   declarations: [
+    SafeHtmlPipe,
     AppComponent,
     HomePageComponent,
     TrimmingPageComponent,

@@ -7,23 +7,27 @@
       Search genomes for discovering mycoviruses
     </ion-label>
     <br/><br/>
-    <ion-grid>
-      <ion-row>
-        <ion-col></ion-col>
-        <ion-col size="12" sizeLg="10" sizeXl="8">
-          <!--suppress AngularUndefinedBinding -->
-          <form (ngSubmit)="trim()">
+    <!--suppress AngularUndefinedBinding -->
+    <form (ngSubmit)="trim()">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
             <ion-accordion-group *ngFor="let report of analysisResults; index as i">
               <ion-accordion value="first">
                 <ion-item slot="header" color="primary">
-                  <ion-label>Report file #{{i+1}}</ion-label>
+                  <ion-label>Report file #{{i + 1}}</ion-label>
                 </ion-item>
                 <div class="ion-padding ion-text-start" slot="content">
-                  <iframe srcdoc="{{report}}"></iframe>
+                  <iframe [srcdoc]="report | safeIFrame"></iframe>
                 </div>
               </ion-accordion>
             </ion-accordion-group>
             <br/><br/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="12" sizeLg="10" sizeXl="8">
             <ion-row class="ion-text-start">
               <ion-col sizeSm="3" sizeXs="4" class="vcenter">
                 <ion-label>Trimmomatic adapter:</ion-label>
@@ -57,15 +61,15 @@
               <ion-col size="1"></ion-col>
               <ion-col size="1"></ion-col>
               <ion-col size="10" sizeMd="4" class="ion-text-center">
-                <ion-button type="submit" expand="block" color="secondary">Submit</ion-button>
+                <ion-button (click)="proceed()" expand="block" color="secondary">Proceed</ion-button>
               </ion-col>
               <ion-col></ion-col>
             </ion-row>
-          </form>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </ion-grid>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
     <br/><br/>
   </ion-card-content>
 </ion-card>

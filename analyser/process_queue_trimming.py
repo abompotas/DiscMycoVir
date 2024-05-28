@@ -16,7 +16,6 @@ def run_trimming(args):
         # Usage (Paired End): lib/trimming.sh [options] -f forward_file -r reverse_file
         cwd = os.path.dirname(os.path.abspath(__file__))
         trimming_exec = os.path.join(cwd, 'lib/trimming.sh')
-        analysis_exec = os.path.join(cwd, 'lib/analysis.sh')
         if args['single_paired'] == 'single':
             res = run([trimming_exec,
                        '-n', str(args['sample_name']),
@@ -30,16 +29,6 @@ def run_trimming(args):
                 print('Trimming executed.')
             else:
                 print('Trimming failed.', res)
-
-            res = run([analysis_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-o', str(args['output_dir']),
-                       '-s', os.path.join(config['args']['outputs'], 'trimming', str(args['forward_file']))])
-            if res.returncode == 0:
-                print('Analysis executed.')
-            else:
-                print('Analysis failed.', res)
 
         elif args['single_paired'] == 'pair':
             res = run([trimming_exec,
@@ -56,6 +45,25 @@ def run_trimming(args):
             else:
                 print('Trimming failed.', res)
 
+
+def run_analysis(args):
+    if check_sequencing_args(args):
+        # Usage (Single End): lib/analysis.sh [options] -s file'
+        # Usage (Paired End): lib/analysis.sh [options] -f forward_file -r reverse_file
+        cwd = os.path.dirname(os.path.abspath(__file__))
+        analysis_exec = os.path.join(cwd, 'lib/analysis.sh')
+        if args['single_paired'] == 'single':
+            res = run([analysis_exec,
+                       '-n', str(args['sample_name']),
+                       '-t', str(args['threads']),
+                       '-o', str(args['output_dir']),
+                       '-s', os.path.join(config['args']['outputs'], 'trimming', str(args['forward_file']))])
+            if res.returncode == 0:
+                print('Analysis executed.')
+            else:
+                print('Analysis failed.', res)
+
+        elif args['single_paired'] == 'pair':
             res = run([analysis_exec,
                        '-n', str(args['sample_name']),
                        '-t', str(args['threads']),
@@ -82,7 +90,10 @@ if __name__ == '__main__':
                                   forward_file=job['forward_file'], reverse_file=job['reverse_file'],
                                   adapter=job['adapter'], min_len=job['min_len'], window=job['window'])
             run_trimming(job_args)
-            timestamp = discvir.mark_as_completed_trimming(job['id'])
+            discvir.mark_as_completed_trimming(job['id'])
+            discvir.mark_as_started_analysis(job['id'])
+            run_analysis(job_args)
+            timestamp = discvir.mark_as_completed_analysis(job['id'])
             if not notify_user(config, job['user'], job['id'], timestamp, 'analysis'):
                 print('Email (trimming) not sent to {}'.format(job['user']))
         sleep(config['queue']['sleep'])

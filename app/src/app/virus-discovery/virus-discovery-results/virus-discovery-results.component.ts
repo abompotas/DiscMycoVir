@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {environment} from '../../../environments/environment';
-import {VirusDiscoveryResult} from '../../interfaces';
+import {VirusDiscoveryResponse} from '../../interfaces';
 
 
 // noinspection DuplicatedCode
@@ -17,7 +17,7 @@ export class VirusDiscoveryResultsComponent implements OnInit {
   jobId: number;
   hash: string;
   pocketomeURL: string;
-  outputs: VirusDiscoveryResult;
+  outputs: VirusDiscoveryResponse;
   resultsTable: Array<Array<string>>;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,
@@ -49,7 +49,7 @@ export class VirusDiscoveryResultsComponent implements OnInit {
 
   getResults() {
     this.loading().then(() => {
-      this.http.get<VirusDiscoveryResult>(this.pocketomeURL, {responseType: 'json'}).subscribe(
+      this.http.get<VirusDiscoveryResponse>(this.pocketomeURL, {responseType: 'json'}).subscribe(
         x => this.parseResults(x),
         e => this.resultsError(e.error),
         () => this.loadingController.dismiss().then(null)

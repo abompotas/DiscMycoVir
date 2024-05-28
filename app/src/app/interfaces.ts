@@ -4,7 +4,7 @@ export interface PaginationItem {
   class?: string;
 }
 
-export interface VirusDiscoveryResult {
+export interface VirusDiscoveryResponse {
   status: string;
   error?: string;
   results?: Array<string>;
