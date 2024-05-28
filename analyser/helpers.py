@@ -1,11 +1,64 @@
+import os
 import smtplib
 import ssl
-import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from hashlib import sha256
 
 import mysql.connector
+
+
+def build_args(config, job_id, genome, paired=0, sample_name='', forward_file='', reverse_file='',
+               adapter=None, min_len=None, window=None):
+    if paired:
+        single_paired = 'pair'
+    else:
+        single_paired = 'single'
+    if adapter is None:
+        adapter = config['args']['adapter']
+    if min_len is None:
+        min_len = config['args']['min_length']
+    if window is None:
+        window = config['args']['sliding_window']
+    args = {
+        # Number of threads for parallel execution
+        'threads': config['args']['threads'],
+        # Max memory to be used by Trinity
+        'max_memory': config['args']['max_memory'],
+        'single_paired': single_paired,
+        # Adapter for Trimmomatic
+        'adapter': adapter,
+        # Sliding window for Trimmomatic
+        'sliding_window': window,
+        # Minimum length for Trimmomatic
+        'min_len': min_len,
+        # Sample name
+        'sample_name': sample_name,
+        # Reference genome
+        'ref_genome': genome,
+        # '-f	Paired forward input file' '-s	Single end input file'
+        'forward_file': forward_file,
+        # Paired reverse input file
+        'reverse_file': reverse_file,
+        # Output directory
+        'output_dir': os.path.join(config['args']['output'], str(job_id))
+    }
+    return args
+
+
+def check_sequencing_args(args, stage='analysis'):
+    if args['single_paired'] == 'single':
+        if not args['forward_file']:
+            print('[{}] ERROR: MISSING single input file'.format(stage))
+            return False
+    elif args['single_paired'] == 'pair':
+        if not (args['reverse_file'] and args['forward_file']):
+            print('[{}] ERROR: MISSING Reverse and forward input files'.format(stage))
+            return False
+    else:
+        print('[{}] ERROR: Unknown sequencing technology'.format(stage))
+        return False
+    return True
 
 
 def notify_user(config, email, job_id, timestamp, stage='analysis'):
@@ -41,95 +94,3 @@ def notify_user(config, email, job_id, timestamp, stage='analysis'):
     finally:
         smtp.quit()
     return notified
-
-
-class VirusDiscoveryJob:
-    def __init__(self, config):
-        self.config = config
-        self.db = mysql.connector.connect(
-            host=config['db']['host'],
-            user=config['db']['username'],
-            password=config['db']['password'],
-            database=config['db']['schema']
-        )
-
-    def get_analysis_jobs(self, limit):
-        cursor = self.db.cursor(dictionary=True)
-        cursor.execute('''SELECT * FROM virus_discovery_jobs 
-            WHERE started_analysis IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
-        jobs = cursor.fetchall()
-        cursor.close()
-        self.db.commit()
-        return jobs
-
-    def mark_as_started_analysis(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_analysis={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp
-
-    def mark_as_completed_analysis(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE virus_discovery_jobs 
-            SET completed_analysis={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp
-
-    def get_trimming_jobs(self, limit):
-        cursor = self.db.cursor(dictionary=True)
-        cursor.execute('''SELECT * FROM virus_discovery_jobs 
-            WHERE trimming_ready=0 AND started_trimming IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
-        jobs = cursor.fetchall()
-        cursor.close()
-        self.db.commit()
-        return jobs
-
-    def mark_as_started_trimming(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_trimming={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp
-
-    def mark_as_completed_trimming(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE `virus_discovery_jobs` 
-            SET completed_trimming={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp
-
-    def get_discovery_jobs(self, limit):
-        cursor = self.db.cursor(dictionary=True)
-        cursor.execute('''SELECT * FROM virus_discovery_jobs 
-            WHERE trimming_ready=1 AND started_discovery IS NULL ORDER BY id LIMIT 0,{}'''.format(limit))
-        jobs = cursor.fetchall()
-        cursor.close()
-        self.db.commit()
-        return jobs
-
-    def mark_as_started_discovery(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_discovery={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp
-
-    def mark_as_completed_discovery(self, job_id):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = self.db.cursor()
-        cursor.execute('''UPDATE `virus_discovery_jobs` 
-            SET completed_discovery={} WHERE id={}'''.format(timestamp, job_id))
-        cursor.close()
-        self.db.commit()
-        return timestamp

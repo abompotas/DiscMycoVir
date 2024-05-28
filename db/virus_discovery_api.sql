@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `completed_analysis` timestamp NULL DEFAULT NULL,
   `started_trimming` timestamp NULL DEFAULT NULL,
   `completed_trimming` timestamp NULL DEFAULT NULL,
-  `trimming_ready` boolean NOT NULL DEFAULT 0,
+  `trimming_ready` tinyint(1) NOT NULL DEFAULT 0,
   `started_discovery` timestamp NULL DEFAULT NULL,
   `completed_discovery` timestamp NULL DEFAULT NULL,
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,

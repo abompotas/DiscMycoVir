@@ -103,80 +103,28 @@ mkdir -p "/tmp/${sample_name}"
 cd "/tmp/${sample_name}"
 
 
-#Trimmomatic
-tmp=(${forward_file//./ })
-trimmomatic_out_f="${tmp[0]}.trimmed.fastq"
-trimmomatic_out_f_un="${tmp[0]}.untrimmed.fastq"
-trimmomatic_out_r=""
-trimmomatic_out_r_un=""
-if [ "${single_paired}" = "single" ]; then
-  TrimmomaticSE \
-    -threads $threads \
-    "${forward_file}" \
-    "${trimmomatic_out_f}" \
-    $adapter \
-    SLIDINGWINDOW:$sliding_window \
-    MINLEN:$min_len
-  # rm forward
-else
-  tmp=(${reverse_file//./ })
-  trimmomatic_out_r="${tmp[0]}.trimmed.fastq"
-  trimmomatic_out_r_un="${tmp[0]}.untrimmed.fastq"
-  TrimmomaticPE \
-     -threads $threads \
-    "${forward_file}" "${reverse_file}" \
-    "${trimmomatic_out_f}" "${trimmomatic_out_f_un}" "${trimmomatic_out_r}" "${trimmomatic_out_r_un}" \
-    $adapter \
-    SLIDINGWINDOW:$sliding_window \
-    MINLEN:$min_len
-    # rm forward reverse
-fi
-
-
-if [ "${seq_type}" = "fa" ]; then
-  tmp=(${trimmomatic_out_f//./ })
-  trinity_in_f="${tmp[0]}.trimmed.fasta"
-  sed -n '1~4s/^@/>/p;2~4p' ${trimmomatic_out_f} > "${trinity_in_f}"
-  sed -i 's#\.1\s#/1 #g' ${trinity_in_f}
-  rm "${trimmomatic_out_f}"
-  if [ "${single_paired}" = "pair" ]; then
-    tmp=(${trimmomatic_out_f_un//./ })
-    trinity_in_f_un="${tmp[0]}.untrimmed.fasta"
-    sed -n '1~4s/^@/>/p;2~4p' ${trimmomatic_out_f_un} > "${trinity_in_f_un}"
-    sed -i 's#\.1\s#/1 #g' ${trinity_in_f_un}
-    rm "${trimmomatic_out_f_un}"
-    tmp=(${trimmomatic_out_r//./ })
-    trinity_in_r="${tmp[0]}.trimmed.fasta"
-    sed -n '1~4s/^@/>/p;2~4p' ${trimmomatic_out_r} > "${trinity_in_r}"
-    sed -i 's#\.2\s#/2 #g' ${trinity_in_r}
-    tmp=(${trimmomatic_out_r_un//./ })
-    trinity_in_r_un="${tmp[0]}.untrimmed.fasta"
-    sed -n '1~4s/^@/>/p;2~4p' ${trimmomatic_out_r_un} > "${trinity_in_r_un}"
-    sed -i 's#\.2\s#/2 #g' ${trinity_in_r_un}
-    rm "${trimmomatic_out_r}" "${trimmomatic_out_r_un}"
-  fi
-else
-  trinity_in_f="${trimmomatic_out_f}"
-  trinity_in_f_un="${trimmomatic_out_f_un}"
-  trinity_in_r="${trimmomatic_out_r}"
-  trinity_in_r_un="${trimmomatic_out_r_un}"
-fi
-
-
 #Trinity
 trinity_dir="./${sample_name}_trinity"
 if [ "${single_paired}" = "single" ]; then
   Trinity --seqType $seq_type \
     --max_memory $max_memory \
-    --single "${trinity_in_f}" \
+    --single "${forward_file}" \
     --no_normalize_reads \
     --CPU $threads \
     --output "${trinity_dir}"
 else
+  trinity_in_f="${forward_file}"
+  if [ -f "${forward_file}.untrimmed" ]; then
+      trinity_in_f="${forward_file},${forward_file}.untrimmed"
+  fi
+  trinity_in_r="${reverse_file}"
+  if [ -f "${reverse_file}.untrimmed" ]; then
+      trinity_in_r="${reverse_file},${reverse_file}.untrimmed"
+  fi
   Trinity --seqType $seq_type \
     --max_memory $max_memory \
-    --left "${trinity_in_f},${trinity_in_f_un}" \
-    --right "${trinity_in_r},${trinity_in_r_un}" \
+    --left "${trinity_in_f}" \
+    --right "${trinity_in_r}" \
     --CPU $threads \
     --output "${trinity_dir}"
 fi
@@ -198,11 +146,8 @@ samtools fasta output_unmapped.sam > output_unmapped.fasta
 blastn -db nt -query output_unmapped.fasta -out output_unmapped_BLASTn.txt -max_target_seqs 5 -remote
 
 # Copy files and cleanup
-mkdir -p "$output_dir"
-mv output_unmapped.sam output_mapped.sam output_unmapped.fasta output_unmapped_BLASTn.txt "$output_dir"
-mv "${trinity_in_f}" "${trinity_dir}.Trinity.fasta" "$output_dir"
-if [ "${single_paired}" = "pair" ]; then
-  mv "${trinity_in_f_un}" "${trinity_in_r}" "${trinity_in_r_un}" "$output_dir"
-fi
+mkdir -p "$output_dir/discovery"
+mv output_unmapped.sam output_mapped.sam output_unmapped.fasta output_unmapped_BLASTn.txt "$output_dir/discovery"
+mv "${trinity_dir}.Trinity.fasta" "$output_dir/discovery"
 cd "${current_dir}"
 rm -r "/tmp/${sample_name}"

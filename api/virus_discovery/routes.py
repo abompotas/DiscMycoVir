@@ -32,9 +32,9 @@ def virus_discovery_analysis_results(job_id=0, job_hash=None):
             if job.verify_hash(job_hash, 'analysis'):
                 return dumps({'status': 'success', 'results': job.get_analysis_results()})
             else:
-                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
-            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
     else:
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
@@ -47,9 +47,9 @@ def virus_discovery_analysis_results_zipped(job_id=0, job_hash=None):
             if job.verify_hash(job_hash, 'analysis'):
                 return send_file(job.get_zipped_analysis_results(), mimetype='application/zip', as_attachment=True)
             else:
-                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
-            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
     else:
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
@@ -62,9 +62,9 @@ def virus_discovery_job_results(job_id=0, job_hash=None):
             if job.verify_hash(job_hash):
                 return dumps({'status': 'success', 'results': job.get_results()})
             else:
-                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
-            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
     else:
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
@@ -77,9 +77,9 @@ def virus_discovery_job_results_zipped(job_id=0, job_hash=None):
             if job.verify_hash(job_hash, 'results'):
                 return send_file(job.get_zipped_results(), mimetype='application/zip', as_attachment=True)
             else:
-                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 400
+                return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
-            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 400
+            return dumps({'status': 'failed', 'error': 'Could not find a matching result'}), 404
     else:
         return dumps({'status': 'failed', 'error': 'Please provide all the necessary information'}), 400
 
