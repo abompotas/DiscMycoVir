@@ -16,13 +16,10 @@ export class VirusDiscoveryFormComponent implements OnInit {
   email: string | null;
   sampleName: string | null;
   sequencingTechnology: string | null;
-  slidingWindow: string | null;
-  minLength: string | null;
   singleFile: File | null;
   forwardFile: File | null;
   reverseFile: File | null;
   referenceGenome: File | null;
-  adapter: File | null;
 
   constructor(private http: HttpClient, private router: Router,
               private alertController: AlertController, private loadingController: LoadingController) {
@@ -33,13 +30,10 @@ export class VirusDiscoveryFormComponent implements OnInit {
     this.email = null;
     this.sampleName = null;
     this.sequencingTechnology = null;
-    this.slidingWindow = null;
-    this.minLength = null;
     this.singleFile = null;
     this.forwardFile = null;
     this.reverseFile = null;
     this.referenceGenome = null;
-    this.adapter = null;
   }
 
   ngOnInit() {
@@ -61,10 +55,6 @@ export class VirusDiscoveryFormComponent implements OnInit {
     this.referenceGenome = event.target.children['reference_genome'].files[0];
   }
 
-  onAdapterChange(event) {
-    this.adapter = event.target.children['adapter'].files[0];
-  }
-
   search() {
     this.loading().then(() => {
       if(this.validateForm()) {
@@ -80,15 +70,6 @@ export class VirusDiscoveryFormComponent implements OnInit {
           formData.append('reverse_file', this.reverseFile, this.reverseFile.name);
         }
         formData.append('reference_genome', this.referenceGenome, this.referenceGenome.name);
-        if(this.adapter !== null) {
-          formData.append('adapter', this.adapter, this.adapter.name);
-        }
-        if(this.slidingWindow !== null) {
-          formData.append('sliding_window', this.slidingWindow);
-        }
-        if(this.minLength !== null) {
-          formData.append('min_length', this.minLength);
-        }
         this.http.post<VirusDiscoveryResult>(environment.discvirAPI + '/virus-discovery',
           formData, {responseType: 'json'}).subscribe(
           x => this.searchResponse(x),
@@ -108,6 +89,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
       validEmail = false;
     }
     else {
+      // noinspection RegExpRedundantEscape
       const matches = this.email.match(
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );

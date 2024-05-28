@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {environment} from '../../../environments/environment';
 import {VirusDiscoveryResult} from '../../interfaces';
 
 
+// noinspection DuplicatedCode
 @Component({
   selector: 'app-virus-discovery-results',
   templateUrl: './virus-discovery-results.component.html',
@@ -13,22 +14,37 @@ import {VirusDiscoveryResult} from '../../interfaces';
 })
 export class VirusDiscoveryResultsComponent implements OnInit {
 
-  @Input() jobId: number;
-  @Input() hash: string;
-  private pocketomeURL: string;
-  private outputs: VirusDiscoveryResult;
-  private resultsTable: Array<Array<string>>;
+  jobId: number;
+  hash: string;
+  pocketomeURL: string;
+  outputs: VirusDiscoveryResult;
+  resultsTable: Array<Array<string>>;
 
-  constructor(private http: HttpClient, private router: Router,
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,
               private alertController: AlertController, private loadingController: LoadingController) {
     this.pocketomeURL = '';
     this.outputs = null;
     this.resultsTable = [];
+    this.jobId = 0;
+    this.hash = '';
+    this.route.params.subscribe(params => {
+      if(params.hasOwnProperty('job')) {
+        if(params.hasOwnProperty('hash')) {
+          this.jobId = params.job;
+          this.hash = params.hash;
+        }
+      }
+    });
   }
 
   ngOnInit() {
-    this.pocketomeURL = environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
-    this.getResults();
+    if((this.jobId) === 0 || (this.hash === '')) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.pocketomeURL = environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
+      this.getResults();
+    }
   }
 
   getResults() {
@@ -43,7 +59,7 @@ export class VirusDiscoveryResultsComponent implements OnInit {
 
   parseResults(resp) {
     this.resultsTable = [['PDBid', 'Matching results', 'Query residues', 'Hit residues', 'RMSD', 'SASA', 'Docking']];
-    const colNames = ['PDBid', 'matchSize', 'query', 'hit', 'RMSD' , 'SASA', 'Docking'];
+    const colNames = ['PDBid', 'matchSize', 'query', 'hit', 'RMSD', 'SASA', 'Docking'];
     const cols = [];
     for(let r = 0; r < resp.results.results.length; r++) {
       let row = resp.results.results[r].replace('\n', '');
