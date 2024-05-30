@@ -87,4 +87,4 @@ fi
 mkdir -p "${output_dir}"
 mv fastqc_analysis "$output_dir"
 cd "${current_dir}"
-rm -r "/tmp/${sample_name}"
+#rm -r "/tmp/${sample_name}"
