@@ -26,7 +26,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_analysis={} WHERE id={}'''.format(timestamp, job_id))
+            SET started_analysis='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
@@ -35,7 +35,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE virus_discovery_jobs 
-            SET completed_analysis={} WHERE id={}'''.format(timestamp, job_id))
+            SET completed_analysis='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
@@ -53,7 +53,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_trimming={} WHERE id={}'''.format(timestamp, job_id))
+            SET started_trimming='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
@@ -62,7 +62,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE `virus_discovery_jobs` 
-            SET completed_trimming={} WHERE id={}'''.format(timestamp, job_id))
+            SET completed_trimming='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
@@ -80,7 +80,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE virus_discovery_jobs 
-            SET started_discovery={} WHERE id={}'''.format(timestamp, job_id))
+            SET started_discovery='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
@@ -89,7 +89,7 @@ class VirusDiscoveryJob:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()
         cursor.execute('''UPDATE `virus_discovery_jobs` 
-            SET completed_discovery={} WHERE id={}'''.format(timestamp, job_id))
+            SET completed_discovery='{}' WHERE id={}'''.format(timestamp, job_id))
         cursor.close()
         self.db.commit()
         return timestamp
