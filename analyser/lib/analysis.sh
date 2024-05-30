@@ -75,11 +75,11 @@ mkdir -p "fastqc_analysis"
 tmp=(${forward_file//./ })
 fastqc_out_f="${tmp[0]}_fastqc"
 if [ "${single_paired}" = "single" ]; then
-  fastqc -o ./fastqc_analysis "${forward_file}" -t $threads -q
+  fastqc -o ./fastqc_analysis "${forward_file}" -t $threads
 else
   tmp=(${reverse_file//./ })
   fastqc_out_r="${tmp[0]}_fastqc"
-  fastqc -o ./fastqc_analysis "${forward_file}" "${reverse_file}" -t $threads -q
+  fastqc -o ./fastqc_analysis "${forward_file}" "${reverse_file}" -t $threads
 fi
 
 
