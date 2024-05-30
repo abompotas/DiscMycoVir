@@ -75,11 +75,11 @@ cd "/tmp/${sample_name}"
 tmp=(${forward_file//./ })
 fastqc_out_f="${tmp[0]}_fastqc"
 if [ "${single_paired}" = "single" ]; then
-  fastqc -o . fastqc_analysis "${forward_file}" -t $threads -q
+  fastqc -o ./fastqc_analysis "${forward_file}" -t $threads -q
 else
   tmp=(${reverse_file//./ })
   fastqc_out_r="${tmp[0]}_fastqc"
-  fastqc -o . fastqc_analysis "${forward_file}" "${reverse_file}" -t $threads -q
+  fastqc -o ./fastqc_analysis "${forward_file}" "${reverse_file}" -t $threads -q
 fi
 
 
@@ -87,4 +87,4 @@ fi
 mkdir -p "${output_dir}"
 mv fastqc_analysis "$output_dir"
 cd "${current_dir}"
-#rm -r "/tmp/${sample_name}"
+rm -r "/tmp/${sample_name}"
