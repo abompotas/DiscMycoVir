@@ -107,4 +107,4 @@ if __name__ == '__main__':
             timestamp = discvir.mark_as_completed_discovery(job['id'])
             if not notify_user(config, job['user'], job['id'], timestamp, 'discovery'):
                 print('Email (discovery) not sent to {}'.format(job['user']))
-            sleep(config['queue']['sleep'])
+        sleep(config['queue']['sleep'])
