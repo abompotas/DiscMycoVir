@@ -69,7 +69,7 @@ fi
 current_dir=$(pwd)
 mkdir -p "/tmp/${sample_name}"
 cd "/tmp/${sample_name}"
-
+mkdir -p "./fastqc_analysis"
 
 #FastQC
 tmp=(${forward_file//./ })
