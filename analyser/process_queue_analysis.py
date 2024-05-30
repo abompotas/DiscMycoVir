@@ -29,6 +29,12 @@ def run_analysis(args):
                 print('Analysis failed.', res)
 
         elif args['single_paired'] == 'pair':
+            print(f"will run: {analysis_exec} '-n',"
+                  f" {str(args['sample_name'])}, "
+                  f"'-t', {str(args['threads'])}, "
+                  f"'-o', {str(args['output_dir'])}, "
+                  f"'-f', {os.path.join(config['args']['uploads'], str(args['forward_file']))}, "
+                  f"'-r', {os.path.join(config['args']['uploads'], str(args['reverse_file']))}")
             res = run([analysis_exec,
                        '-n', str(args['sample_name']),
                        '-t', str(args['threads']),
