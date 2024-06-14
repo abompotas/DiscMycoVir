@@ -20,7 +20,7 @@ def run_trimming(args):
             res = run([trimming_exec,
                        '-n', str(args['sample_name']),
                        '-t', str(args['threads']),
-                       '-a', str(args['adapter']),
+                       '-a', os.path.join(config['args']['uploads'], str(args['adapter'])),
                        '-w', str(args['sliding_window']),
                        '-l', str(args['min_len']),
                        '-o', str(args['output_dir']),
