@@ -69,7 +69,6 @@ def notify_user(config, email, job_id, timestamp, stage='analysis'):
     except Exception as e:
         print(str(e))
         return notified
-    print(config['smtp']['username'], config['smtp']['password'])
     try:
         smtp.login(config['smtp']['username'], config['smtp']['password'])
         message = MIMEMultipart()

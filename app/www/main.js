@@ -80,7 +80,7 @@ let AppRoutingModule = class AppRoutingModule {
 AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule.forRoot(routes, { useHash: false })
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule.forRoot(routes, { useHash: true })
         ],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_5__.RouterModule]
     })
