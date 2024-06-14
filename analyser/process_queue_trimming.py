@@ -18,13 +18,13 @@ def run_trimming(args):
         trimming_exec = os.path.join(cwd, 'lib/trimming.sh')
         if args['single_paired'] == 'single':
             res = run([trimming_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-a', os.path.join(config['args']['uploads'], str(args['adapter'])),
-                       '-w', str(args['sliding_window']),
-                       '-l', str(args['min_len']),
-                       '-o', str(args['output_dir']),
-                       '-s', os.path.join(config['args']['uploads'], str(args['forward_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-a', os.path.join(config['args']['uploads'], args['adapter']),
+                       '-w', args['sliding_window'],
+                       '-l', args['min_len'],
+                       '-o', args['output_job'],
+                       '-s', os.path.join(config['args']['uploads'], args['forward_file'])])
             if res.returncode == 0:
                 print('Trimming executed.')
             else:
@@ -32,14 +32,14 @@ def run_trimming(args):
 
         elif args['single_paired'] == 'pair':
             res = run([trimming_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-a', os.path.join(config['args']['uploads'], str(args['adapter'])),
-                       '-w', str(args['sliding_window']),
-                       '-l', str(args['min_len']),
-                       '-o', str(args['output_dir']),
-                       '-f', os.path.join(config['args']['uploads'], str(args['forward_file'])),
-                       '-r', os.path.join(config['args']['uploads'], str(args['reverse_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-a', os.path.join(config['args']['uploads'], args['adapter']),
+                       '-w', args['sliding_window'],
+                       '-l', args['min_len'],
+                       '-o', args['output_job'],
+                       '-f', os.path.join(config['args']['uploads'], args['forward_file']),
+                       '-r', os.path.join(config['args']['uploads'], args['reverse_file'])])
             if res.returncode == 0:
                 print('Trimming executed.')
             else:
@@ -54,10 +54,10 @@ def run_analysis(args):
         analysis_exec = os.path.join(cwd, 'lib/analysis.sh')
         if args['single_paired'] == 'single':
             res = run([analysis_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-o', str(args['output_dir']),
-                       '-s', os.path.join(config['args']['output'], 'trimming', str(args['forward_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-o', args['output_job'],
+                       '-s', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:
@@ -65,11 +65,11 @@ def run_analysis(args):
 
         elif args['single_paired'] == 'pair':
             res = run([analysis_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-o', str(args['output_dir']),
-                       '-f', os.path.join(config['args']['output'], 'trimming', str(args['forward_file'])),
-                       '-r', os.path.join(config['args']['output'], 'trimming', str(args['reverse_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-o', args['output_job'],
+                       '-f', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file'])),
+                       '-r', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:

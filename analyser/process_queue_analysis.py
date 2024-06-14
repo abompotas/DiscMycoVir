@@ -17,16 +17,11 @@ def run_analysis(args):
         cwd = os.path.dirname(os.path.abspath(__file__))
         analysis_exec = os.path.join(cwd, 'lib/analysis.sh')
         if args['single_paired'] == 'single':
-            print(f"will run: {analysis_exec} '-n',"
-                  f" {str(args['sample_name'])}, "
-                  f"'-t', {str(args['threads'])}, "
-                  f"'-o', {str(args['output_dir'])}, "
-                  f"'-f', {os.path.join(config['args']['uploads'], str(args['forward_file']))}")
             res = run([analysis_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-o', str(args['output_dir']),
-                       '-s', os.path.join(config['args']['uploads'], str(args['forward_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-o', args['output_job'],
+                       '-s', os.path.join(config['args']['uploads'], args['forward_file'])])
 
             if res.returncode == 0:
                 print('Analysis executed.')
@@ -34,18 +29,12 @@ def run_analysis(args):
                 print('Analysis failed.', res)
 
         elif args['single_paired'] == 'pair':
-            print(f"will run: {analysis_exec} '-n',"
-                  f" {str(args['sample_name'])}, "
-                  f"'-t', {str(args['threads'])}, "
-                  f"'-o', {str(args['output_dir'])}, "
-                  f"'-f', {os.path.join(config['args']['uploads'], str(args['forward_file']))}, "
-                  f"'-r', {os.path.join(config['args']['uploads'], str(args['reverse_file']))}")
             res = run([analysis_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-o', str(args['output_dir']),
-                       '-f', os.path.join(config['args']['uploads'], str(args['forward_file'])),
-                       '-r', os.path.join(config['args']['uploads'], str(args['reverse_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-o', args['output_job'],
+                       '-f', os.path.join(config['args']['uploads'], args['forward_file']),
+                       '-r', os.path.join(config['args']['uploads'], args['reverse_file'])])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:

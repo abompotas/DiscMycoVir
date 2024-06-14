@@ -22,26 +22,26 @@ def build_args(config, job_id, genome, paired=0, sample_name='', forward_file=''
         window = config['args']['sliding_window']
     args = {
         # Number of threads for parallel execution
-        'threads': config['args']['threads'],
+        'threads': str(config['args']['threads']),
         # Max memory to be used by Trinity
-        'max_memory': config['args']['max_memory'],
+        'max_memory': str(config['args']['max_memory']),
         'single_paired': single_paired,
         # Adapter for Trimmomatic
-        'adapter': adapter,
+        'adapter': str(adapter),
         # Sliding window for Trimmomatic
-        'sliding_window': window,
+        'sliding_window': str(window),
         # Minimum length for Trimmomatic
-        'min_len': min_len,
+        'min_len': str(min_len),
         # Sample name
-        'sample_name': sample_name,
+        'sample_name': str(sample_name),
         # Reference genome
-        'ref_genome': genome,
+        'ref_genome': str(genome),
         # '-f	Paired forward input file' '-s	Single end input file'
-        'forward_file': forward_file,
+        'forward_file': str(forward_file),
         # Paired reverse input file
-        'reverse_file': reverse_file,
+        'reverse_file': str(reverse_file),
         # Output directory
-        'output_dir': os.path.join(config['args']['output'], str(job_id))
+        'output_job': os.path.join(config['args']['output'], str(job_id))
     }
     return args
 

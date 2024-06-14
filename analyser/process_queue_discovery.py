@@ -10,42 +10,6 @@ with open('config.json', encoding='utf-8') as fp:
     config = load(fp)
 
 
-def run_trimming(args, input_dir=''):
-    if check_sequencing_args(args):
-        # Usage (Single End): lib/trimming.sh [options] -s file'
-        # Usage (Paired End): lib/trimming.sh [options] -f forward_file -r reverse_file
-        cwd = os.path.dirname(os.path.abspath(__file__))
-        trimming_exec = os.path.join(cwd, 'lib/trimming.sh')
-        if args['single_paired'] == 'single':
-            res = run([trimming_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-a', str(args['adapter']),
-                       '-w', str(args['sliding_window']),
-                       '-l', str(args['min_len']),
-                       '-o', str(args['output_dir']),
-                       '-s', os.path.join(input_dir, str(args['forward_file']))])
-            if res.returncode == 0:
-                print('Discovery executed.')
-            else:
-                print('Discovery failed.', res)
-
-        elif args['single_paired'] == 'pair':
-            res = run([trimming_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-a', str(args['adapter']),
-                       '-w', str(args['sliding_window']),
-                       '-l', str(args['min_len']),
-                       '-o', str(args['output_dir']),
-                       '-f', os.path.join(input_dir, str(args['forward_file'])),
-                       '-r', os.path.join(input_dir, str(args['reverse_file']))])
-            if res.returncode == 0:
-                print('Discovery executed.')
-            else:
-                print('Discovery failed.', res)
-
-
 def run_discovery(args):
     # TODO: .sh to python
     # step 1: fastq -> fasta NOT NEEDED
@@ -57,33 +21,38 @@ def run_discovery(args):
     # Usage (Single End): lib/discovery.sh [options] -g reference_genome -s file'
     # Usage (Paired End): lib/discovery.sh [options] -g reference_genome -f forward_file -r reverse_file
     if check_sequencing_args(args):
-        input_dir = os.path.join(config['args']['output'], 'trimming')
-        if not os.path.exists(input_dir):
-            input_dir = config['args']['uploads']
         cwd = os.path.dirname(os.path.abspath(__file__))
         discovery_exec = os.path.join(cwd, 'lib/discovery.sh')
         if args['single_paired'] == 'single':
+            forward_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))
+            if not os.path.exists(forward_file):
+                forward_file = os.path.join(config['args']['uploads'], args['forward_file'])
             res = run([discovery_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-m', str(args['max_memory']),
-                       '-o', str(args['output_dir']),
-                       '-g', os.path.join(config['args']['uploads'], str(args['ref_genome'])),
-                       '-s', os.path.join(input_dir, str(args['forward_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-m', args['max_memory'],
+                       '-o', args['output_job'],
+                       '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
+                       '-s', forward_file])
             if res.returncode == 0:
                 print('Discovery executed.')
             else:
                 print('Discovery failed.', res)
 
         elif args['single_paired'] == 'pair':
+            forward_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))
+            reverse_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))
+            if not os.path.exists(forward_file):
+                forward_file = os.path.join(config['args']['uploads'], args['forward_file'])
+                reverse_file = os.path.join(config['args']['uploads'], args['reverse_file'])
             res = run([discovery_exec,
-                       '-n', str(args['sample_name']),
-                       '-t', str(args['threads']),
-                       '-m', str(args['max_memory']),
-                       '-o', str(args['output_dir']),
-                       '-g', os.path.join(config['args']['uploads'], str(args['ref_genome'])),
-                       '-f', os.path.join(input_dir, str(args['forward_file'])),
-                       '-r', os.path.join(input_dir, str(args['reverse_file']))])
+                       '-n', args['sample_name'],
+                       '-t', args['threads'],
+                       '-m', args['max_memory'],
+                       '-o', args['output_job'],
+                       '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
+                       '-f', forward_file,
+                       '-r', reverse_file])
             if res.returncode == 0:
                 print('Discovery executed.')
             else:
