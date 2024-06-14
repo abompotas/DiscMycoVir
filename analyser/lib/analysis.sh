@@ -85,6 +85,7 @@ fi
 
 # Copy files and cleanup
 mkdir -p "${output_dir}"
+rm -r ${output_dir}/fastqc_analysis 2> /dev/null
 mv fastqc_analysis "$output_dir"
 cd "${current_dir}"
 rm -r "/tmp/${sample_name}"

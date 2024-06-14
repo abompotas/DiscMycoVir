@@ -2,7 +2,7 @@
 
 threads=1
 single_paired="pair"
-adapter="NexteraPE-PE.fa:2:30:10"
+adapter="NexteraPE-PE.fa"
 sliding_window="5:20"
 min_len="50"
 sample_name=""
@@ -98,7 +98,7 @@ if [ "${single_paired}" = "single" ]; then
     -threads $threads \
     "${input_dir}/${forward_file}" \
     "${trimmomatic_out_f}" \
-    ILLUMINACLIP:$adapter \
+    ILLUMINACLIP:$adapter:2:30:10 \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
 else
@@ -108,7 +108,7 @@ else
      -threads $threads \
     "${input_dir}/${forward_file}" "${input_dir}/${reverse_file}" \
     "${trimmomatic_out_f}" "${trimmomatic_out_f_un}" "${trimmomatic_out_r}" "${trimmomatic_out_r_un}" \
-    ILLUMINACLIP:$adapter \
+    ILLUMINACLIP:$adapter:2:30:10 \
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
 fi
