@@ -24,7 +24,8 @@ def run_trimming(args):
                        '-w', args['sliding_window'],
                        '-l', args['min_len'],
                        '-o', args['output_job'],
-                       '-s', os.path.join(config['args']['uploads'], args['forward_file'])])
+                       '-i', config['args']['uploads'],
+                       '-s', args['forward_file']])
             if res.returncode == 0:
                 print('Trimming executed.')
             else:
@@ -38,8 +39,9 @@ def run_trimming(args):
                        '-w', args['sliding_window'],
                        '-l', args['min_len'],
                        '-o', args['output_job'],
-                       '-f', os.path.join(config['args']['uploads'], args['forward_file']),
-                       '-r', os.path.join(config['args']['uploads'], args['reverse_file'])])
+                       '-i', config['args']['uploads'],
+                       '-f', args['forward_file'],
+                       '-r', args['reverse_file']])
             if res.returncode == 0:
                 print('Trimming executed.')
             else:
@@ -57,7 +59,7 @@ def run_analysis(args):
                        '-n', args['sample_name'],
                        '-t', args['threads'],
                        '-o', args['output_job'],
-                       '-s', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))])
+                       '-s', os.path.join(args['output_job'], 'trimming', args['forward_file'])])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:
@@ -68,8 +70,8 @@ def run_analysis(args):
                        '-n', args['sample_name'],
                        '-t', args['threads'],
                        '-o', args['output_job'],
-                       '-f', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file'])),
-                       '-r', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))])
+                       '-f', os.path.join(args['output_job'], 'trimming', args['forward_file']),
+                       '-r', os.path.join(args['output_job'], 'trimming', args['reverse_file'])])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:

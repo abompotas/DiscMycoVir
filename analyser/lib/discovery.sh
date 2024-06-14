@@ -114,12 +114,12 @@ if [ "${single_paired}" = "single" ]; then
     --output "${trinity_dir}"
 else
   trinity_in_f="${forward_file}"
-  if [ -f "${forward_file}.untrimmed" ]; then
-      trinity_in_f="${forward_file},${forward_file}.untrimmed"
+  if [ -f "${forward_file}.unpaired" ]; then
+      trinity_in_f="${forward_file},${forward_file}.unpaired"
   fi
   trinity_in_r="${reverse_file}"
-  if [ -f "${reverse_file}.untrimmed" ]; then
-      trinity_in_r="${reverse_file},${reverse_file}.untrimmed"
+  if [ -f "${reverse_file}.unpaired" ]; then
+      trinity_in_r="${reverse_file},${reverse_file}.unpaired"
   fi
   Trinity --seqType $seq_type \
     --max_memory $max_memory \
