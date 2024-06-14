@@ -57,7 +57,7 @@ def run_discovery(args):
     # Usage (Single End): lib/discovery.sh [options] -g reference_genome -s file'
     # Usage (Paired End): lib/discovery.sh [options] -g reference_genome -f forward_file -r reverse_file
     if check_sequencing_args(args):
-        input_dir = os.path.join(config['args']['outputs'], 'trimming')
+        input_dir = os.path.join(config['args']['output'], 'trimming')
         if not os.path.exists(input_dir):
             input_dir = config['args']['uploads']
         cwd = os.path.dirname(os.path.abspath(__file__))
