@@ -15,7 +15,7 @@ tee /virus-discovery/config.json > /dev/null <<EOT
     "sliding_window": "${SLIDING_WINDOW}",
     "min_length": ${MIN_LENGTH},
     "threads": ${THREADS},
-    "max_memory": ${MAX_MEMORY}
+    "max_memory": "${MAX_MEMORY}"
   },
   "db": {
     "host": "${DB_HOST}",
