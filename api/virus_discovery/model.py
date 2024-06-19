@@ -1,9 +1,8 @@
 import os
-import base64
 import shutil
-
 from datetime import datetime
 from hashlib import sha256
+from Bio.Blast import NCBIXML
 
 from shared import config, db
 
@@ -17,12 +16,6 @@ def get_text_output(filepath, array=False):
     return contents
 
 
-def get_image_output(filepath):
-    with open(filepath, 'rb') as img:
-        contents = img.read()
-    return base64.b64encode(contents).decode("utf-8")
-
-
 class VirusDiscoveryJob(db.Model):
     __tablename__ = 'virus_discovery_jobs'
 
@@ -34,6 +27,8 @@ class VirusDiscoveryJob(db.Model):
     started_trimming = db.Column('started_trimming', db.TIMESTAMP)
     completed_trimming = db.Column('completed_trimming', db.TIMESTAMP)
     started_discovery = db.Column('started_discovery', db.TIMESTAMP)
+    completed_assembly = db.Column('completed_assembly', db.TIMESTAMP)
+    started_blast = db.Column('started_blast', db.TIMESTAMP)
     completed_discovery = db.Column('completed_discovery', db.TIMESTAMP)
     user = db.Column('user', db.String(255), nullable=False)
     sample_name = db.Column('sample_name', db.String(255), nullable=False)
@@ -100,7 +95,6 @@ class VirusDiscoveryJob(db.Model):
         return False
 
     def verify_hash(self, job_hash, stage='analysis'):
-        return True
         if stage == 'analysis':
             check_str = '{}%%{}%%{}'.format(self.id, self.user, self.completed_analysis).encode('utf-8')
         else:
@@ -111,46 +105,39 @@ class VirusDiscoveryJob(db.Model):
         return False
 
     def get_analysis_reports(self):
-        root_path = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
+        analysis_dir = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
         if self.paired:
-            forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
-            reverse_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.reverse_file))
+            forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
+            reverse_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.reverse_file))
             return [get_text_output(forward_file_report), get_text_output(reverse_file_report)]
         else:
-            forward_file_report = os.path.join(root_path, '{}_fastqc.html'.format(self.forward_file))
+            forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
             return [get_text_output(forward_file_report)]
 
-    def get_zipped_analysis_reports(self):
-        root_path = os.path.join(config['app']['output_path'], str(self.id))
-        results_path = os.path.join(root_path, 'fastqc_analysis')
-        zip_path = os.path.join(root_path, 'virus_discovery-{}'.format(str(self.id)))
-        zip_file = '{}.zip'.format(zip_path)
+    def get_analysis_reports_zipped(self):
+        analysis_dir = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
+        zip_name = 'virus_discovery-{}-fastqc_analysis'.format(str(self.id))
+        zip_file = '{}.zip'.format(zip_name)
         if not os.path.exists(zip_file):
             os.remove(zip_file)
-        shutil.make_archive(zip_path, 'zip', results_path)
+        shutil.make_archive(zip_name, 'zip', root_dir=analysis_dir, base_dir=analysis_dir)
         return zip_file
 
-    def get_results(self):
-        root_path = os.path.join(config['app']['output_path'], str(self.id))
-        visualisation_path = root_path + 'visualisation' + os.sep
-        centroids = []
-        for f in sorted(os.listdir(visualisation_path)):
-            if f.endswith('.pdb'):
-                centroids.append(get_text_output(visualisation_path + f, False))
-        return {
-            'results': get_text_output(root_path + 'Results.txt'),
-            'graphs': {
-                'filtering': 'data:image/png;base64,'
-                             + get_image_output(root_path + 'filtering.png'),
-            },
-            'centroids': centroids
-        }
+    def get_final_results(self):
+        discovery_dir = os.path.join(config['app']['output_path'], str(self.id), 'discovery')
+        blastn_file = os.path.join(discovery_dir, 'output_blast.xml')
+        results = []
+        with open(blastn_file, 'r') as xml:
+            blast_records = NCBIXML.parse(xml)
+            for blast_record in blast_records:
+                results.append(blast_record)
+        return results
 
-    def get_zipped_results(self):
-        root_path = os.path.join(config['app']['output_path'], str(self.id))
-        results_path = os.path.join(root_path, 'results')
-        zip_path = os.path.join(root_path, 'virus_discovery-{}'.format(str(self.id)))
-        zip_file = '{}.zip'.format(zip_path)
+    def get_all_results_zipped(self):
+        results_dir = os.path.join(config['app']['output_path'], str(self.id))
+        zip_name = 'virus_discovery-{}'.format(str(self.id))
+        zip_file = '{}.zip'.format(zip_name)
         if not os.path.exists(zip_file):
-            shutil.make_archive(zip_path, 'zip', results_path)
+            os.remove(zip_file)
+        shutil.make_archive(zip_name, 'zip', root_dir=results_dir, base_dir=results_dir)
         return zip_file

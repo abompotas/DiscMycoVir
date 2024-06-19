@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `started_trimming` timestamp NULL DEFAULT NULL,
   `completed_trimming` timestamp NULL DEFAULT NULL,
   `started_discovery` timestamp NULL DEFAULT NULL,
+  `completed_assembly` timestamp NULL DEFAULT NULL,
+  `started_blast` timestamp NULL DEFAULT NULL,
   `completed_discovery` timestamp NULL DEFAULT NULL,
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `sample_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,

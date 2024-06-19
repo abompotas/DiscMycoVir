@@ -16,7 +16,6 @@ def run_discovery(args):
     # step 2: Trinity (paired-single)
     # step 3: BWA-MEM
     # step 4: SAMTOOLS
-    # step 5: BLAST
     #
     # Usage (Single End): lib/discovery.sh [options] -g reference_genome -s file'
     # Usage (Paired End): lib/discovery.sh [options] -g reference_genome -f forward_file -r reverse_file
@@ -73,7 +72,5 @@ if __name__ == '__main__':
                                   forward_file=job['forward_file'], reverse_file=job['reverse_file'],
                                   adapter=job['adapter'], min_len=job['min_len'], window=job['window'])
             run_discovery(job_args)
-            timestamp = discvir.mark_as_completed_discovery(job['id'])
-            if not notify_user(config, job['user'], job['id'], timestamp, 'discovery'):
-                print('Email (discovery) not sent to {}'.format(job['user']))
+            timestamp = discvir.mark_as_completed_assembly(job['id'])
         sleep(config['queue']['sleep'])

@@ -2,9 +2,6 @@
 
 threads=1
 single_paired="pair"
-adapter="NexteraPE-PE.fa:2:30:10"
-sliding_window="5:20"
-min_len="50"
 max_memory="8G"
 seq_type="fq"
 sample_name=""
@@ -14,13 +11,10 @@ reverse_file=""
 output_dir="virus_discovery_output"
 
 usage() {
-  echo "Usage (Single End): ./virus_discovery_pipeline.sh [options] -g reference_genome -s file"
-  echo "Usage (Paired End): ./virus_discovery_pipeline.sh [options] -g reference_genome -f forward_file -r reverse_file"
+  echo "Usage (Single End): ./discovery.sh [options] -g reference_genome -s file"
+  echo "Usage (Paired End): ./discovery.sh [options] -g reference_genome -f forward_file -r reverse_file"
   echo "OPTIONS:"
   echo "-t	Number of threads for parallel execution"
-  echo "-a	Adapter for Trimmomatic"
-  echo "-w	Sliding window for Trimmomatic"
-  echo "-l	Minimum length for Trimmomatic"
   echo "-q	Sequence type to be used by Trinity"
   echo "-m	Max memory to be used by Trinity"
   echo "-n	Sample name"
@@ -33,19 +27,10 @@ usage() {
 }
 
 
-while getopts ":t:a:w:l:q:m:n:g:s:f:r:o:h:" option; do
+while getopts ":t:q:m:n:g:s:f:r:o:h:" option; do
   case $option in
     t)
       threads=$OPTARG
-      ;;
-    a)
-      adapter=$OPTARG
-      ;;
-    w)
-      sliding_window=$OPTARG
-      ;;
-    l)
-      min_len=$OPTARG
       ;;
     q)
       seq_type=$OPTARG
@@ -138,16 +123,13 @@ bwa mem $ref_genome "${trinity_dir}.Trinity.fasta" > ./output.sam
 #Getting the unmapped reads from a sam file:
 samtools view -f 4 output.sam > output_unmapped.sam
 #Getting only the mapped reads from a sam file:
-samtools view -b -F 4 output.sam> output_mapped.sam
+samtools view -b -F 4 output.sam > output_mapped.sam
 #Unmapped sequences from SAM to FASTA
 samtools fasta output_unmapped.sam > output_unmapped.fasta
 
-#BLAST
-blastn -db nt -query output_unmapped.fasta -out output_unmapped_BLASTn.txt -max_target_seqs 5 -remote
-
 # Copy files and cleanup
 mkdir -p "$output_dir/discovery"
-mv output_unmapped.sam output_mapped.sam output_unmapped.fasta output_unmapped_BLASTn.txt "$output_dir/discovery"
+mv output_unmapped.sam output_mapped.sam output_unmapped.fasta "$output_dir/discovery"
 mv "${trinity_dir}.Trinity.fasta" "$output_dir/discovery"
 cd "${current_dir}"
 rm -r "/tmp/${sample_name}"

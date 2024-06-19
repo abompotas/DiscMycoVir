@@ -85,6 +85,44 @@ class VirusDiscoveryJob:
         self.db.commit()
         return timestamp
 
+    def mark_as_completed_assembly(self, job_id):
+        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+        cursor = self.db.cursor()
+        cursor.execute('''UPDATE `virus_discovery_jobs` 
+            SET completed_assembly='{}' WHERE id={}'''.format(timestamp, job_id))
+        cursor.close()
+        self.db.commit()
+        return timestamp
+
+    def get_blast_jobs(self, limit):
+        cursor = self.db.cursor(dictionary=True)
+        cursor.execute('''SELECT * FROM virus_discovery_jobs 
+            WHERE completed_assembly IS NOT NULL AND started_blast IS NULL 
+            ORDER BY id LIMIT 0,{}'''.format(limit))
+        jobs = cursor.fetchall()
+        cursor.close()
+        self.db.commit()
+        return jobs
+
+    def mark_as_started_blast(self, job_id):
+        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+        cursor = self.db.cursor()
+        cursor.execute('''UPDATE virus_discovery_jobs 
+            SET started_blast='{}' WHERE id={}'''.format(timestamp, job_id))
+        cursor.close()
+        self.db.commit()
+        return timestamp
+
+    def get_pending_blast_jobs(self, limit):
+        cursor = self.db.cursor(dictionary=True)
+        cursor.execute('''SELECT * FROM virus_discovery_jobs 
+            WHERE started_blast IS NOT NULL AND completed_discovery IS NULL 
+            ORDER BY id LIMIT 0,{}'''.format(limit))
+        jobs = cursor.fetchall()
+        cursor.close()
+        self.db.commit()
+        return jobs
+
     def mark_as_completed_discovery(self, job_id):
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.db.cursor()

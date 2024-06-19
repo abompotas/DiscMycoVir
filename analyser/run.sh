@@ -34,4 +34,5 @@ tee /virus-discovery/config.json > /dev/null <<EOT
 EOT
 python -u /virus-discovery/process_queue_analysis.py &
 python -u /virus-discovery/process_queue_trimming.py &
-python -u /virus-discovery/process_queue_discovery.py
+python -u /virus-discovery/process_queue_discovery.py &
+python -u /virus-discovery/process_queue_discovery_blast.py
