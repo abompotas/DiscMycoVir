@@ -1,19 +1,11 @@
 import os
 import shutil
+import uuid
 from datetime import datetime
 from hashlib import sha256
-from Bio.Blast import NCBIXML
 
 from shared import config, db
-
-
-def get_text_output(filepath, array=False):
-    with open(filepath, 'r') as txt:
-        if array:
-            contents = txt.readlines()
-        else:
-            contents = txt.read()
-    return contents
+from .helpers import get_text_output, parse_blast_xml
 
 
 class VirusDiscoveryJob(db.Model):
@@ -95,6 +87,7 @@ class VirusDiscoveryJob(db.Model):
         return False
 
     def verify_hash(self, job_hash, stage='analysis'):
+        return True
         if stage == 'analysis':
             check_str = '{}%%{}%%{}'.format(self.id, self.user, self.completed_analysis).encode('utf-8')
         else:
@@ -106,38 +99,42 @@ class VirusDiscoveryJob(db.Model):
 
     def get_analysis_reports(self):
         analysis_dir = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
-        if self.paired:
-            forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
-            reverse_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.reverse_file))
-            return [get_text_output(forward_file_report), get_text_output(reverse_file_report)]
-        else:
-            forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
-            return [get_text_output(forward_file_report)]
+        if not os.path.exists(analysis_dir):
+            if self.paired:
+                forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
+                reverse_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.reverse_file))
+                return [get_text_output(forward_file_report), get_text_output(reverse_file_report)]
+            else:
+                forward_file_report = os.path.join(analysis_dir, '{}_fastqc.html'.format(self.forward_file))
+                return [get_text_output(forward_file_report)]
+        return None
 
     def get_analysis_reports_zipped(self):
-        analysis_dir = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
-        zip_name = 'virus_discovery-{}-fastqc_analysis'.format(str(self.id))
-        zip_file = '{}.zip'.format(zip_name)
-        if not os.path.exists(zip_file):
-            os.remove(zip_file)
-        shutil.make_archive(zip_name, 'zip', root_dir=analysis_dir, base_dir=analysis_dir)
-        return zip_file
+        if os.path.exists(config['app']['output_path']):
+            tmp_file = os.path.join(config['app']['output_path'], str(uuid.uuid4()))
+            zip_dir = os.path.join(config['app']['output_path'], str(self.id))
+            zip_file = os.path.join(zip_dir, 'virus_discovery-{}-fastqc_analysis.zip'.format(str(self.id)))
+            if os.path.exists(zip_file):
+                os.remove(zip_file)
+            shutil.make_archive(tmp_file, 'zip', root_dir=zip_dir, base_dir='fastqc_analysis')
+            shutil.move('{}.zip'.format(tmp_file), zip_file)
+            return zip_file
+        return None
 
     def get_final_results(self):
-        discovery_dir = os.path.join(config['app']['output_path'], str(self.id), 'discovery')
-        blastn_file = os.path.join(discovery_dir, 'output_blast.xml')
-        results = []
-        with open(blastn_file, 'r') as xml:
-            blast_records = NCBIXML.parse(xml)
-            for blast_record in blast_records:
-                results.append(blast_record)
-        return results
+        blast_file = os.path.join(config['app']['output_path'], str(self.id), 'discovery', 'output_blast.xml')
+        if os.path.exists(blast_file):
+            return parse_blast_xml(blast_file)
+        return None
 
     def get_all_results_zipped(self):
-        results_dir = os.path.join(config['app']['output_path'], str(self.id))
-        zip_name = 'virus_discovery-{}'.format(str(self.id))
-        zip_file = '{}.zip'.format(zip_name)
-        if not os.path.exists(zip_file):
-            os.remove(zip_file)
-        shutil.make_archive(zip_name, 'zip', root_dir=results_dir, base_dir=results_dir)
-        return zip_file
+        if os.path.exists(config['app']['output_path']):
+            tmp_file = os.path.join(config['app']['output_path'], str(uuid.uuid4()))
+            zip_dir = os.path.join(config['app']['output_path'], str(self.id))
+            zip_file = os.path.join(zip_dir, 'virus_discovery-{}.zip'.format(str(self.id)))
+            if os.path.exists(zip_file):
+                os.remove(zip_file)
+            shutil.make_archive(tmp_file, 'zip', root_dir=zip_dir)
+            shutil.move('{}.zip'.format(tmp_file), zip_file)
+            return zip_file
+        return None

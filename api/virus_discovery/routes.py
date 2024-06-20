@@ -45,7 +45,11 @@ def analysis_reports_zipped(job_id=0, job_hash=None):
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'analysis'):
-                return send_file(job.get_analysis_reports_zipped(), mimetype='application/zip', as_attachment=True)
+                zip_path = job.get_analysis_reports_zipped()
+                if zip_path is not None:
+                    return send_file(zip_path, mimetype='application/zip', as_attachment=True)
+                else:
+                    return dumps({'status': 'failed', 'error': 'Could not create the archive'}), 500
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
@@ -101,7 +105,11 @@ def results(job_id=0, job_hash=None):
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash):
-                return dumps({'status': 'success', 'results': job.get_final_results()})
+                final_results = job.get_final_results()
+                if final_results is not None:
+                    return dumps({'status': 'success', 'results': final_results})
+                else:
+                    return dumps({'status': 'failed', 'error': 'Could not retrieve results'}), 500
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
@@ -116,7 +124,11 @@ def results_zipped(job_id=0, job_hash=None):
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'results'):
-                return send_file(job.get_all_results_zipped(), mimetype='application/zip', as_attachment=True)
+                zip_path = job.get_all_results_zipped()
+                if zip_path is not None:
+                    return send_file(zip_path, mimetype='application/zip', as_attachment=True)
+                else:
+                    return dumps({'status': 'failed', 'error': 'Could not create the archive'}), 500
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:
