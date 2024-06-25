@@ -30,7 +30,11 @@ def analysis_reports(job_id=0, job_hash=None):
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'analysis'):
-                return dumps({'status': 'success', 'results': job.get_analysis_reports()})
+                reports = job.get_analysis_reports()
+                if reports is not None:
+                    return dumps({'status': 'success', 'reports': reports})
+                else:
+                    return dumps({'status': 'failed', 'error': 'Could not retrieve FastQC analysis'}), 500
             else:
                 return dumps({'status': 'failed', 'error': 'Unauthorized access'}), 403
         else:

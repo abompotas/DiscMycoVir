@@ -1,4 +1,4 @@
-(self["webpackChunkVirus_Discovery"] = self["webpackChunkVirus_Discovery"] || []).push([["common"],{
+(self["webpackChunkVirusDiscovery"] = self["webpackChunkVirusDiscovery"] || []).push([["common"],{
 
 /***/ 3168:
 /*!*********************************************************************!*\

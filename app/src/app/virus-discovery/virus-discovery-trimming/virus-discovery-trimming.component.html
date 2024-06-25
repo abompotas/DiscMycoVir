@@ -10,9 +10,9 @@
     <!--suppress AngularUndefinedBinding -->
     <form (ngSubmit)="trim()">
       <ion-grid>
-        <ion-row>
+        <ion-row *ngFor="let report of analysisReports; index as i">
           <ion-col>
-            <ion-accordion-group *ngFor="let report of analysisResults; index as i">
+            <ion-accordion-group>
               <ion-accordion value="first">
                 <ion-item slot="header" color="primary">
                   <ion-label>Report file #{{i + 1}}</ion-label>
@@ -22,9 +22,9 @@
                 </div>
               </ion-accordion>
             </ion-accordion-group>
-            <br/><br/>
           </ion-col>
         </ion-row>
+        <br/><br/>
         <ion-row>
           <ion-col></ion-col>
           <ion-col size="12" sizeLg="10" sizeXl="8">

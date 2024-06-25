@@ -1,4 +1,4 @@
-(self["webpackChunkVirus_Discovery"] = self["webpackChunkVirus_Discovery"] || []).push([["polyfills-dom"],{
+(self["webpackChunkVirusDiscovery"] = self["webpackChunkVirusDiscovery"] || []).push([["polyfills-dom"],{
 
 /***/ 5141:
 /*!************************************************************!*\

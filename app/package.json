@@ -1,5 +1,5 @@
 {
-  "name": "Virus Discovery",
+  "name": "VirusDiscovery",
   "version": "0.0.1",
   "author": "Agorakis Bompotas",
   "homepage": "https://www.imslab.gr/",
@@ -21,8 +21,10 @@
     "@angular/router": "~12.1.1",
     "@ionic/angular": "^6.7.5",
     "@ionic/angular-server": "^6.7.5",
-    "chart.js": "^4.3.0",
-    "datatables": "^1.10.18",
+    "chart.js": "^4.4.3",
+    "datatables.net": "^2.0.8",
+    "datatables.net-dt": "^2.0.8",
+    "jquery": "^3.7.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -41,6 +43,7 @@
     "@types/chart.js": "^2.9.37",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jquery": "^3.5.30",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",

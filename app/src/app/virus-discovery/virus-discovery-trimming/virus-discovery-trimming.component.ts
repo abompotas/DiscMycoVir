@@ -28,7 +28,7 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
 
   jobId: number;
   hash: string;
-  analysisResults: Array<string>;
+  analysisReports: Array<string>;
   sequencingTechnology: string | null;
   slidingWindow: string | null;
   minLength: string | null;
@@ -38,7 +38,7 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
               private alertController: AlertController, private loadingController: LoadingController) {
     this.jobId = 0;
     this.hash = '';
-    this.analysisResults = [];
+    this.analysisReports = [];
     this.route.params.subscribe(params => {
       if(params.hasOwnProperty('job')) {
         if(params.hasOwnProperty('hash')) {
@@ -70,7 +70,7 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
     this.loading().then(() => {
       this.http.get<VirusDiscoveryResponse>(environment.discvirAPI + '/analysis/' + this.jobId + '/' + this.hash, {responseType: 'json'}).subscribe(
         x => {
-          this.analysisResults = [...x.results]
+          this.analysisReports = [...x.reports];
         },
         e => this.error(e.error),
         () => this.loadingController.dismiss().then(null)

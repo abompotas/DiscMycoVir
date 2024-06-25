@@ -21,8 +21,8 @@ def parse_blast_xml(blast_file):
 
 def get_blast_record(blast_record):
     return {
-        'query_name': blast_record.query,
-        'query_letters': blast_record.query_letters,
+        'queryName': blast_record.query,
+        'queryLetters': blast_record.query_letters,
         'descriptions': get_blast_descriptions(blast_record),
         'alignments': get_blast_alignments(blast_record)
     }
@@ -36,7 +36,7 @@ def get_blast_descriptions(blast_record):
             'score': d.score,
             'bits': d.bits,
             'e': d.e,
-            'num_alignments': d.num_alignments
+            'numAlignments': d.num_alignments
         })
     return descriptions
 
@@ -45,8 +45,8 @@ def get_blast_alignments(blast_record):
     alignments = []
     for a in blast_record.alignments:
         alignments.append({
-            'hit_id': a.hit_id,
-            'hit_def': a.hit_def,
+            'hitId': a.hit_id,
+            'hitDef': a.hit_def,
             'length': a.length,
             'hsps': get_blast_hsps(a)
         })
@@ -60,19 +60,19 @@ def get_blast_hsps(blast_alignment):
             'score': h.score,
             'bits': h.bits,
             'expect': h.expect,
-            'num_alignments': h.num_alignments,
+            'numAlignments': h.num_alignments,
             'identities': h.identities,
             'positives': h.positives,
             'gaps': h.gaps,
-            'align_length': h.align_length,
+            'alignLength': h.align_length,
             'strand': h.strand,
             'frame': h.frame,
             'query': h.query,
-            'query_start': h.query_start,
-            'query_end': h.query_end,
+            'queryStart': h.query_start,
+            'queryEnd': h.query_end,
             'match': h.match,
             'sbjct': h.sbjct,
-            'sbjct_start': h.sbjct_start,
-            'sbjct_end': h.sbjct_end,
+            'sbjctStart': h.sbjct_start,
+            'sbjctEnd': h.sbjct_end,
         })
     return hsps

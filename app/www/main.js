@@ -1,4 +1,4 @@
-(self["webpackChunkVirus_Discovery"] = self["webpackChunkVirus_Discovery"] || []).push([["main"],{
+(self["webpackChunkVirusDiscovery"] = self["webpackChunkVirusDiscovery"] || []).push([["main"],{
 
 /***/ 8255:
 /*!*******************************************************!*\
@@ -33,7 +33,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/home/home-page.component */ 2249);
@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./app.component.html */ 1106);
 /* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss */ 3069);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -168,13 +168,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ 1841);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/forms */ 3679);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! tslib */ 5353);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
 /* harmony import */ var _pages_home_home_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/home/home-page.component */ 2249);
@@ -185,6 +185,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-form/virus-discovery-form.component */ 3743);
 /* harmony import */ var _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-trimming/virus-discovery-trimming.component */ 7575);
 /* harmony import */ var _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-results/virus-discovery-results.component */ 1126);
+/* harmony import */ var _virus_discovery_virus_discovery_hits_graph_virus_discovery_hits_graph_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-hits-graph/virus-discovery-hits-graph.component */ 5017);
+/* harmony import */ var _virus_discovery_virus_discovery_hits_table_virus_discovery_hits_table_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-hits-table/virus-discovery-hits-table.component */ 125);
+/* harmony import */ var _virus_discovery_virus_discovery_hit_details_virus_discovery_hit_details_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./virus-discovery/virus-discovery-hit-details/virus-discovery-hit-details.component */ 2365);
+
+
+
 
 
 
@@ -204,8 +210,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_13__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_14__.NgModule)({
         declarations: [
             _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__.SafeHtmlPipe,
             _app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent,
@@ -216,18 +222,21 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
             _commons_topbar_topbar_component__WEBPACK_IMPORTED_MODULE_6__.TopbarComponent,
             _virus_discovery_virus_discovery_form_virus_discovery_form_component__WEBPACK_IMPORTED_MODULE_7__.VirusDiscoveryFormComponent,
             _virus_discovery_virus_discovery_trimming_virus_discovery_trimming_component__WEBPACK_IMPORTED_MODULE_8__.VirusDiscoveryTrimmingComponent,
-            _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_9__.VirusDiscoveryResultsComponent
+            _virus_discovery_virus_discovery_results_virus_discovery_results_component__WEBPACK_IMPORTED_MODULE_9__.VirusDiscoveryResultsComponent,
+            _virus_discovery_virus_discovery_hits_table_virus_discovery_hits_table_component__WEBPACK_IMPORTED_MODULE_11__.VirusDiscoveryHitsTableComponent,
+            _virus_discovery_virus_discovery_hit_details_virus_discovery_hit_details_component__WEBPACK_IMPORTED_MODULE_12__.VirusDiscoveryHitDetailsComponent,
+            _virus_discovery_virus_discovery_hits_graph_virus_discovery_hits_graph_component__WEBPACK_IMPORTED_MODULE_10__.VirusDiscoveryHitsGraphComponent
         ],
         entryComponents: [],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicModule.forRoot(),
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_16__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_14__.HttpClientModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_15__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_15__.ReactiveFormsModule
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_17__.HttpClientModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_18__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_18__.ReactiveFormsModule
         ],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_16__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicRouteStrategy }],
+        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_19__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_16__.IonicRouteStrategy }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
     })
 ], AppModule);
@@ -247,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FooterComponent": () => (/* binding */ FooterComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_footer_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./footer.component.html */ 5302);
 /* harmony import */ var _footer_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./footer.component.scss */ 2696);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -289,7 +298,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TopbarComponent": () => (/* binding */ TopbarComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_topbar_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./topbar.component.html */ 4503);
 /* harmony import */ var _topbar_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./topbar.component.scss */ 772);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -331,7 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePageComponent": () => (/* binding */ HomePageComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_home_page_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./home-page.component.html */ 4217);
 /* harmony import */ var _home_page_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home-page.component.scss */ 4728);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -369,7 +378,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResultsPageComponent": () => (/* binding */ ResultsPageComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_results_page_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./results-page.component.html */ 8069);
 /* harmony import */ var _results_page_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./results-page.component.scss */ 1308);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -405,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TrimmingPageComponent": () => (/* binding */ TrimmingPageComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_trimming_page_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./trimming-page.component.html */ 4210);
 /* harmony import */ var _trimming_page_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./trimming-page.component.scss */ 4422);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -441,7 +450,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "VirusDiscoveryFormComponent": () => (/* binding */ VirusDiscoveryFormComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_virus_discovery_form_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-form.component.html */ 8790);
 /* harmony import */ var _virus_discovery_form_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-form.component.scss */ 8827);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -641,6 +650,321 @@ VirusDiscoveryFormComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)(
 
 /***/ }),
 
+/***/ 2365:
+/*!******************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hit-details/virus-discovery-hit-details.component.ts ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VirusDiscoveryHitDetailsComponent": () => (/* binding */ VirusDiscoveryHitDetailsComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
+/* harmony import */ var _raw_loader_virus_discovery_hit_details_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-hit-details.component.html */ 8546);
+/* harmony import */ var _virus_discovery_hit_details_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-hit-details.component.scss */ 3407);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+
+
+
+
+let VirusDiscoveryHitDetailsComponent = class VirusDiscoveryHitDetailsComponent {
+    constructor() {
+    }
+    ngOnInit() {
+    }
+};
+VirusDiscoveryHitDetailsComponent.ctorParameters = () => [];
+VirusDiscoveryHitDetailsComponent.propDecorators = {
+    hsp: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }]
+};
+VirusDiscoveryHitDetailsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'app-virus-discovery-hit-details',
+        template: _raw_loader_virus_discovery_hit_details_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_virus_discovery_hit_details_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], VirusDiscoveryHitDetailsComponent);
+
+
+
+/***/ }),
+
+/***/ 5017:
+/*!****************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hits-graph/virus-discovery-hits-graph.component.ts ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VirusDiscoveryHitsGraphComponent": () => (/* binding */ VirusDiscoveryHitsGraphComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 5353);
+/* harmony import */ var _raw_loader_virus_discovery_hits_graph_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-hits-graph.component.html */ 7566);
+/* harmony import */ var _virus_discovery_hits_graph_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-hits-graph.component.scss */ 1129);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js/auto */ 5649);
+
+
+
+
+
+let VirusDiscoveryHitsGraphComponent = class VirusDiscoveryHitsGraphComponent {
+    constructor() {
+        this.canvas = null;
+        this.rootStyle = null;
+        this.graphData = null;
+        this.datasets = { '200': [], '80-200': [], '50-80': [], '40-50': [], '0-40': [] };
+    }
+    ngOnInit() {
+        this.rootStyle = getComputedStyle(document.body);
+        this.createDatasets();
+        this.graphData = {
+            datasets: [{
+                    label: '>=200',
+                    data: this.datasets['200'],
+                    barThickness: 15,
+                    borderWidth: 2,
+                    borderColor: this.rootStyle.getPropertyValue('--ion-color-danger-shade'),
+                    backgroundColor: this.rootStyle.getPropertyValue('--ion-color-danger-tint'),
+                    stack: 'stack-0',
+                }, {
+                    label: '80-200',
+                    data: this.datasets['80-200'],
+                    barThickness: 15,
+                    borderWidth: 2,
+                    borderColor: this.rootStyle.getPropertyValue('--ion-color-warning-shade'),
+                    backgroundColor: this.rootStyle.getPropertyValue('--ion-color-warning-tint'),
+                    stack: 'stack-0',
+                }, {
+                    label: '50-80',
+                    data: this.datasets['50-80'],
+                    barThickness: 15,
+                    borderWidth: 2,
+                    borderColor: this.rootStyle.getPropertyValue('--ion-color-secondary-shade'),
+                    backgroundColor: this.rootStyle.getPropertyValue('--ion-color-secondary-tint'),
+                    stack: 'stack-0',
+                }, {
+                    label: '40-50',
+                    data: this.datasets['40-50'],
+                    barThickness: 15,
+                    borderWidth: 2,
+                    borderColor: this.rootStyle.getPropertyValue('--ion-color-primary-shade'),
+                    backgroundColor: this.rootStyle.getPropertyValue('--ion-color-primary-tint'),
+                    stack: 'stack-0',
+                }, {
+                    label: '<40',
+                    data: this.datasets['0-40'],
+                    barThickness: 15,
+                    borderWidth: 2,
+                    borderColor: this.rootStyle.getPropertyValue('--ion-color-dark-shade'),
+                    backgroundColor: this.rootStyle.getPropertyValue('--ion-color-dark'),
+                    stack: 'stack-0',
+                }]
+        };
+    }
+    ngAfterViewInit() {
+        this.canvas = document.getElementById('hits-graph-' + this.qid);
+        this.canvas.height = this.qData.alignments.length * 6 + 15;
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_2__.Chart(this.canvas.getContext('2d'), {
+            type: 'bar',
+            data: this.graphData,
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    y: { display: false },
+                    x: {
+                        title: {
+                            text: 'Query',
+                            display: true,
+                            padding: { top: 10, bottom: 5 },
+                            color: '#ffffff'
+                        },
+                        ticks: {
+                            color: '#ffffff',
+                            align: 'inner',
+                            padding: 0
+                        },
+                        position: 'top',
+                        backgroundColor: this.rootStyle.getPropertyValue('--ion-color-tertiary-tint'),
+                        max: this.qData.queryLetters
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' }
+                }
+            }
+        });
+    }
+    createDatasets() {
+        for (let a of this.qData.alignments) {
+            for (let h of a.hsps) {
+                const dataPoint = {
+                    y: a.hitId + ' Score: ' + h.score,
+                    x: h.alignLength
+                };
+                if (h.score >= 200) {
+                    this.datasets['200'].push(dataPoint);
+                }
+                else if (h.score < 200 && h.score >= 80) {
+                    this.datasets['80-200'].push(dataPoint);
+                }
+                else if (h.score < 80 && h.score >= 50) {
+                    this.datasets['50-80'].push(dataPoint);
+                }
+                else if (h.score < 50 && h.score >= 40) {
+                    this.datasets['40-50'].push(dataPoint);
+                }
+                else {
+                    this.datasets['0-40'].push(dataPoint);
+                }
+            }
+        }
+    }
+};
+VirusDiscoveryHitsGraphComponent.ctorParameters = () => [];
+VirusDiscoveryHitsGraphComponent.propDecorators = {
+    qid: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    qData: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }]
+};
+VirusDiscoveryHitsGraphComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-virus-discovery-hits-graph',
+        template: _raw_loader_virus_discovery_hits_graph_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_virus_discovery_hits_graph_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], VirusDiscoveryHitsGraphComponent);
+
+
+
+/***/ }),
+
+/***/ 125:
+/*!****************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hits-table/virus-discovery-hits-table.component.ts ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VirusDiscoveryHitsTableComponent": () => (/* binding */ VirusDiscoveryHitsTableComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 5353);
+/* harmony import */ var _raw_loader_virus_discovery_hits_table_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-hits-table.component.html */ 8723);
+/* harmony import */ var _virus_discovery_hits_table_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-hits-table.component.scss */ 3697);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! datatables.net-dt */ 2661);
+
+
+
+
+
+let VirusDiscoveryHitsTableComponent = class VirusDiscoveryHitsTableComponent {
+    constructor() {
+        this.alignmentsData = [];
+        this.matchesData = [];
+        this.selectedHSP = null;
+    }
+    ngOnInit() {
+        for (let a of this.qData.alignments) {
+            for (let h of a.hsps) {
+                h.title = a.hitId + a.hitDef;
+                h.length = a.length;
+                this.alignmentsData.push(h);
+                this.matchesData.push(this.parseHSPMatch(h, 50));
+            }
+        }
+    }
+    ngAfterViewInit() {
+        new datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__.default('#alignments-' + this.qid);
+    }
+    parseHSPMatch(hsp, limit) {
+        const parsedData = {
+            'queryStart': [], 'queryEnd': [], 'query': [],
+            'sbjctStart': [], 'sbjctEnd': [], 'sbjct': [],
+            'match': [], 'title': hsp.title
+        };
+        let step = 1;
+        if (hsp.strand[1] === 'Minus') {
+            step = -1;
+        }
+        let query = '';
+        let sbjct = '';
+        let match = '';
+        let queryStart = hsp.queryStart - 1;
+        let queryEnd = queryStart;
+        let sbjctStart = hsp.sbjctStart - step;
+        let sbjctEnd = sbjctStart;
+        for (let i = 0; i < hsp.query.length; i++) {
+            query += hsp.query[i];
+            sbjct += hsp.sbjct[i];
+            match += hsp.match[i];
+            if (hsp.query[i] !== '-') {
+                queryEnd++;
+            }
+            if (hsp.sbjct[i] !== '-') {
+                sbjctEnd += step;
+            }
+            if ((i % limit) === 0) {
+                if (hsp.query[i] !== '-') {
+                    queryStart++;
+                }
+                if (hsp.sbjct[i] !== '-') {
+                    sbjctStart += step;
+                }
+            }
+            if ((i % limit) === (limit - 1)) {
+                parsedData.queryStart.push(queryStart);
+                parsedData.queryEnd.push(queryEnd);
+                parsedData.query.push(query);
+                parsedData.sbjctStart.push(sbjctStart);
+                parsedData.sbjctEnd.push(sbjctEnd);
+                parsedData.sbjct.push(sbjct);
+                parsedData.match.push(match);
+                query = '';
+                sbjct = '';
+                match = '';
+                queryStart = queryEnd;
+                sbjctStart = sbjctEnd;
+            }
+        }
+        if (query !== '') {
+            parsedData.queryStart.push(queryStart);
+            parsedData.queryEnd.push(hsp.queryEnd);
+            parsedData.query.push(query);
+            parsedData.sbjctStart.push(sbjctStart);
+            parsedData.sbjctEnd.push(hsp.sbjctEnd);
+            parsedData.sbjct.push(sbjct);
+            parsedData.match.push(match);
+        }
+        return parsedData;
+    }
+    showHSPDetails(i) {
+        this.selectedHSP = this.matchesData[i];
+        return false;
+    }
+};
+VirusDiscoveryHitsTableComponent.ctorParameters = () => [];
+VirusDiscoveryHitsTableComponent.propDecorators = {
+    qid: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    qData: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }]
+};
+VirusDiscoveryHitsTableComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-virus-discovery-hits-table',
+        template: _raw_loader_virus_discovery_hits_table_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_virus_discovery_hits_table_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], VirusDiscoveryHitsTableComponent);
+
+
+
+/***/ }),
+
 /***/ 1126:
 /*!**********************************************************************************************!*\
   !*** ./src/app/virus-discovery/virus-discovery-results/virus-discovery-results.component.ts ***!
@@ -652,7 +976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "VirusDiscoveryResultsComponent": () => (/* binding */ VirusDiscoveryResultsComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_virus_discovery_results_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-results.component.html */ 9064);
 /* harmony import */ var _virus_discovery_results_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-results.component.scss */ 8081);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -676,11 +1000,11 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
         this.router = router;
         this.alertController = alertController;
         this.loadingController = loadingController;
-        this.pocketomeURL = '';
-        this.outputs = null;
-        this.resultsTable = [];
+        this.resultsURL = '';
+        this.downloadURL = '';
         this.jobId = 0;
         this.hash = '';
+        this.results = null;
         this.route.params.subscribe(params => {
             if (params.hasOwnProperty('job')) {
                 if (params.hasOwnProperty('hash')) {
@@ -695,38 +1019,18 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
             this.router.navigate(['/']);
         }
         else {
-            this.pocketomeURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/virus_discovery/' + this.jobId + '/' + this.hash;
+            this.resultsURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/results/' + this.jobId + '/' + this.hash;
+            this.downloadURL = this.resultsURL + '/download';
             this.getResults();
         }
     }
     getResults() {
         this.loading().then(() => {
-            this.http.get(this.pocketomeURL, { responseType: 'json' }).subscribe(x => this.parseResults(x), e => this.resultsError(e.error), () => this.loadingController.dismiss().then(null));
+            this.http.get(this.resultsURL, { responseType: 'json' }).subscribe(x => this.parseResults(x), e => this.resultsError(e.error), () => this.loadingController.dismiss().then(null));
         });
     }
     parseResults(resp) {
-        this.resultsTable = [['PDBid', 'Matching results', 'Query residues', 'Hit residues', 'RMSD', 'SASA', 'Docking']];
-        const colNames = ['PDBid', 'matchSize', 'query', 'hit', 'RMSD', 'SASA', 'Docking'];
-        const cols = [];
-        for (let r = 0; r < resp.results.results.length; r++) {
-            let row = resp.results.results[r].replace('\n', '');
-            row = row.split('\t');
-            if (!r) {
-                for (let c = 0; c < row.length; c++) {
-                    if (colNames.includes(row[c])) {
-                        cols.push(c);
-                    }
-                }
-            }
-            else {
-                const resultsRow = [];
-                for (const c of cols) {
-                    resultsRow.push(row[c]);
-                }
-                this.resultsTable.push(resultsRow);
-            }
-        }
-        this.outputs = resp.results;
+        this.results = [...resp.results];
     }
     loading() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
@@ -789,7 +1093,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SafeHtmlPipe": () => (/* binding */ SafeHtmlPipe),
 /* harmony export */   "VirusDiscoveryTrimmingComponent": () => (/* binding */ VirusDiscoveryTrimmingComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 5353);
 /* harmony import */ var _raw_loader_virus_discovery_trimming_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./virus-discovery-trimming.component.html */ 3352);
 /* harmony import */ var _virus_discovery_trimming_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./virus-discovery-trimming.component.scss */ 1400);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
@@ -834,7 +1138,7 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
         this.loadingController = loadingController;
         this.jobId = 0;
         this.hash = '';
-        this.analysisResults = [];
+        this.analysisReports = [];
         this.route.params.subscribe(params => {
             if (params.hasOwnProperty('job')) {
                 if (params.hasOwnProperty('hash')) {
@@ -862,7 +1166,7 @@ let VirusDiscoveryTrimmingComponent = class VirusDiscoveryTrimmingComponent {
     fetchAnalysis() {
         this.loading().then(() => {
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.discvirAPI + '/analysis/' + this.jobId + '/' + this.hash, { responseType: 'json' }).subscribe(x => {
-                this.analysisResults = [...x.results];
+                this.analysisReports = [...x.reports];
             }, e => this.error(e.error), () => this.loadingController.dismiss().then(null));
         });
     }
@@ -1371,6 +1675,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 3407:
+/*!********************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hit-details/virus-discovery-hit-details.component.scss ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (".hsp-data > ion-col > div {\n  padding: 0.5em 0;\n}\n\n.hsp-data .alignments {\n  display: flex;\n  justify-content: center;\n}\n\n.hsp-data .bio-base {\n  display: block;\n  width: 1.5em;\n}\n\n.hsp-data .bio-base.base-A {\n  background-color: var(--ion-color-tertiary-tint);\n}\n\n.hsp-data .bio-base.base-T {\n  background-color: var(--ion-color-secondary-tint);\n}\n\n.hsp-data .bio-base.base-G {\n  background-color: var(--ion-color-warning-tint);\n}\n\n.hsp-data .bio-base.base-C {\n  background-color: var(--ion-color-danger-tint);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1oaXQtZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsdUJBQUE7QUFDRjs7QUFDQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0FBRUY7O0FBQ0E7RUFDRSxnREFBQTtBQUVGOztBQUNBO0VBQ0UsaURBQUE7QUFFRjs7QUFDQTtFQUNFLCtDQUFBO0FBRUY7O0FBQ0E7RUFDRSw4Q0FBQTtBQUVGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS1oaXQtZGV0YWlscy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oc3AtZGF0YSA+IGlvbi1jb2wgPiBkaXYge1xuICBwYWRkaW5nOiAwLjVlbSAwO1xufVxuXG4uaHNwLWRhdGEgLmFsaWdubWVudHMge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cbi5oc3AtZGF0YSAuYmlvLWJhc2Uge1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2lkdGg6IDEuNWVtO1xufVxuXG4uaHNwLWRhdGEgLmJpby1iYXNlLmJhc2UtQSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWlvbi1jb2xvci10ZXJ0aWFyeS10aW50KTtcbn1cblxuLmhzcC1kYXRhIC5iaW8tYmFzZS5iYXNlLVQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1pb24tY29sb3Itc2Vjb25kYXJ5LXRpbnQpO1xufVxuXG4uaHNwLWRhdGEgLmJpby1iYXNlLmJhc2UtRyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLXRpbnQpO1xufVxuXG4uaHNwLWRhdGEgLmJpby1iYXNlLmJhc2UtQyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWlvbi1jb2xvci1kYW5nZXItdGludCk7XG59XG4iXX0= */");
+
+/***/ }),
+
+/***/ 1129:
+/*!******************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hits-graph/virus-discovery-hits-graph.component.scss ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("h3 {\n  font-size: 1.5em;\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1oaXRzLWdyYXBoLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQUE7RUFDQSxpQkFBQTtBQUNGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS1oaXRzLWdyYXBoLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDMge1xuICBmb250LXNpemU6IDEuNWVtO1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cbiJdfQ== */");
+
+/***/ }),
+
+/***/ 3697:
+/*!******************************************************************************************************!*\
+  !*** ./src/app/virus-discovery/virus-discovery-hits-table/virus-discovery-hits-table.component.scss ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("h3 {\n  font-size: 1.5em;\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1oaXRzLXRhYmxlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQUE7RUFDQSxpQkFBQTtBQUNGIiwiZmlsZSI6InZpcnVzLWRpc2NvdmVyeS1oaXRzLXRhYmxlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDMge1xuICBmb250LXNpemU6IDEuNWVtO1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cbiJdfQ== */");
+
+/***/ }),
+
 /***/ 8081:
 /*!************************************************************************************************!*\
   !*** ./src/app/virus-discovery/virus-discovery-results/virus-discovery-results.component.scss ***!
@@ -1382,7 +1731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-item {\n  width: 100%;\n}\n\nion-item .error-ad {\n  color: var(--ion-color-danger);\n}\n\nion-text {\n  size: 5em;\n}\n\nion-icon {\n  margin-right: 0.5em;\n}\n\nion-grid.seven-cols {\n  --ion-grid-columns: 7;\n}\n\nion-col {\n  text-align: center;\n}\n\nion-col.bg-white {\n  background-color: #ffffff;\n}\n\nion-button {\n  min-width: 11em;\n}\n\nh2 {\n  margin: 1em 0 0.5em;\n  font-size: 24px;\n  font-weight: 500;\n}\n\np {\n  margin: 1em 0;\n  font-size: 1em;\n}\n\nimg {\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1yZXN1bHRzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBQTtBQUNGOztBQUVBO0VBQ0UsOEJBQUE7QUFDRjs7QUFFQTtFQUNFLFNBQUE7QUFDRjs7QUFFQTtFQUNFLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxxQkFBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7QUFDRjs7QUFFQTtFQUNFLHlCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxlQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtBQUNGOztBQUVBO0VBQ0UsYUFBQTtFQUNBLGNBQUE7QUFDRjs7QUFFQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LXJlc3VsdHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5pb24taXRlbSAuZXJyb3ItYWQge1xuICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLWRhbmdlcik7XG59XG5cbmlvbi10ZXh0IHtcbiAgc2l6ZTogNWVtO1xufVxuXG5pb24taWNvbiB7XG4gIG1hcmdpbi1yaWdodDogMC41ZW07XG59XG5cbmlvbi1ncmlkLnNldmVuLWNvbHMge1xuICAtLWlvbi1ncmlkLWNvbHVtbnM6IDc7XG59XG5cbmlvbi1jb2wge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbmlvbi1jb2wuYmctd2hpdGUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xufVxuXG5pb24tYnV0dG9uIHtcbiAgbWluLXdpZHRoOiAxMWVtO1xufVxuXG5oMiB7XG4gIG1hcmdpbjogMWVtIDAgMC41ZW07XG4gIGZvbnQtc2l6ZTogMjRweDtcbiAgZm9udC13ZWlnaHQ6IDUwMDtcbn1cblxucCB7XG4gIG1hcmdpbjogMWVtIDA7XG4gIGZvbnQtc2l6ZTogMWVtO1xufVxuXG5pbWcge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRvcDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG59XG4iXX0= */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-item {\n  width: 100%;\n}\n\nion-text {\n  size: 5em;\n}\n\nion-button {\n  min-width: 11em;\n}\n\nh2 {\n  margin: 1em 0 0.5em;\n  font-size: 24px;\n  font-weight: 500;\n}\n\nh3 {\n  font-size: 1.5em;\n  font-weight: bold;\n}\n\np {\n  margin: 1em 0;\n  font-size: 1em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnVzLWRpc2NvdmVyeS1yZXN1bHRzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBQTtBQUNGOztBQUVBO0VBQ0UsU0FBQTtBQUNGOztBQUVBO0VBQ0UsZUFBQTtBQUNGOztBQUVBO0VBQ0UsbUJBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7QUFDRjs7QUFFQTtFQUNFLGdCQUFBO0VBQ0EsaUJBQUE7QUFDRjs7QUFFQTtFQUNFLGFBQUE7RUFDQSxjQUFBO0FBQ0YiLCJmaWxlIjoidmlydXMtZGlzY292ZXJ5LXJlc3VsdHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5pb24tdGV4dCB7XG4gIHNpemU6IDVlbTtcbn1cblxuaW9uLWJ1dHRvbiB7XG4gIG1pbi13aWR0aDogMTFlbTtcbn1cblxuaDIge1xuICBtYXJnaW46IDFlbSAwIDAuNWVtO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA1MDA7XG59XG5cbmgzIHtcbiAgZm9udC1zaXplOiAxLjVlbTtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbnAge1xuICBtYXJnaW46IDFlbSAwO1xuICBmb250LXNpemU6IDFlbTtcbn1cbiJdfQ== */");
 
 /***/ }),
 
@@ -1506,6 +1855,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 8546:
+/*!**********************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery-hit-details/virus-discovery-hit-details.component.html ***!
+  \**********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-row class=\"hsp-data\">\n  <ion-col size=\"1\" class=\"ion-text-end\">\n    <div *ngFor=\"let h of hsp.query; index as i\">\n      <div><strong>Query Start</strong></div>\n      <div>{{hsp.queryStart[i]}}</div>\n      <div>&nbsp;</div>\n      <div>{{hsp.sbjctStart[i]}}</div>\n      <div><strong>Subject Start</strong></div>\n    </div>\n  </ion-col>\n  <ion-col size=\"10\" class=\"ion-text-center\">\n    <div *ngFor=\"let h of hsp.query; index as i\">\n      <div><strong>Query</strong></div>\n      <div class=\"alignments\">\n        <span *ngFor=\"let b of hsp.query[i].split('');\" class=\"bio-base base-{{b}}\">{{b}}</span>\n      </div>\n      <div class=\"alignments\">\n        <span *ngFor=\"let b of hsp.match[i].split('');\" class=\"bio-base\"><strong>{{b}}</strong></span>\n      </div>\n      <div class=\"alignments\">\n        <span *ngFor=\"let b of hsp.sbjct[i].split('');\" class=\"bio-base base-{{b}}\">{{b}}</span>\n      </div>\n      <div><strong>Subject</strong></div>\n    </div>\n  </ion-col>\n  <ion-col size=\"1\" class=\"ion-text-start\">\n    <div *ngFor=\"let h of hsp.query; index as i\">\n      <div><strong>Query End</strong></div>\n      <div>{{hsp.queryEnd[i]}}</div>\n      <div>&nbsp;</div>\n      <div>{{hsp.sbjctEnd[i]}}</div>\n      <div><strong>Subject End</strong></div>\n    </div>\n  </ion-col>\n</ion-row>\n");
+
+/***/ }),
+
+/***/ 7566:
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery-hits-graph/virus-discovery-hits-graph.component.html ***!
+  \********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-grid>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <h3>Graphic Summary</h3>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <canvas id=\"hits-graph-{{qid}}\"></canvas>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n");
+
+/***/ }),
+
+/***/ 8723:
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery-hits-table/virus-discovery-hits-table.component.html ***!
+  \********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-grid>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <ion-label>\n        <h3>Hits</h3>\n      </ion-label>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <table id=\"alignments-{{qid}}\" class=\"display\" style=\"width:100%\">\n        <thead>\n        <tr>\n          <th>Title</th>\n          <th>Length</th>\n          <th>Score</th>\n          <th>Bits</th>\n          <th>Expect</th>\n          <th>Alignment Length</th>\n          <th>Gaps\n          <th>Identities</th>\n          <th>Positives</th>\n          <th>Strand</th>\n          <th>Details</th>\n        </tr>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let a of alignmentsData; index as i\">\n          <td>{{a.title}}</td>\n          <td>{{a.length}}</td>\n          <td>{{a.score}}</td>\n          <td>{{a.bits}}</td>\n          <td>{{a.expect}}</td>\n          <td>{{a.alignLength}}</td>\n          <td>{{a.gaps}}</td>\n          <td>{{a.identities}}</td>\n          <td>{{a.positives}}</td>\n          <td>{{a.strand.join('/')}}</td>\n          <td>\n            <ion-button (click)=\"showHSPDetails(i)\" color=\"secondary\">Show</ion-button>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </ion-col>\n  </ion-row>\n  <ion-row *ngIf=\"selectedHSP !== null\">\n    <ion-col class=\"ion-text-center\">\n      <ion-label>\n        <h3>High Scoring Pairs</h3>\n        <p><strong>{{selectedHSP.title}}</strong></p>\n      </ion-label>\n    </ion-col>\n  </ion-row>\n  <app-virus-discovery-hit-details *ngIf=\"selectedHSP !== null\" [hsp]=\"selectedHSP\"></app-virus-discovery-hit-details>\n</ion-grid>\n");
+
+/***/ }),
+
 /***/ 9064:
 /*!**************************************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/virus-discovery/virus-discovery-results/virus-discovery-results.component.html ***!
@@ -1517,7 +1911,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Pocketome Analysis</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-list>\n      <ion-grid>\n        <ion-row>\n          <ion-item class=\"ion-no-padding\">\n            <ion-col><h2>Results</h2></ion-col>\n          </ion-item>\n        </ion-row>\n\n        <div *ngIf=\"outputs !== null\">\n        </div>\n\n        <br/>\n\n      </ion-grid>\n    </ion-list>\n    <br/>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Analysis Results</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <br/>\n    <ion-button color=\"secondary\" [href]=\"downloadURL\">Download all</ion-button>\n    <br/><br/>\n    <ion-grid>\n      <ion-row *ngFor=\"let row of results; index as i\">\n        <ion-col>\n          <ion-accordion-group>\n            <ion-accordion value=\"first\">\n              <ion-item slot=\"header\" color=\"primary\">\n                <ion-label>Query: {{row.queryName}}</ion-label>\n              </ion-item>\n              <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                <ion-grid>\n                  <ion-row>\n                    <ion-col class=\"ion-text-center\">\n                      <ion-label>\n                        <h3>Query Info</h3>\n                      </ion-label>\n                      <ion-label>\n                        <strong>Name:</strong> {{row.queryName}}\n                        &nbsp;&nbsp;\n                        <strong>Letters:</strong> {{row.queryLetters}}\n                      </ion-label>\n                    </ion-col>\n                  </ion-row>\n                </ion-grid>\n                <br/>\n                <app-virus-discovery-hits-graph [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-graph>\n                <br/>\n                <app-virus-discovery-hits-table [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-table>\n              </div>\n            </ion-accordion>\n          </ion-accordion-group>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ }),
 
@@ -1532,7 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <!--suppress AngularUndefinedBinding -->\n    <form (ngSubmit)=\"trim()\">\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-accordion-group *ngFor=\"let report of analysisResults; index as i\">\n              <ion-accordion value=\"first\">\n                <ion-item slot=\"header\" color=\"primary\">\n                  <ion-label>Report file #{{i + 1}}</ion-label>\n                </ion-item>\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                  <iframe [srcdoc]=\"report | safeIFrame\"></iframe>\n                </div>\n              </ion-accordion>\n            </ion-accordion-group>\n            <br/><br/>\n          </ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col></ion-col>\n          <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic adapter:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic sliding window:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic minimum length:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"primary\">Trim</ion-button>\n              </ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button (click)=\"proceed()\" expand=\"block\" color=\"secondary\">Proceed</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </ion-col>\n          <ion-col></ion-col>\n        </ion-row>\n      </ion-grid>\n    </form>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Mycovirus Discovery</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <ion-label>\n      Search genomes for discovering mycoviruses\n    </ion-label>\n    <br/><br/>\n    <!--suppress AngularUndefinedBinding -->\n    <form (ngSubmit)=\"trim()\">\n      <ion-grid>\n        <ion-row *ngFor=\"let report of analysisReports; index as i\">\n          <ion-col>\n            <ion-accordion-group>\n              <ion-accordion value=\"first\">\n                <ion-item slot=\"header\" color=\"primary\">\n                  <ion-label>Report file #{{i + 1}}</ion-label>\n                </ion-item>\n                <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                  <iframe [srcdoc]=\"report | safeIFrame\"></iframe>\n                </div>\n              </ion-accordion>\n            </ion-accordion-group>\n          </ion-col>\n        </ion-row>\n        <br/><br/>\n        <ion-row>\n          <ion-col></ion-col>\n          <ion-col size=\"12\" sizeLg=\"10\" sizeXl=\"8\">\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic adapter:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input name=\"adapter\" type=\"file\" (ionChange)=\"onAdapterChange($event)\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic sliding window:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"slidingWindow\" name=\"sliding_window\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <ion-row class=\"ion-text-start\">\n              <ion-col sizeSm=\"3\" sizeXs=\"4\" class=\"vcenter\">\n                <ion-label>Trimmomatic minimum length:</ion-label>\n              </ion-col>\n              <ion-col sizeSm=\"9\" sizeXs=\"8\">\n                <ion-input [(ngModel)]=\"minLength\" name=\"min_length\" type=\"text\" required=\"true\"></ion-input>\n              </ion-col>\n            </ion-row>\n            <br/><br/>\n            <ion-row>\n              <ion-col></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button type=\"submit\" expand=\"block\" color=\"primary\">Trim</ion-button>\n              </ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"1\"></ion-col>\n              <ion-col size=\"10\" sizeMd=\"4\" class=\"ion-text-center\">\n                <ion-button (click)=\"proceed()\" expand=\"block\" color=\"secondary\">Proceed</ion-button>\n              </ion-col>\n              <ion-col></ion-col>\n            </ion-row>\n          </ion-col>\n          <ion-col></ion-col>\n        </ion-row>\n      </ion-grid>\n    </form>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ })
 

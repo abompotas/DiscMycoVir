@@ -2,28 +2,8 @@ ion-item {
   width: 100%;
 }
 
-ion-item .error-ad {
-  color: var(--ion-color-danger);
-}
-
 ion-text {
   size: 5em;
-}
-
-ion-icon {
-  margin-right: 0.5em;
-}
-
-ion-grid.seven-cols {
-  --ion-grid-columns: 7;
-}
-
-ion-col {
-  text-align: center;
-}
-
-ion-col.bg-white {
-  background-color: #ffffff;
 }
 
 ion-button {
@@ -36,13 +16,12 @@ h2 {
   font-weight: 500;
 }
 
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 p {
   margin: 1em 0;
   font-size: 1em;
-}
-
-img {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 }
