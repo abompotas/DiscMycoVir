@@ -34,7 +34,23 @@ export class VirusDiscoveryHitsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    new DataTable('#alignments-' + this.qid);
+    new DataTable('#alignments-' + this.qid, {
+      autoWidth: false,
+      order: [[2, 'desc']],
+      columns: [
+        {width: '30%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'},
+        {width: '7%'}
+      ]
+    });
   }
 
   parseHSPMatch(hsp, limit) {

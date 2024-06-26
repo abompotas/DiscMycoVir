@@ -803,8 +803,8 @@ let VirusDiscoveryHitsGraphComponent = class VirusDiscoveryHitsGraphComponent {
         for (let a of this.qData.alignments) {
             for (let h of a.hsps) {
                 const dataPoint = {
-                    y: a.hitId + ' Score: ' + h.score,
-                    x: h.alignLength
+                    y: 'Score: ' + h.score + ', Alignment length: ' + h.alignLength + ', E-value: ' + h.expect,
+                    x: [h.queryStart, h.queryEnd]
                 };
                 if (h.score >= 200) {
                     this.datasets['200'].push(dataPoint);
@@ -880,7 +880,23 @@ let VirusDiscoveryHitsTableComponent = class VirusDiscoveryHitsTableComponent {
         }
     }
     ngAfterViewInit() {
-        new datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__.default('#alignments-' + this.qid);
+        new datatables_net_dt__WEBPACK_IMPORTED_MODULE_2__.default('#alignments-' + this.qid, {
+            autoWidth: false,
+            order: [[2, 'desc']],
+            columns: [
+                { width: '30%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' },
+                { width: '7%' }
+            ]
+        });
     }
     parseHSPMatch(hsp, limit) {
         const parsedData = {
