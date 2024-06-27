@@ -104,13 +104,13 @@ class VirusDiscoveryJob(db.Model):
         analysis_dir = os.path.join(config['app']['output_path'], str(self.id), 'fastqc_analysis')
         if os.path.exists(analysis_dir):
             if self.paired:
-                forward_file_report = '{}_fastqc.html'.format(self.forward_file.split('.')[0])
-                reverse_file_report = '{}_fastqc.html'.format(self.reverse_file.split('.')[0])
+                forward_file_report = '{}_fastqc.html'.format(self.forward_file)
+                reverse_file_report = '{}_fastqc.html'.format(self.reverse_file)
                 forward_file_report_path = os.path.join(analysis_dir, forward_file_report)
                 reverse_file_report_path = os.path.join(analysis_dir, reverse_file_report)
                 return [get_text_output(forward_file_report_path), get_text_output(reverse_file_report_path)]
             else:
-                forward_file_report = '{}_fastqc.html'.format(self.forward_file.split('.')[0])
+                forward_file_report = '{}_fastqc.html'.format(self.forward_file)
                 forward_file_report_path = os.path.join(analysis_dir, forward_file_report)
                 return [get_text_output(forward_file_report_path)]
         return None
