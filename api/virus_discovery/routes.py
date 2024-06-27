@@ -233,13 +233,19 @@ def parse_file(name, default=None):
         filename = ''
         file = request.files[name]
         if file.filename != '':
-            if file and allowed_file(file.filename):
-                filename = str(uuid.uuid4())
-                filepath = os.path.join(config['app']['uploads_path'], filename)
-                file.save(filepath)
+            if file:
+                file_extension = allowed_file(file.filename)
+                if file_extension is not None:
+                    filename = '{}.{}'.format(str(uuid.uuid4()), file_extension)
+                    filepath = os.path.join(config['app']['uploads_path'], filename)
+                    file.save(filepath)
         return filename
 
 
 def allowed_file(filename):
     filetypes = ['txt', 'fa', 'fq', 'fasta', 'fastq', 'gz']
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in filetypes
+    if '.' in filename:
+        file_extension = filename.rsplit('.', 1)[1].lower()
+        if file_extension in filetypes:
+            return file_extension
+    return None
