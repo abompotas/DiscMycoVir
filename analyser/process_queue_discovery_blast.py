@@ -12,7 +12,6 @@ with open('config.json', encoding='utf-8') as fp:
 
 if __name__ == '__main__':
     discvir = VirusDiscoveryJob(config)
-    print('Processing queues...')
     while True:
         jobs_batch = discvir.get_blast_jobs(config['queue']['batch'])
         for job in jobs_batch:

@@ -54,7 +54,7 @@ def run_discovery(args):
                        '-t', args['threads'],
                        '-m', args['max_memory'],
                        '-o', args['output_job'],
-                       '-q', forward_file,
+                       '-q', input_format,
                        '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
                        '-f', forward_file,
                        '-r', reverse_file])
