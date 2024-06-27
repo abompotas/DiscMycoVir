@@ -55,6 +55,7 @@ RUN python3 -m pip install -r requirements.txt
 RUN chmod 755 /virus-discovery/run.sh \
     /virus-discovery/lib/analysis.sh \
     /virus-discovery/lib/trimming.sh \
-    /virus-discovery/lib/discovery.sh
+    /virus-discovery/lib/discovery.sh \
+    /virus-discovery/lib/discovery_blast.sh
 
 CMD ["/virus-discovery/run.sh"]
