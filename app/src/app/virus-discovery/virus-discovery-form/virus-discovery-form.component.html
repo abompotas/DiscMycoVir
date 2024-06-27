@@ -38,6 +38,17 @@
             </ion-row>
             <ion-row class="ion-text-start">
               <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Input format:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-select [(ngModel)]="inputFormat" name="input_format"  placeholder="Single or Pair end" required="true">
+                  <ion-select-option value="fa">FASTA</ion-select-option>
+                  <ion-select-option value="fq">FASTQ</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
                 <ion-label>Sequencing technology:</ion-label>
               </ion-col>
               <ion-col sizeSm="9" sizeXs="8">

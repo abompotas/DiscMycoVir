@@ -25,6 +25,7 @@ class VirusDiscoveryJob(db.Model):
     user = db.Column('user', db.String(255), nullable=False)
     sample_name = db.Column('sample_name', db.String(255), nullable=False)
     genome = db.Column('genome', db.String(255), nullable=False)
+    fasta = db.Column('fasta', db.Boolean, nullable=False, default=False)
     paired = db.Column('paired', db.Boolean, nullable=False, default=False)
     adapter = db.Column('adapter', db.String(255), nullable=True)
     min_len = db.Column('min_len', db.Integer, nullable=True)
@@ -39,13 +40,16 @@ class VirusDiscoveryJob(db.Model):
     @staticmethod
     def create(job_args):
         new_job = None
+        fa = True
+        if job_args['input_format'] == 'fq':
+            fa = False
         if job_args['sequencing_technology'] == 'single':
             new_job = VirusDiscoveryJob(user=job_args['email'], sample_name=job_args['sample_name'],
-                                        genome=job_args['genome'], paired=False,
+                                        genome=job_args['genome'], fasta=fa, paired=False,
                                         forward_file=job_args['single_file'], reverse_file=None)
         elif job_args['sequencing_technology'] == 'paired':
             new_job = VirusDiscoveryJob(user=job_args['email'], sample_name=job_args['sample_name'],
-                                        genome=job_args['genome'], paired=True,
+                                        genome=job_args['genome'], fasta=fa, paired=True,
                                         forward_file=job_args['forward_file'], reverse_file=job_args['reverse_file'])
         if new_job:
             db.session.add(new_job)

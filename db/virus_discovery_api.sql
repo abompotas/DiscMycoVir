@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `virus_discovery_jobs` (
   `user` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `sample_name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `genome` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `fasta` boolean NOT NULL DEFAULT 1,
   `paired` boolean NOT NULL DEFAULT 0,
   `forward_file` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `reverse_file` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,

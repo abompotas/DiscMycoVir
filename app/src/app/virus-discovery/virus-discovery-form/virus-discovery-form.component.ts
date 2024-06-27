@@ -15,6 +15,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
 
   email: string | null;
   sampleName: string | null;
+  inputFormat: string | null;
   sequencingTechnology: string | null;
   singleFile: File | null;
   forwardFile: File | null;
@@ -29,6 +30,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
   initForm() {
     this.email = null;
     this.sampleName = null;
+    this.inputFormat = null;
     this.sequencingTechnology = null;
     this.singleFile = null;
     this.forwardFile = null;
@@ -61,6 +63,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
         const formData = new FormData();
         formData.append('email', this.email);
         formData.append('sample_name', this.sampleName);
+        formData.append('input_format', this.inputFormat);
         formData.append('sequencing_technology', this.sequencingTechnology);
         if(this.sequencingTechnology === 'single') {
           formData.append('single_file', this.singleFile, this.singleFile.name);
@@ -118,6 +121,10 @@ export class VirusDiscoveryFormComponent implements OnInit {
   }
 
   validateInputFiles() {
+    if(this.inputFormat === null) {
+      this.error({error: 'Please select format of the input files.'}).then(null);
+      return false;
+    }
     if(this.sequencingTechnology === null) {
       this.error({error: 'Please select the sequencing technology type.'}).then(null);
       return false;

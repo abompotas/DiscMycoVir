@@ -59,7 +59,7 @@ def run_analysis(args):
                        '-n', args['sample_name'],
                        '-t', args['threads'],
                        '-o', args['output_job'],
-                       '-s', os.path.join(args['output_job'], 'trimming', args['forward_file'])])
+                       '-s', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:
@@ -70,8 +70,8 @@ def run_analysis(args):
                        '-n', args['sample_name'],
                        '-t', args['threads'],
                        '-o', args['output_job'],
-                       '-f', os.path.join(args['output_job'], 'trimming', args['forward_file']),
-                       '-r', os.path.join(args['output_job'], 'trimming', args['reverse_file'])])
+                       '-f', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file'])),
+                       '-r', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))])
             if res.returncode == 0:
                 print('Analysis executed.')
             else:

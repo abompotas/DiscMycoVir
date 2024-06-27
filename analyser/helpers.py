@@ -8,8 +8,12 @@ from hashlib import sha256
 import mysql.connector
 
 
-def build_args(config, job_id, genome, paired=0, sample_name='', forward_file='', reverse_file='',
+def build_args(config, job_id, genome, fasta=0, paired=0, sample_name='', forward_file='', reverse_file='',
                adapter=None, min_len=None, window=None):
+    if fasta:
+        input_format = 'fa'
+    else:
+        input_format = 'fq'
     if paired:
         single_paired = 'pair'
     else:
@@ -25,6 +29,7 @@ def build_args(config, job_id, genome, paired=0, sample_name='', forward_file=''
         'threads': str(config['args']['threads']),
         # Max memory to be used by Trinity
         'max_memory': str(config['args']['max_memory']),
+        'input_format': input_format,
         'single_paired': single_paired,
         # Adapter for Trimmomatic
         'adapter': str(adapter),

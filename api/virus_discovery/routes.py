@@ -147,6 +147,10 @@ def parse_job_form():
         'sample_name': parse_sample_name(),
         'genome': parse_file('reference_genome')
     }
+    if 'input_format' in request.form:
+        job_args['input_format'] = request.form['input_format']
+    else:
+        return None
     if 'sequencing_technology' in request.form:
         job_args['sequencing_technology'] = request.form['sequencing_technology']
         if request.form['sequencing_technology'] == 'single':

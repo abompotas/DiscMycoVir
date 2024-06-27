@@ -23,14 +23,17 @@ def run_discovery(args):
         cwd = os.path.dirname(os.path.abspath(__file__))
         discovery_exec = os.path.join(cwd, 'lib/discovery.sh')
         if args['single_paired'] == 'single':
+            input_format = 'fq'
             forward_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))
             if not os.path.exists(forward_file):
+                input_format = args['input_format']
                 forward_file = os.path.join(config['args']['uploads'], args['forward_file'])
             res = run([discovery_exec,
                        '-n', args['sample_name'],
                        '-t', args['threads'],
                        '-m', args['max_memory'],
                        '-o', args['output_job'],
+                       '-q', input_format,
                        '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
                        '-s', forward_file])
             if res.returncode == 0:
@@ -39,9 +42,11 @@ def run_discovery(args):
                 print('Discovery failed.', res)
 
         elif args['single_paired'] == 'pair':
+            input_format = 'fq'
             forward_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))
             reverse_file = os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))
             if not os.path.exists(forward_file):
+                input_format = args['input_format']
                 forward_file = os.path.join(config['args']['uploads'], args['forward_file'])
                 reverse_file = os.path.join(config['args']['uploads'], args['reverse_file'])
             res = run([discovery_exec,
@@ -49,6 +54,7 @@ def run_discovery(args):
                        '-t', args['threads'],
                        '-m', args['max_memory'],
                        '-o', args['output_job'],
+                       '-q', forward_file,
                        '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
                        '-f', forward_file,
                        '-r', reverse_file])
@@ -68,7 +74,7 @@ if __name__ == '__main__':
         for job in jobs_batch:
             discvir.mark_as_started_discovery(job['id'])
             job_args = build_args(config=config, job_id=job['id'], genome=job['genome'],
-                                  paired=job['paired'], sample_name=job['sample_name'],
+                                  fasta=job['fasta'], paired=job['paired'], sample_name=job['sample_name'],
                                   forward_file=job['forward_file'], reverse_file=job['reverse_file'],
                                   adapter=job['adapter'], min_len=job['min_len'], window=job['window'])
             run_discovery(job_args)
