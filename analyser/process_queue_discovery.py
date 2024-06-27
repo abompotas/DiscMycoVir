@@ -37,9 +37,9 @@ def run_discovery(args):
                        '-g', os.path.join(config['args']['uploads'], args['ref_genome']),
                        '-s', forward_file])
             if res.returncode == 0:
-                print('Discovery executed.')
+                print('[{}|{}]: Discovery executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Discovery failed.', res)
+                print('[{}|{}]: Discovery failed: '.format(job['id'], job['sample_name'], str(res)))
 
         elif args['single_paired'] == 'pair':
             input_format = 'fq'
@@ -59,18 +59,15 @@ def run_discovery(args):
                        '-f', forward_file,
                        '-r', reverse_file])
             if res.returncode == 0:
-                print('Discovery executed.')
+                print('[{}|{}]: Discovery executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Discovery failed.', res)
+                print('[{}|{}]: Discovery failed: '.format(job['id'], job['sample_name'], str(res)))
 
 
 if __name__ == '__main__':
     discvir = VirusDiscoveryJob(config)
-    print('Processing queue...')
     while True:
         jobs_batch = discvir.get_discovery_jobs(config['queue']['batch'])
-        if not jobs_batch:
-            print('No discovery jobs found')
         for job in jobs_batch:
             discvir.mark_as_started_discovery(job['id'])
             job_args = build_args(config=config, job_id=job['id'], genome=job['genome'],

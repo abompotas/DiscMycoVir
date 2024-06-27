@@ -27,9 +27,9 @@ def run_trimming(args):
                        '-i', config['args']['uploads'],
                        '-s', args['forward_file']])
             if res.returncode == 0:
-                print('Trimming executed.')
+                print('[{}|{}]: Trimming executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Trimming failed.', res)
+                print('[{}|{}]: Trimming failed: '.format(job['id'], job['sample_name'], str(res)))
 
         elif args['single_paired'] == 'pair':
             res = run([trimming_exec,
@@ -43,9 +43,9 @@ def run_trimming(args):
                        '-f', args['forward_file'],
                        '-r', args['reverse_file']])
             if res.returncode == 0:
-                print('Trimming executed.')
+                print('[{}|{}]: Trimming executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Trimming failed.', res)
+                print('[{}|{}]: Trimming failed: '.format(job['id'], job['sample_name'], str(res)))
 
 
 def run_analysis(args):
@@ -61,9 +61,9 @@ def run_analysis(args):
                        '-o', args['output_job'],
                        '-s', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file']))])
             if res.returncode == 0:
-                print('Analysis executed.')
+                print('[{}|{}]: Analysis executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Analysis failed.', res)
+                print('[{}|{}]: Analysis failed: '.format(job['id'], job['sample_name'], str(res)))
 
         elif args['single_paired'] == 'pair':
             res = run([analysis_exec,
@@ -73,18 +73,15 @@ def run_analysis(args):
                        '-f', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['forward_file'])),
                        '-r', os.path.join(args['output_job'], 'trimming', '{}.trimmed'.format(args['reverse_file']))])
             if res.returncode == 0:
-                print('Analysis executed.')
+                print('[{}|{}]: Analysis executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Analysis failed.', res)
+                print('[{}|{}]: Analysis failed: '.format(job['id'], job['sample_name'], str(res)))
 
 
 if __name__ == '__main__':
     discvir = VirusDiscoveryJob(config)
-    print('Processing queue...')
     while True:
         jobs_batch = discvir.get_trimming_jobs(config['queue']['batch'])
-        if not jobs_batch:
-            print('No trimming jobs found')
         for job in jobs_batch:
             discvir.mark_as_started_trimming(job['id'])
             job_args = build_args(config=config, job_id=job['id'], genome=job['genome'],
@@ -97,5 +94,5 @@ if __name__ == '__main__':
             run_analysis(job_args)
             timestamp = discvir.mark_as_completed_analysis(job['id'])
             if not notify_user(config, job['user'], job['id'], timestamp, 'analysis'):
-                print('Email (trimming) not sent to {}'.format(job['user']))
+                print('[{}|{}]: Email (trimming) not sent to {}'.format(job['id'], job['sample_name'], job['user']))
         sleep(config['queue']['sleep'])

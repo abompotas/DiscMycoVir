@@ -24,9 +24,9 @@ def run_analysis(args):
                        '-s', os.path.join(config['args']['uploads'], args['forward_file'])])
 
             if res.returncode == 0:
-                print('Analysis executed.')
+                print('[{}|{}]: Analysis executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Analysis failed.', res)
+                print('[{}|{}]: Analysis failed: '.format(job['id'], job['sample_name'], str(res)))
 
         elif args['single_paired'] == 'pair':
             res = run([analysis_exec,
@@ -36,18 +36,15 @@ def run_analysis(args):
                        '-f', os.path.join(config['args']['uploads'], args['forward_file']),
                        '-r', os.path.join(config['args']['uploads'], args['reverse_file'])])
             if res.returncode == 0:
-                print('Analysis executed.')
+                print('[{}|{}]: Analysis executed.'.format(job['id'], job['sample_name']))
             else:
-                print('Analysis failed.', res)
+                print('[{}|{}]: Analysis failed: '.format(job['id'], job['sample_name'], str(res)))
 
 
 if __name__ == '__main__':
     discvir = VirusDiscoveryJob(config)
-    print('Processing queue...')
     while True:
         jobs_batch = discvir.get_analysis_jobs(config['queue']['batch'])
-        if not jobs_batch:
-            print('No analysis jobs found')
         for job in jobs_batch:
             discvir.mark_as_started_analysis(job['id'])
             job_args = build_args(config=config, job_id=job['id'], genome=job['genome'],
@@ -57,5 +54,5 @@ if __name__ == '__main__':
             run_analysis(job_args)
             timestamp = discvir.mark_as_completed_analysis(job['id'])
             if not notify_user(config, job['user'], job['id'], timestamp, 'analysis'):
-                print('Email (analysis) not sent to {}'.format(job['user']))
+                print('[{}|{}]: Email (analysis) not sent to {}'.format(job['id'], job['sample_name'], job['user']))
         sleep(config['queue']['sleep'])
