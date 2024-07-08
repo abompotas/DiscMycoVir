@@ -1026,7 +1026,7 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
         this.downloadURL = '';
         this.jobId = 0;
         this.hash = '';
-        this.results = null;
+        this.results = [];
         this.route.params.subscribe(params => {
             if (params.hasOwnProperty('job')) {
                 if (params.hasOwnProperty('hash')) {
@@ -1052,7 +1052,11 @@ let VirusDiscoveryResultsComponent = class VirusDiscoveryResultsComponent {
         });
     }
     parseResults(resp) {
-        this.results = [...resp.results];
+        for (const r of resp.results) {
+            if (r.alignments.length > 0) {
+                this.results.push(r);
+            }
+        }
     }
     loading() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
@@ -1933,7 +1937,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Analysis Results</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <br/>\n    <ion-button color=\"secondary\" [href]=\"downloadURL\">Download all</ion-button>\n    <br/><br/>\n    <ion-grid>\n      <ion-row *ngFor=\"let row of results; index as i\">\n        <ion-col>\n          <ion-accordion-group>\n            <ion-accordion value=\"first\">\n              <ion-item slot=\"header\" color=\"primary\">\n                <ion-label>Query: {{row.queryName}}</ion-label>\n              </ion-item>\n              <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                <ion-grid>\n                  <ion-row>\n                    <ion-col class=\"ion-text-center\">\n                      <ion-label>\n                        <h3>Query Info</h3>\n                      </ion-label>\n                      <ion-label>\n                        <strong>Name:</strong> {{row.queryName}}\n                        &nbsp;&nbsp;\n                        <strong>Letters:</strong> {{row.queryLetters}}\n                      </ion-label>\n                    </ion-col>\n                  </ion-row>\n                </ion-grid>\n                <br/>\n                <app-virus-discovery-hits-graph [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-graph>\n                <br/>\n                <app-virus-discovery-hits-table [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-table>\n              </div>\n            </ion-accordion>\n          </ion-accordion-group>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-card-header class=\"ion-margin-top ion-text-center\">\n    <ion-card-title>Analysis Results</ion-card-title>\n  </ion-card-header>\n  <ion-card-content class=\"ion-text-center\">\n    <br/>\n    <ion-button color=\"secondary\" [href]=\"downloadURL\">Download all</ion-button>\n    <br/><br/>\n    <ion-grid *ngIf=\"results.length === 0\">\n      <ion-row>\n        <ion-col>\n          <h3>No hits were found for the provided queries</h3>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <ion-grid *ngIf=\"results.length > 0\">\n      <ion-row>\n        <ion-col>\n          <h3>Note: Queries that did not produce any hits are omitted from this view</h3>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngFor=\"let row of results; index as i\">\n        <ion-col>\n          <ion-accordion-group>\n            <ion-accordion value=\"first\">\n              <ion-item slot=\"header\" color=\"primary\">\n                <ion-label>Query: {{row.queryName}}</ion-label>\n              </ion-item>\n              <div class=\"ion-padding ion-text-start\" slot=\"content\">\n                <ion-grid>\n                  <ion-row>\n                    <ion-col class=\"ion-text-center\">\n                      <ion-label>\n                        <h3>Query Info</h3>\n                      </ion-label>\n                      <ion-label>\n                        <strong>Name:</strong> {{row.queryName}}\n                        &nbsp;&nbsp;\n                        <strong>Letters:</strong> {{row.queryLetters}}\n                      </ion-label>\n                    </ion-col>\n                  </ion-row>\n                </ion-grid>\n                <br/>\n                <app-virus-discovery-hits-graph [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-graph>\n                <br/>\n                <app-virus-discovery-hits-table [qid]=\"i\" [qData]=\"row\"></app-virus-discovery-hits-table>\n              </div>\n            </ion-accordion>\n          </ion-accordion-group>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n    <br/><br/>\n  </ion-card-content>\n</ion-card>\n");
 
 /***/ }),
 

@@ -108,7 +108,7 @@ def results(job_id=0, job_hash=None):
     if job_id != 0 and job_hash is not None:
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
-            if job.verify_hash(job_hash):
+            if job.verify_hash(job_hash, 'discovery'):
                 final_results = job.get_final_results()
                 if final_results is not None:
                     return dumps({'status': 'success', 'results': final_results})

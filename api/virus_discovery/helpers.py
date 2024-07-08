@@ -12,11 +12,24 @@ def get_text_output(filepath, array=False):
 
 def parse_blast_xml(blast_file):
     records = []
-    with open(blast_file, 'r') as xml:
-        blast_records = NCBIXML.parse(xml)
-        for r in blast_records:
-            records.append(get_blast_record(r))
+    if check_and_correct_blast_xml(blast_file):
+        with open(blast_file, 'r') as xml:
+            blast_records = NCBIXML.parse(xml)
+            for r in blast_records:
+                records.append(get_blast_record(r))
     return records
+
+
+def check_and_correct_blast_xml(blast_file):
+    with open(blast_file, 'r+') as txt:
+        contents = txt.readlines()
+        if contents[-1].strip() != '</BlastOutput>':
+            if contents[-1].strip() != '</BlastOutput_iterations>':
+                if contents[-1].strip() != '</Iteration>':
+                    return False
+                txt.write('\n</BlastOutput_iterations>')
+            txt.write('\n</BlastOutput>')
+    return True
 
 
 def get_blast_record(blast_record):

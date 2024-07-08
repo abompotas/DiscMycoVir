@@ -26,7 +26,7 @@ export class VirusDiscoveryResultsComponent implements OnInit {
     this.downloadURL = '';
     this.jobId = 0;
     this.hash = '';
-    this.results = null;
+    this.results = [];
     this.route.params.subscribe(params => {
       if(params.hasOwnProperty('job')) {
         if(params.hasOwnProperty('hash')) {
@@ -59,7 +59,11 @@ export class VirusDiscoveryResultsComponent implements OnInit {
   }
 
   parseResults(resp) {
-    this.results = [...resp.results];
+    for(const r of resp.results) {
+      if(r.alignments.length > 0) {
+        this.results.push(r);
+      }
+    }
   }
 
   async loading() {

@@ -6,7 +6,19 @@
     <br/>
     <ion-button color="secondary" [href]="downloadURL">Download all</ion-button>
     <br/><br/>
-    <ion-grid>
+    <ion-grid *ngIf="results.length === 0">
+      <ion-row>
+        <ion-col>
+          <h3>No hits were found for the provided queries</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="results.length > 0">
+      <ion-row>
+        <ion-col>
+          <h3>Note: Queries that did not produce any hits are omitted from this view</h3>
+        </ion-col>
+      </ion-row>
       <ion-row *ngFor="let row of results; index as i">
         <ion-col>
           <ion-accordion-group>
