@@ -1,0 +1,13 @@
+.env
+
+analyser/venv
+analyser/config.json
+
+api/venv
+api/config.json
+api/output
+api/uploads
+
+app/node_modules
+app/platforms
+app/plugins

@@ -1,0 +1,35 @@
+<ion-row class="hsp-data">
+  <ion-col size="1" class="ion-text-end">
+    <div *ngFor="let h of hsp.query; index as i">
+      <div><strong>Query Start</strong></div>
+      <div>{{hsp.queryStart[i]}}</div>
+      <div>&nbsp;</div>
+      <div>{{hsp.sbjctStart[i]}}</div>
+      <div><strong>Subject Start</strong></div>
+    </div>
+  </ion-col>
+  <ion-col size="10" class="ion-text-center">
+    <div *ngFor="let h of hsp.query; index as i">
+      <div><strong>Query</strong></div>
+      <div class="alignments">
+        <span *ngFor="let b of hsp.query[i].split('');" class="bio-base base-{{b}}">{{b}}</span>
+      </div>
+      <div class="alignments">
+        <span *ngFor="let b of hsp.match[i].split('');" class="bio-base"><strong>{{b}}</strong></span>
+      </div>
+      <div class="alignments">
+        <span *ngFor="let b of hsp.sbjct[i].split('');" class="bio-base base-{{b}}">{{b}}</span>
+      </div>
+      <div><strong>Subject</strong></div>
+    </div>
+  </ion-col>
+  <ion-col size="1" class="ion-text-start">
+    <div *ngFor="let h of hsp.query; index as i">
+      <div><strong>Query End</strong></div>
+      <div>{{hsp.queryEnd[i]}}</div>
+      <div>&nbsp;</div>
+      <div>{{hsp.sbjctEnd[i]}}</div>
+      <div><strong>Subject End</strong></div>
+    </div>
+  </ion-col>
+</ion-row>

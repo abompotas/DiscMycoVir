@@ -1,0 +1,56 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Analysis Results</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <br/>
+    <ion-button color="secondary" [href]="downloadURL">Download all</ion-button>
+    <br/><br/>
+    <ion-grid *ngIf="results.length === 0">
+      <ion-row>
+        <ion-col>
+          <h3>No hits were found for the provided queries</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="results.length > 0">
+      <ion-row>
+        <ion-col>
+          <p><strong>Note:</strong> Queries that did not produce any hits are omitted from this view</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let row of results; index as i">
+        <ion-col>
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="primary">
+                <ion-label>Query: {{row.queryName}}</ion-label>
+              </ion-item>
+              <div class="ion-padding ion-text-start" slot="content">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col class="ion-text-center">
+                      <ion-label>
+                        <h3>Query Info</h3>
+                      </ion-label>
+                      <ion-label>
+                        <strong>Name:</strong> {{row.queryName}}
+                        &nbsp;&nbsp;
+                        <strong>Letters:</strong> {{row.queryLetters}}
+                      </ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <br/>
+                <app-virus-discovery-hits-graph [qid]="i" [qData]="row"></app-virus-discovery-hits-graph>
+                <br/>
+                <app-virus-discovery-hits-table [qid]="i" [qData]="row"></app-virus-discovery-hits-table>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/><br/>
+  </ion-card-content>
+</ion-card>

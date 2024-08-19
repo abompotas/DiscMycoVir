@@ -1,0 +1,7 @@
+{
+  "name": "VirusDiscoveryApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

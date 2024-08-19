@@ -1,0 +1,24 @@
+ion-col.vcenter {
+  display: flex;
+  align-items: center;
+}
+
+ion-col.section-head {
+  padding: 20px 0 10px;
+}
+
+ion-input, ion-select  {
+  background-color: #fdfdfd;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.75em;
+}
+
+ion-button {
+  margin: 0;
+}
+
+iframe {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  border: 0;
+}

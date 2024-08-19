@@ -1,0 +1,94 @@
+version: "3"
+
+services:
+  discvir.db:
+    image: discvir.db:1.0
+    build: ./db
+    container_name: discvir.db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: virus_discovery_api
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 2s
+    volumes:
+      - virus-discovery-db:/var/lib/mysql
+
+  discvir.analyser:
+    image: discvir.analyser:1.0
+    build: ./analyser
+    container_name: discvir.analyser
+    restart: always
+    environment:
+      DISCVIR_WEBAPP: $DISCVIR_WEBAPP_URL:$DISCVIR_WEBAPP_URL/#
+      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
+      OUTPUT_PATH: /virus-discovery/output
+      UPLOADS_PATH: /virus-discovery/uploads
+      DB_HOST: discvir.db
+      DB_NAME: virus_discovery_api
+      DB_USERNAME: root
+      DB_PASSWORD: $DB_PASSWORD
+      BATCH_SIZE: $BATCH_SIZE
+      SLEEP_SEC: $SLEEP_SEC
+      ADAPTER: $ADAPTER
+      SLIDING_WINDOW: $SLIDING_WINDOW
+      MIN_LENGTH: $MIN_LENGTH
+      SEQ_TYPE: $SEQ_TYPE
+      THREADS: $THREADS
+      MAX_MEMORY: $MAX_MEMORY
+      SMTP_SERVER: $SMTP_SERVER
+      SMTP_PORT: $SMTP_PORT
+      SMTP_ADDRESS: $SMTP_ADDRESS
+      SMTP_USERNAME: $SMTP_USERNAME
+      SMTP_PASSWORD: $SMTP_PASSWORD
+    depends_on:
+      discvir.db:
+          condition: service_healthy
+    volumes:
+      - virus-discovery-output:/virus-discovery/output
+      - virus-discovery-uploads:/virus-discovery/uploads
+
+  discvir.api:
+    image: discvir.api:1.0
+    build: ./api
+    container_name: discvir.api
+    restart: always
+    environment:
+      OUTPUT_PATH: /virus-discovery/output
+      UPLOADS_PATH: /virus-discovery/uploads
+      UPLOADS_SIZE: $UPLOADS_SIZE
+      DB_HOST: discvir.db
+      DB_NAME: virus_discovery_api
+      DB_USERNAME: root
+      DB_PASSWORD: $DB_PASSWORD
+      ADAPTER: $ADAPTER
+      SLIDING_WINDOW: $SLIDING_WINDOW
+      MIN_LENGTH: $MIN_LENGTH
+    depends_on:
+      discvir.db:
+          condition: service_healthy
+    volumes:
+      - virus-discovery-output:/virus-discovery/output
+      - virus-discovery-uploads:/virus-discovery/uploads
+    ports:
+      - "${DISCVIR_API_PORT}:5000"
+
+  discvir.app:
+    image: discvir.app:1.0
+    build: ./app
+    container_name: discvir.app
+    restart: always
+    environment:
+      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
+    ports:
+      - "${DISCVIR_WEBAPP_PORT}:80"
+
+volumes:
+  virus-discovery-db:
+    external: true
+  virus-discovery-output:
+    external: true
+  virus-discovery-uploads:
+    external: true

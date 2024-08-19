@@ -1,0 +1,75 @@
+<ion-card>
+  <ion-card-header class="ion-margin-top ion-text-center">
+    <ion-card-title>Mycovirus Discovery</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>
+      Search genomes for discovering mycoviruses
+    </ion-label>
+    <br/><br/>
+    <!--suppress AngularUndefinedBinding -->
+    <form (ngSubmit)="trim()">
+      <ion-grid>
+        <ion-row *ngFor="let report of analysisReports; index as i">
+          <ion-col>
+            <ion-accordion-group>
+              <ion-accordion value="first">
+                <ion-item slot="header" color="primary">
+                  <ion-label>Report file #{{i + 1}}</ion-label>
+                </ion-item>
+                <div class="ion-padding ion-text-start" slot="content">
+                  <iframe [srcdoc]="report | safeIFrame"></iframe>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-col>
+        </ion-row>
+        <br/><br/>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="12" sizeLg="10" sizeXl="8">
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Trimmomatic adapter:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input name="adapter" type="file" (ionChange)="onAdapterChange($event)" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Trimmomatic sliding window:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input [(ngModel)]="slidingWindow" name="sliding_window" type="text" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-start">
+              <ion-col sizeSm="3" sizeXs="4" class="vcenter">
+                <ion-label>Trimmomatic minimum length:</ion-label>
+              </ion-col>
+              <ion-col sizeSm="9" sizeXs="8">
+                <ion-input [(ngModel)]="minLength" name="min_length" type="text" required="true"></ion-input>
+              </ion-col>
+            </ion-row>
+            <br/><br/>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col size="10" sizeMd="4" class="ion-text-center">
+                <ion-button type="submit" expand="block" color="primary">Trim</ion-button>
+              </ion-col>
+              <ion-col size="1"></ion-col>
+              <ion-col size="1"></ion-col>
+              <ion-col size="10" sizeMd="4" class="ion-text-center">
+                <ion-button (click)="proceed()" expand="block" color="secondary">Proceed</ion-button>
+              </ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <br/><br/>
+  </ion-card-content>
+</ion-card>

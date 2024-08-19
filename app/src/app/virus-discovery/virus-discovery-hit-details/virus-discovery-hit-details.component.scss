@@ -1,0 +1,28 @@
+.hsp-data > ion-col > div {
+  padding: 0.5em 0;
+}
+
+.hsp-data .alignments {
+  display: flex;
+  justify-content: center;
+}
+.hsp-data .bio-base {
+  display: block;
+  width: 1.5em;
+}
+
+.hsp-data .bio-base.base-A {
+  background-color: var(--ion-color-tertiary-tint);
+}
+
+.hsp-data .bio-base.base-T {
+  background-color: var(--ion-color-secondary-tint);
+}
+
+.hsp-data .bio-base.base-G {
+  background-color: var(--ion-color-warning-tint);
+}
+
+.hsp-data .bio-base.base-C {
+  background-color: var(--ion-color-danger-tint);
+}

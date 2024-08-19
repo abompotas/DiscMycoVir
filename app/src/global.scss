@@ -1,0 +1,135 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', sans-serif;
+}
+
+ion-content {
+  --background: #262626;
+}
+
+ion-content > .page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ion-content > .page-container > ion-grid {
+  width: 100%;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+ion-card {
+  margin-bottom: 1.5rem;
+  border: 2px solid #155d80;
+  border-radius: 24px;
+  color: #333333;
+}
+
+ion-item {
+  color: #333333;
+  width: 100%;
+}
+
+ion-card-title {
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 32px;
+}
+
+ion-card-subtitle {
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 24px;
+}
+
+ion-card h3 {
+  color: #333333;
+}
+
+ion-card ion-label {
+  font-size: 16px;
+}
+
+ion-button {
+  height: 3em;
+  --border-radius: 1.5em;
+  --box-shadow: none;
+}
+
+ion-button ion-icon {
+  margin-right: 0.5em;
+}
+
+ion-button ion-icon.no-text {
+  margin-right: 0;
+  font-size: 1em;
+}
+
+ion-button.home {
+  margin: 1em 0 0.5em;
+}
+
+.pagination ion-button {
+  font-size: 0.8em;
+}
+
+ion-list.form ion-label h3 {
+  margin: 0.75em 0 0;
+  font-size: 24px;
+}
+
+ion-list.form ion-input, ion-list.form ion-select {
+  padding-left: 1em;
+  text-align: center;
+  width: 100%;
+}
+
+ion-accordion {
+  background: #f0f0f0;
+  border-radius: 0.75em;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.table-head {
+  font-family: 'Roboto Slab', sans-serif;
+}
+
+.references h3 {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.references p, .references li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}

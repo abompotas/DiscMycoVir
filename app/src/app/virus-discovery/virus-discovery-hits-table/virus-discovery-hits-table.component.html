@@ -1,0 +1,56 @@
+<ion-grid>
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-label>
+        <h3>Hits</h3>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <table id="alignments-{{qid}}" class="display" style="width:100%">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Length</th>
+          <th>Score</th>
+          <th>Bits</th>
+          <th>Expect</th>
+          <th>Alignment Length</th>
+          <th>Gaps
+          <th>Identities</th>
+          <th>Positives</th>
+          <th>Strand</th>
+          <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let a of alignmentsData; index as i">
+          <td>{{a.title}}</td>
+          <td>{{a.length}}</td>
+          <td>{{a.score}}</td>
+          <td>{{a.bits}}</td>
+          <td>{{a.expect}}</td>
+          <td>{{a.alignLength}}</td>
+          <td>{{a.gaps}}</td>
+          <td>{{a.identities}}</td>
+          <td>{{a.positives}}</td>
+          <td>{{a.strand.join('/')}}</td>
+          <td>
+            <ion-button (click)="showHSPDetails(i)" color="secondary">Show</ion-button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="selectedHSP !== null">
+    <ion-col class="ion-text-center">
+      <ion-label>
+        <h3>High Scoring Pairs</h3>
+        <p><strong>{{selectedHSP.title}}</strong></p>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <app-virus-discovery-hit-details *ngIf="selectedHSP !== null" [hsp]="selectedHSP"></app-virus-discovery-hit-details>
+</ion-grid>
