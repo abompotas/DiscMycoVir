@@ -2,7 +2,7 @@ version: "3"
 
 services:
   discvir.db:
-    image: discvir.db:0.1
+    image: discvir.db:1.0
     build: ./db
     container_name: discvir.db
     command: --default-authentication-plugin=mysql_native_password
@@ -17,13 +17,13 @@ services:
       - virus-discovery-db:/var/lib/mysql
 
   discvir.analyser:
-    image: discvir.analyser:0.1
+    image: discvir.analyser:1.0
     build: ./analyser
     container_name: discvir.analyser
     restart: always
     environment:
-      DISCVIR_WEBAPP: $DISCVIR_WEBAPP
-      DISCVIR_API: $DISCVIR_API
+      DISCVIR_WEBAPP: $DISCVIR_WEBAPP_URL:$DISCVIR_WEBAPP_URL/#
+      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
       OUTPUT_PATH: /virus-discovery/output
       UPLOADS_PATH: /virus-discovery/uploads
       DB_HOST: discvir.db
@@ -51,7 +51,7 @@ services:
       - virus-discovery-uploads:/virus-discovery/uploads
 
   discvir.api:
-    image: discvir.api:0.1
+    image: discvir.api:1.0
     build: ./api
     container_name: discvir.api
     restart: always
@@ -73,17 +73,22 @@ services:
       - virus-discovery-output:/virus-discovery/output
       - virus-discovery-uploads:/virus-discovery/uploads
     ports:
-      - "5000:5000"
+      - "${DISCVIR_API_PORT}:5000"
 
   discvir.app:
-    image: discvir.app:0.1
+    image: discvir.app:1.0
     build: ./app
     container_name: discvir.app
     restart: always
+    environment:
+      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
     ports:
-      - "8000:80"
+      - "${DISCVIR_WEBAPP_PORT}:80"
 
 volumes:
   virus-discovery-db:
+    external: true
   virus-discovery-output:
+    external: true
   virus-discovery-uploads:
+    external: true

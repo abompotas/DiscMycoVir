@@ -1308,8 +1308,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    discvirAPI: 'http://localhost:5000',
-    discvir: 'http://localhost:8100'
+    discvirAPI: '___discvirAPI___'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1959,7 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ "use strict";
-/******/ 
+/******/
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
 /******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(4431)));
 /******/ var __webpack_exports__ = __webpack_require__.O();
