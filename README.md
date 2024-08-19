@@ -15,7 +15,7 @@ If this is the first run, follow the steps below before starting the app.
 
 1. Download the code:
     ```shell
-    git clone https://gitlab.com/ceid-makris-team/bioinformatics/virus-discovery
+    git clone https://github.com/abompotas/DiscMycoVir
     ```
 
 2. Edit the file ```example.env``` that contains the configuration options and rename it to ```.env```:
