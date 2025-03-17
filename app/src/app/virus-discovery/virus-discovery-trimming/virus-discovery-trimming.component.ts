@@ -91,8 +91,14 @@ export class VirusDiscoveryTrimmingComponent implements OnInit {
       if(this.slidingWindow !== null) {
         formData.append('sliding_window', this.slidingWindow);
       }
+      else {
+        formData.append('sliding_window', '5:20');
+      }
       if(this.minLength !== null) {
         formData.append('min_length', this.minLength);
+      }
+      else {
+        formData.append('min_length', '50');
       }
       this.http.put<VirusDiscoveryResponse>(environment.discvirAPI + '/trimming/' + this.jobId + '/' + this.hash, formData, {responseType: 'json'}).subscribe(
         x => this.response(x),

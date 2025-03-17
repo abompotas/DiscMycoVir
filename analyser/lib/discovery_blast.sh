@@ -26,9 +26,9 @@ while getopts ":d:h:" option; do
 done
 
 
-blastn -db nt_viruses -max_target_seqs 5 -outfmt 5 \
+blastn -db ${VIRUS_DB} -max_target_seqs ${MAX_TARGET_SEQS} -outfmt 5 \
   -query "$discovery_dir/output_unmapped.fasta" \
   -out "$discovery_dir/output_blast.xml" \
-  -remote
+  ${BLAST_MODE}
 
 touch "$discovery_dir/blast_finished"

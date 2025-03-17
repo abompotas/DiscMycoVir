@@ -12,6 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HomePageComponent} from './pages/home/home-page.component';
 import {TrimmingPageComponent} from './pages/trimming/trimming-page.component';
 import {ResultsPageComponent} from './pages/results/results-page.component';
+import {TutorialPageComponent} from './pages/tutorial/tutorial.component';
 import {FooterComponent} from './commons/footer/footer.component';
 import {TopbarComponent} from './commons/topbar/topbar.component';
 import {VirusDiscoveryFormComponent} from './virus-discovery/virus-discovery-form/virus-discovery-form.component';
@@ -29,6 +30,7 @@ import {VirusDiscoveryHitDetailsComponent} from './virus-discovery/virus-discove
     HomePageComponent,
     TrimmingPageComponent,
     ResultsPageComponent,
+    TutorialPageComponent,
     FooterComponent,
     TopbarComponent,
     VirusDiscoveryFormComponent,

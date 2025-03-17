@@ -3,11 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from './pages/home/home-page.component';
 import {TrimmingPageComponent} from './pages/trimming/trimming-page.component';
 import {ResultsPageComponent} from './pages/results/results-page.component';
+import {TutorialPageComponent} from "./pages/tutorial/tutorial.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent
+  },
+  {
+    path: 'tutorial',
+    component: TutorialPageComponent
   },
   {
     path: 'trimming',

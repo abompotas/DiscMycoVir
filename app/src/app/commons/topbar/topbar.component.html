@@ -1,17 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons *ngIf="buttons === true" slot="start">
-      <a href="https://www.imslab.gr/" target="_blank">
-        <ion-icon name="information-circle"></ion-icon>
+      <a routerLink="/">
+        <ion-icon name="home"></ion-icon>
       </a>
     </ion-buttons>
     <ion-title>
       <a routerLink="/">
-        <ion-img class="large ion-hide-lg-down" src="/assets/discvir.png"></ion-img>
+        <ion-img class="large ion-hide-lg-down ion-text-start" src="/assets/discvir.png"></ion-img>
       </a>
       <a routerLink="/">
-        <ion-img class="small ion-hide-lg-up" src="/assets/discvir.png"></ion-img>
+        <ion-img class="small ion-hide-lg-up ion-text-start" src="/assets/discvir.png"></ion-img>
       </a>
     </ion-title>
+    <ion-buttons *ngIf="buttons === true" slot="end">
+      <a routerLink="/tutorial">
+        <ion-icon name="book"></ion-icon>
+      </a>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
