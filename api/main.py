@@ -33,6 +33,11 @@ def home():
     return '<h1> DISCVIR: Virus Discovery API</h1>'
 
 
+@app.route('/max-upload', methods=['GET'])
+def max_upload():
+    return config['app']['uploads_size']
+
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')

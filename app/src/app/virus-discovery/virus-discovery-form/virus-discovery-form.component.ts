@@ -21,6 +21,7 @@ export class VirusDiscoveryFormComponent implements OnInit {
   forwardFile: File | null;
   reverseFile: File | null;
   referenceGenome: File | null;
+  maxUpload: number;
 
   constructor(private http: HttpClient, private router: Router,
               private alertController: AlertController, private loadingController: LoadingController) {
@@ -36,9 +37,11 @@ export class VirusDiscoveryFormComponent implements OnInit {
     this.forwardFile = null;
     this.reverseFile = null;
     this.referenceGenome = null;
+    this.maxUpload = 8192;
   }
 
   ngOnInit() {
+    this.getMaxUploadSize();
   }
 
   onSingleFileChange(event) {
@@ -55,6 +58,14 @@ export class VirusDiscoveryFormComponent implements OnInit {
 
   onGenomeFileChange(event) {
     this.referenceGenome = event.target.children['reference_genome'].files[0];
+  }
+
+  getMaxUploadSize(): void{
+    this.http.get<number>(environment.discvirAPI + '/max-upload').subscribe(
+      x => {
+        this.maxUpload = x;
+      }
+    );
   }
 
   search() {
