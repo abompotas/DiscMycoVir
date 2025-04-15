@@ -14,6 +14,8 @@
           <th>Title</th>
           <th>Length</th>
           <th>Score</th>
+          <th>Percentage of Match</th>
+          <th>Percentage of Query</th>
           <th>Bits</th>
           <th>Expect</th>
           <th>Alignment Length</th>
@@ -29,6 +31,8 @@
           <td>{{a.title}}</td>
           <td>{{a.length}}</td>
           <td>{{a.score}}</td>
+          <td>{{showPercentage(a.alignLength, a.length)}}%</td>
+          <td>{{showPercentage(a.alignLength, qData.queryLetters)}}%</td>
           <td>{{a.bits}}</td>
           <td>{{a.expect}}</td>
           <td>{{a.alignLength}}</td>
@@ -52,5 +56,6 @@
       </ion-label>
     </ion-col>
   </ion-row>
-  <app-virus-discovery-hit-details *ngIf="selectedHSP !== null" [hsp]="selectedHSP"></app-virus-discovery-hit-details>
+  <app-virus-discovery-hit-coverage *ngIf="selectedHSP !== null" [qid]="qid" [hsp]="selectedHSP"></app-virus-discovery-hit-coverage>
+  <app-virus-discovery-hit-details *ngIf="selectedMatches !== null" [hsp]="selectedMatches"></app-virus-discovery-hit-details>
 </ion-grid>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 
 
 @Component({
@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './virus-discovery-hit-details.component.html',
   styleUrls: ['./virus-discovery-hit-details.component.scss'],
 })
-export class VirusDiscoveryHitDetailsComponent implements OnInit {
+export class VirusDiscoveryHitDetailsComponent implements OnInit, OnChanges {
 
   @Input() hsp;
 
@@ -14,6 +14,9 @@ export class VirusDiscoveryHitDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
   }
 
 }

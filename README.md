@@ -1,6 +1,6 @@
 # MycoVirus Discovery
 
-__MycoVirus Discovery__ aims to be an elegant and user-friendly web platform for
+**MycoVirus Discovery** aims to be an elegant and user-friendly web platform for
 biological analysis, emphasising on a comprehensive and detailed result-reporting
 user experience. The focus of this tool is on a pipeline of sequence
 alignment and searching phases to enhance the efficiency even for users that
@@ -9,5 +9,5 @@ Discovery as its initial use is for discovering  mycoviruses in fungal transcrip
 
 Follow the guides below for more information:
 
-- [Setup guide](./SETUP.md)
-- [User guide](./TUTORIAL.md)
+- [Setup guide](docs/SETUP.md)
+- [User guide](docs/TUTORIAL.md)

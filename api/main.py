@@ -35,7 +35,7 @@ def home():
 
 @app.route('/max-upload', methods=['GET'])
 def max_upload():
-    return config['app']['uploads_size']
+    return str(config['app']['uploads_size'])
 
 
 @app.after_request

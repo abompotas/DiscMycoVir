@@ -11,16 +11,115 @@
               <ion-card-title>Mycovirus Discovery Tutorial</ion-card-title>
             </ion-card-header>
             <ion-card-content class="ion-text-center">
-              <ion-label>
-              </ion-label>
               <br/><br/>
               <ion-grid>
                 <ion-row>
-                  <ion-col></ion-col>
-                  <ion-col size="12" sizeLg="10" sizeXl="8">
-                    <p>TODO: add tutorial</p>
+                  <ion-col>
+                    <ion-accordion-group #step1>
+                      <ion-accordion value="step1">
+                        <ion-item slot="header" color="primary">
+                          <ion-label>Step 1 - Provide files for analysis</ion-label>
+                        </ion-item>
+                        <div class="ion-padding ion-text-start" slot="content">
+                          <p>Navigate to the tool&#39;s <a href="#" [routerLink]="'/'">home page</a> and fill all the fields:</p>
+                          <ul>
+                            <li><strong>E-mail:</strong> This is where you will be notified once each step of the analysis is completed. If you want to ensure
+                              complete anonymity while using the tool you may consider an email masking service
+                              like <a target="_blank" href="https://relay.firefox.com/">Firefox Relay</a>.
+                            </li>
+                            <li><strong>Analysis name:</strong> This is the name that will be assigned to then analysis you are about to run. It is used only
+                              for archiving purposes. Characters allowed: <strong>a-z, A-Z, 0-9, _</strong> (underscore)
+                            </li>
+                            <li><strong>Input format:</strong> Whether the sequence files are provided in <em>FASTA</em> or <em>FASTQ</em> format. Please note that you can also
+                              provide compressed files (gzip) but their format after decompression should match this option.
+                            </li>
+                            <li><strong>Sequencing technology:</strong> Whether the input file(s) were generated using single or pair end sequencing. Depending on
+                              your selection one or two fields will appear right below this field.
+                            </li>
+                            <li><strong>Input file:</strong> The actual file you want ot analyze. If you selected the <em>Pair End</em> option then you will have to
+                              upload two input files, <em>forward</em> and <em>reverse</em>.
+                            </li>
+                            <li><strong>Reference Genome file:</strong> This is the file that contains the reference genome you want to search against</li>
+                          </ul>
+                          <p>After providing all the input data click on the green <strong>Submit</strong> button that is located below the form. Your inputs will
+                            be checked for errors or omissions and will be queued for analysis. Once the first step of this analysis is completed
+                            you will receive an email containing a link for navigating to step 2.</p>
+                          <p><strong>Important:</strong> Please be patient and do not close your browser while the files are uploading as this process may last
+                            several minutes.</p>
+                          <p><img src="assets/step1.gif" alt="step1.gif"></p>
+                          <h3 id="demo-inputs">Demo Inputs:</h3>
+                          <p>For easier testing of the application you can try it with the following input data:</p>
+                          <ul>
+                            <li><strong>Sequencing technology:</strong> Single end</li>
+                            <li><strong>Input file:</strong>
+                              <a target="_blank" href="https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&amp;acc=SRR13576988&amp;display=download">GSM5049606: CBS10913_repl2; [Candida] auris; RNA-Seq (SRR13576988)</a></li>
+                            <li><strong>Reference genome:</strong>
+                              <a target="_blank" href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_031357565.2/">Candidozyma auris B11221 ASM3135756v2</a></li>
+                          </ul>
+                        </div>
+                      </ion-accordion>
+                    </ion-accordion-group>
                   </ion-col>
-                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-accordion-group>
+                      <ion-accordion value="step2">
+                        <ion-item slot="header" color="primary">
+                          <ion-label>Step 2 - Trim the input file</ion-label>
+                        </ion-item>
+                        <div class="ion-padding ion-text-start" slot="content">
+                          <p>During the first step, the quality of the input files is checked using the FastQC tool. Once the analysis is complete an
+                            email with the link to the second step is sent to the address that you provided. By clicking this link (or
+                            copying/pasting to your browser) you will be navigated to a screen that shows the analysis results and gives you two
+                            options:</p>
+                          <ul>
+                            <li>If you are content with the quality of your input file, you can click the green <em>Proceed</em> button to continue the virus
+                              discovery process
+                            </li>
+                            <li>Otherwise you may choose to trim your input sequences by filling the form (see
+                              <strong><a target="_blank" href="#options-for-trimming">Options for trimming</a></strong>) and clicking the blue <em>Trim</em> button. When trimming is completed you
+                              will receive a new email with a link containing the report of the trimmed sequences. This
+                              step can be repeated as many times as you like. Every time the trimming occurs to the original sequences.
+                            </li>
+                          </ul>
+                          <p><img src="assets/step2.gif" alt="step2.gif"></p>
+                          <h3 id="options-for-trimming">Options for trimming</h3>
+                          <p>These are the options you can tweak to better the quality of your sequences:</p>
+                          <ul>
+                            <li><strong>Trimmomatic adapter:</strong> This is the Trimmomatic adapter you want to use for trimming the input file(s). The most
+                              common
+                              adapters can be downloaded from <a target="_blank" href="https://github.com/timflutre/trimmomatic/tree/master/adapters">here</a>.
+                            </li>
+                            <li><strong>Trimmomatic sliding window:</strong> Trimmomatic&#39;s SLIDINGWINDOW option provided in the
+                              format: <em>&lt;windowSize&gt;:&lt;requiredQuality&gt;</em>, e.g.: 5:20
+                              <ul>
+                                <li>windowSize: specifies the number of bases to average across,</li>
+                                <li>requiredQuality: specifies the average quality required.</li>
+                              </ul>
+                            </li>
+                            <li><strong>Trimmomatic minimum length:</strong> Specifies the minimum length of reads to be kept.</li>
+                          </ul>
+                        </div>
+                      </ion-accordion>
+                    </ion-accordion-group>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-accordion-group>
+                      <ion-accordion value="step3">
+                        <ion-item slot="header" color="primary">
+                          <ion-label>Step 3 - View the results</ion-label>
+                        </ion-item>
+                        <div class="ion-padding ion-text-start" slot="content">
+                          <p>Once the Virus Discovery process is finished, a new email is sent with a link to the final results. There you view
+                            the results in our tool&#39;s web viewer or you can download them for further analysing them.</p>
+                          <p><img src="assets/step3.gif" alt="step3.gif"></p>
+                        </div>
+                      </ion-accordion>
+                    </ion-accordion-group>
+                  </ion-col>
                 </ion-row>
               </ion-grid>
               <br/><br/>

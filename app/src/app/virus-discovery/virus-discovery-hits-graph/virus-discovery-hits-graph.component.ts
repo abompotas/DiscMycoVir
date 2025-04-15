@@ -29,7 +29,7 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
     this.createDatasets();
     this.graphData = {
       datasets: [{
-        label: '>=200',
+        label: 'Score >=200',
         data: this.datasets['200'],
         barThickness: 15,
         borderWidth: 2,
@@ -37,7 +37,7 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
         backgroundColor: this.rootStyle.getPropertyValue('--ion-color-danger-tint'),
         stack: 'stack-0',
       }, {
-        label: '80-200',
+        label: '80<= Score <200',
         data: this.datasets['80-200'],
         barThickness: 15,
         borderWidth: 2,
@@ -45,7 +45,7 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
         backgroundColor: this.rootStyle.getPropertyValue('--ion-color-warning-tint'),
         stack: 'stack-0',
       }, {
-        label: '50-80',
+        label: '50<= Score <80',
         data: this.datasets['50-80'],
         barThickness: 15,
         borderWidth: 2,
@@ -53,7 +53,7 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
         backgroundColor: this.rootStyle.getPropertyValue('--ion-color-secondary-tint'),
         stack: 'stack-0',
       }, {
-        label: '40-50',
+        label: '40<= Score <50',
         data: this.datasets['40-50'],
         barThickness: 15,
         borderWidth: 2,
@@ -61,7 +61,7 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
         backgroundColor: this.rootStyle.getPropertyValue('--ion-color-primary-tint'),
         stack: 'stack-0',
       }, {
-        label: '<40',
+        label: 'Score <40',
         data: this.datasets['0-40'],
         barThickness: 15,
         borderWidth: 2,
@@ -109,8 +109,9 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
   createDatasets() {
     for(let a of this.qData.alignments) {
       for(let h of a.hsps) {
+        const per = Math.round(100 * h.alignLength / this.qData.queryLetters).toFixed(2);
         const dataPoint = {
-          y: 'Score: ' + h.score + ', Alignment length: ' + h.alignLength + ', E-value: ' + h.expect,
+          y: this.trimString(a.hitId + a.hitDef, 50) + ' - ' + 'Score: ' + h.score + ', Alignment length: ' + h.alignLength + ' (' + per + '%), E-value: ' + h.expect,
           x: [h.queryStart, h.queryEnd]
         }
         if(h.score >= 200) {
@@ -130,6 +131,13 @@ export class VirusDiscoveryHitsGraphComponent implements OnInit, AfterViewInit {
         }
       }
     }
+  }
+
+  trimString(str: string, len: number) {
+    if(str.length > len) {
+      return str.substring(0, len - 3) + '...';
+    }
+    return str
   }
 
 }

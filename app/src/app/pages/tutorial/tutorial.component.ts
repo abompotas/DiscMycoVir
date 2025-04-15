@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {IonAccordionGroup} from '@ionic/angular';
 
 @Component({
   selector: 'app-tutorial',
@@ -7,10 +8,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TutorialPageComponent implements OnInit {
 
+  @ViewChild('step1', { static: true }) accordionGroup!: IonAccordionGroup;
+
   constructor() {
   }
 
   ngOnInit() {
+    const nativeEl = this.accordionGroup;
+    nativeEl.value = 'step1';
   }
 
 }

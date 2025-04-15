@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
 
-import {VirusDiscoveryResultsComponent} from './search-binding-pockets-results.component';
+import {VirusDiscoveryResultsComponent} from './virus-discovery-results.component';
 
-describe('SearchBindingPocketsResultsComponent', () => {
+describe('VirusDiscoveryResultsComponent', () => {
   let component: VirusDiscoveryResultsComponent;
   let fixture: ComponentFixture<VirusDiscoveryResultsComponent>;
 

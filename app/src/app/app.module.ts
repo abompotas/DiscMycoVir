@@ -20,6 +20,7 @@ import {SafeHtmlPipe, VirusDiscoveryTrimmingComponent} from './virus-discovery/v
 import {VirusDiscoveryResultsComponent} from './virus-discovery/virus-discovery-results/virus-discovery-results.component';
 import {VirusDiscoveryHitsGraphComponent} from './virus-discovery/virus-discovery-hits-graph/virus-discovery-hits-graph.component';
 import {VirusDiscoveryHitsTableComponent} from './virus-discovery/virus-discovery-hits-table/virus-discovery-hits-table.component';
+import {VirusDiscoveryHitCoverageComponent} from './virus-discovery/virus-discovery-hit-coverage/virus-discovery-hit-coverage.component';
 import {VirusDiscoveryHitDetailsComponent} from './virus-discovery/virus-discovery-hit-details/virus-discovery-hit-details.component';
 
 
@@ -37,8 +38,9 @@ import {VirusDiscoveryHitDetailsComponent} from './virus-discovery/virus-discove
     VirusDiscoveryTrimmingComponent,
     VirusDiscoveryResultsComponent,
     VirusDiscoveryHitsTableComponent,
+    VirusDiscoveryHitsGraphComponent,
     VirusDiscoveryHitDetailsComponent,
-    VirusDiscoveryHitsGraphComponent
+    VirusDiscoveryHitCoverageComponent
   ],
   entryComponents: [],
   imports: [

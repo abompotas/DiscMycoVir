@@ -14,12 +14,14 @@ export class VirusDiscoveryHitsTableComponent implements OnInit, AfterViewInit {
   @Input() qData: VirusDiscoveryResults;
   alignmentsData: Array<VirusDiscoveryResultHSP>;
   matchesData: Array<any>;
-  selectedHSP: any;
+  selectedHSP: VirusDiscoveryResultHSP;
+  selectedMatches: any;
 
   constructor() {
     this.alignmentsData = [];
     this.matchesData = [];
-    this.selectedHSP = null
+    this.selectedHSP = null;
+    this.selectedMatches = null;
   }
 
   ngOnInit() {
@@ -38,17 +40,19 @@ export class VirusDiscoveryHitsTableComponent implements OnInit, AfterViewInit {
       autoWidth: false,
       order: [[2, 'desc']],
       columns: [
-        {width: '30%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'},
-        {width: '7%'}
+        {width: '28%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'},
+        {width: '6%'}
       ]
     });
   }
@@ -116,8 +120,13 @@ export class VirusDiscoveryHitsTableComponent implements OnInit, AfterViewInit {
   }
 
   showHSPDetails(i: number) {
-    this.selectedHSP = this.matchesData[i];
+    this.selectedHSP = this.alignmentsData[i];
+    this.selectedMatches = this.matchesData[i];
     return false;
+  }
+
+  showPercentage(a: number, b: number) {
+    return Math.round(100 * a / b).toFixed(2);
   }
 
 }
