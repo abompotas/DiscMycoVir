@@ -27,7 +27,7 @@ If this is the first run, follow the steps below before starting the app.
 3. Create the persistent volumes:
     ```shell
     docker volume create virus-discovery-db
-    docker volume create virus-discovery-outputs
+    docker volume create virus-discovery-output
     docker volume create virus-discovery-uploads
     ```
    **Optional:** For performance reasons it is advised to run the app in machine with SSD storage. 

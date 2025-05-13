@@ -12,12 +12,13 @@ def get_text_output(filepath, array=False):
 
 def parse_blast_xml(blast_file):
     records = []
-    print(blast_file)
     if check_and_correct_blast_xml(blast_file):
         with open(blast_file, 'r') as xml:
             blast_records = NCBIXML.parse(xml)
             for r in blast_records:
-                records.append(get_blast_record(r))
+                rec = get_blast_record(r)
+                if len(rec['alignments']) > 0:
+                    records.append(rec)
     return records
 
 

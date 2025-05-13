@@ -19,12 +19,20 @@
           <p><strong>Note:</strong> Queries that did not produce any hits are omitted from this view</p>
         </ion-col>
       </ion-row>
+      <ion-row *ngIf="pages.length > 1">
+        <ion-col>
+          <span class="pagination" *ngFor="let p of pages">
+            <ion-button *ngIf="p !== current" color="medium" (click)="getResults(p)">{{ p }}</ion-button>
+            <ion-button *ngIf="p === current" color="secondary">{{ p }}</ion-button>
+          </span>
+        </ion-col>
+      </ion-row>
       <ion-row *ngFor="let row of results; index as i">
         <ion-col>
           <ion-accordion-group>
             <ion-accordion value="first">
               <ion-item slot="header" color="primary">
-                <ion-label>Query: {{row.queryName}}</ion-label>
+                <ion-label>Query: {{ row.queryName }}</ion-label>
               </ion-item>
               <div class="ion-padding ion-text-start" slot="content">
                 <ion-grid>
@@ -34,9 +42,9 @@
                         <h3>Query Info</h3>
                       </ion-label>
                       <ion-label>
-                        <strong>Name:</strong> {{row.queryName}}
+                        <strong>Name:</strong> {{ row.queryName }}
                         &nbsp;&nbsp;
-                        <strong>Letters:</strong> {{row.queryLetters}}
+                        <strong>Letters:</strong> {{ row.queryLetters }}
                       </ion-label>
                     </ion-col>
                   </ion-row>
@@ -48,6 +56,14 @@
               </div>
             </ion-accordion>
           </ion-accordion-group>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="pages.length > 1">
+        <ion-col>
+          <span class="pagination" *ngFor="let p of pages">
+            <ion-button *ngIf="p !== current" color="medium" (click)="getResults(p)">{{ p }}</ion-button>
+            <ion-button *ngIf="p === current" color="secondary">{{ p }}</ion-button>
+          </span>
         </ion-col>
       </ion-row>
     </ion-grid>

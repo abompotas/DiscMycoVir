@@ -7,6 +7,7 @@ export interface PaginationItem {
 export interface VirusDiscoveryResponse {
   status: string;
   error?: string;
+  total?: number;
   reports?: Array<string>;
   results?: Array<VirusDiscoveryResults>;
 }

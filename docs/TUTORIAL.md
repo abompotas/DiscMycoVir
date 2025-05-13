@@ -30,9 +30,9 @@ several minutes.
 
 For easier testing of the application you can try it with the following input data:
 
-- **Sequencing technology:** Single end
-- **Input file:**
-  [GSM5049606: CBS10913_repl2; [Candida] auris; RNA-Seq (SRR13576988)](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR13576988&display=download)
+- **Sequencing technology:** Paired end
+- **Input files:**
+  [GSM4478256: whole cells, ITC; [Candida] auris; RNA-Seq (SRR11550480)](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR11550480&display=download)
 - **Reference genome:**
   [Candidozyma auris B11221 ASM3135756v2](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_031357565.2/)
 

@@ -109,9 +109,12 @@ def results(job_id=0, job_hash=None):
         job = VirusDiscoveryJob.get(job_id)
         if job is not None:
             if job.verify_hash(job_hash, 'discovery'):
-                final_results = job.get_final_results()
+                page = request.args.get('page', default=1, type=int)
+                limit = request.args.get('limit', default=0, type=int)
+                offset = (page - 1) * limit
+                count, final_results = job.get_final_results(offset, limit)
                 if final_results is not None:
-                    return dumps({'status': 'success', 'results': final_results})
+                    return dumps({'status': 'success', 'total': count, 'results': final_results})
                 else:
                     return dumps({'status': 'failed', 'error': 'Could not retrieve results'}), 500
             else:

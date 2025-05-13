@@ -127,10 +127,14 @@ class VirusDiscoveryJob(db.Model):
             return zip_file
         return None
 
-    def get_final_results(self):
+    def get_final_results(self, offset=0, limit=0):
         blast_file = os.path.join(config['app']['output_path'], str(self.id), 'discovery', 'output_blast.xml')
         if os.path.exists(blast_file):
-            return parse_blast_xml(blast_file)
+            results = parse_blast_xml(blast_file)
+            count = len(results)
+            if limit > 0:
+                return count, results[offset:(offset + limit)]
+            return count, results
         return None
 
     def get_all_results_zipped(self):

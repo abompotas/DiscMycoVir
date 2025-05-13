@@ -22,8 +22,8 @@ services:
     container_name: discvir.analyser
     restart: always
     environment:
-      DISCVIR_WEBAPP: $DISCVIR_WEBAPP_URL:$DISCVIR_WEBAPP_URL/#
-      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
+      DISCVIR_WEBAPP: $DISCVIR_WEBAPP_URL
+      DISCVIR_API: $DISCVIR_API_URL
       OUTPUT_PATH: /virus-discovery/output
       UPLOADS_PATH: /virus-discovery/uploads
       DB_HOST: discvir.db
@@ -83,7 +83,7 @@ services:
     container_name: discvir.app
     restart: always
     environment:
-      DISCVIR_API: $DISCVIR_API_URL:$DISCVIR_API_PORT
+      DISCVIR_API: $DISCVIR_API_URL
     ports:
       - "${DISCVIR_WEBAPP_PORT}:80"
 

@@ -18,6 +18,9 @@ export class VirusDiscoveryResultsComponent implements OnInit {
   hash: string;
   resultsURL: string;
   downloadURL: string;
+  current: number;
+  limit: number;
+  pages: Array<number>;
   results: Array<VirusDiscoveryResults>;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,
@@ -26,6 +29,9 @@ export class VirusDiscoveryResultsComponent implements OnInit {
     this.downloadURL = '';
     this.jobId = 0;
     this.hash = '';
+    this.current = 1;
+    this.limit = 50;
+    this.pages = [];
     this.results = [];
     this.route.params.subscribe(params => {
       if(params.hasOwnProperty('job')) {
@@ -44,13 +50,16 @@ export class VirusDiscoveryResultsComponent implements OnInit {
     else {
       this.resultsURL = environment.discvirAPI + '/results/' + this.jobId + '/' + this.hash;
       this.downloadURL = this.resultsURL + '/download';
-      this.getResults();
+      this.getResults(1);
     }
   }
 
-  getResults() {
+  getResults(page) {
+    this.current = page;
     this.loading().then(() => {
-      this.http.get<VirusDiscoveryResponse>(this.resultsURL, {responseType: 'json'}).subscribe(
+      this.http.get<VirusDiscoveryResponse>(
+        this.resultsURL + '?page=' + page + '&limit=' + this.limit,
+        {responseType: 'json'}).subscribe(
         x => this.parseResults(x),
         e => this.resultsError(e.error),
         () => this.loadingController.dismiss().then(null)
@@ -59,6 +68,13 @@ export class VirusDiscoveryResultsComponent implements OnInit {
   }
 
   parseResults(resp) {
+    if(!this.pages.length) {
+      const total_pages = Math.ceil(resp.total / this.limit)
+      for(let i = 0; i < total_pages; i++) {
+        this.pages.push(i + 1);
+      }
+    }
+    this.results = [];
     for(const r of resp.results) {
       if(r.alignments.length > 0) {
         this.results.push(r);
