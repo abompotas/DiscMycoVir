@@ -24,7 +24,7 @@ def run_discovery(args):
         discovery_exec = os.path.join(cwd, 'lib/discovery.sh')
         if args['single_paired'] == 'single':
             input_format = 'fq'
-            forward_file = os.path.join(args['output_job'], 'trimming', 'trimmed_{}'.format(args['forward_file']))
+            forward_file = os.path.join(args['output_job'], 'trimming', args['forward_file'])
             if not os.path.exists(forward_file):
                 input_format = args['input_format']
                 forward_file = os.path.join(config['args']['uploads'], args['forward_file'])
@@ -43,8 +43,8 @@ def run_discovery(args):
 
         elif args['single_paired'] == 'pair':
             input_format = 'fq'
-            forward_file = os.path.join(args['output_job'], 'trimming', 'trimmed_{}'.format(args['forward_file']))
-            reverse_file = os.path.join(args['output_job'], 'trimming', 'trimmed_{}'.format(args['reverse_file']))
+            forward_file = os.path.join(args['output_job'], 'trimming', args['forward_file'])
+            reverse_file = os.path.join(args['output_job'], 'trimming', args['reverse_file'])
             if not os.path.exists(forward_file):
                 input_format = args['input_format']
                 forward_file = os.path.join(config['args']['uploads'], args['forward_file'])

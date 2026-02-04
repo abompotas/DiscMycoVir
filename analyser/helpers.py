@@ -69,6 +69,8 @@ def check_sequencing_args(args, stage='analysis'):
 def notify_user(config, email, job_id, timestamp, stage='analysis'):
     notified = False
     context = ssl.create_default_context()
+    # Uncomment the following line in case of "SSL Dh key too short" error
+    #context.set_ciphers('DEFAULT:!DH')
     try:
         smtp = smtplib.SMTP_SSL(config['smtp']['server'], config['smtp']['port'], context=context)
     except Exception as e:

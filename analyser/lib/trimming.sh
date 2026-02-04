@@ -89,8 +89,8 @@ cd "/tmp/${sample_name}"
 
 
 #Trimmomatic
-trimmomatic_out_f="trimmed_${forward_file}"
-trimmomatic_out_f_un="unpaired_trimmed_${forward_file}"
+trimmomatic_out_f="${forward_file}"
+trimmomatic_out_f_un="unpaired_${forward_file}"
 trimmomatic_out_r=""
 trimmomatic_out_r_un=""
 if [ "${single_paired}" = "single" ]; then
@@ -102,8 +102,8 @@ if [ "${single_paired}" = "single" ]; then
     SLIDINGWINDOW:$sliding_window \
     MINLEN:$min_len
 else
-  trimmomatic_out_r="trimmed_${reverse_file}"
-  trimmomatic_out_r_un="unpaired_trimmed_${reverse_file}"
+  trimmomatic_out_r="${reverse_file}"
+  trimmomatic_out_r_un="unpaired_${reverse_file}"
   TrimmomaticPE \
      -threads $threads \
     "${input_dir}/${forward_file}" "${input_dir}/${reverse_file}" \
