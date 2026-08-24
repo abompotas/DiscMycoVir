@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 tee /virus-discovery/config.json > /dev/null <<EOT
 {
