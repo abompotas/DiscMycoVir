@@ -87,8 +87,8 @@ services:
 
 volumes:
   virus-discovery-db:
-#    external: true
+    external: true
   virus-discovery-output:
-#    external: true
+    external: true
   virus-discovery-uploads:
-#    external: true
+    external: true
